@@ -1,0 +1,1826 @@
+{
+ "meta": {
+  "pop_totale": 66165581,
+  "surface_totale_km2": 548957,
+  "communes_non_rattachees": {
+   "communes": 1,
+   "pop": 234
+  },
+  "communes_sur_2_sous_bassins": 0,
+  "communes_sur_2_ecoregions": 0,
+  "perturbation": {
+   "departements_total": 96,
+   "departements_partages": {
+    "1": 47,
+    "5": 32,
+    "10": 22,
+    "25": 11
+   },
+   "departements_ecarteles": [
+    {
+     "code": "61",
+     "nom": "Orne",
+     "parts": [
+      {
+       "eco": "loireaval",
+       "part": 50.6
+      },
+      {
+       "eco": "normandie",
+       "part": 49.4
+      }
+     ]
+    },
+    {
+     "code": "40",
+     "nom": "Landes",
+     "parts": [
+      {
+       "eco": "garonne",
+       "part": 61.5
+      },
+      {
+       "eco": "dordogne",
+       "part": 38.5
+      }
+     ]
+    },
+    {
+     "code": "55",
+     "nom": "Meuse",
+     "parts": [
+      {
+       "eco": "rhinmeuse",
+       "part": 61.6
+      },
+      {
+       "eco": "seineamont",
+       "part": 38.4
+      }
+     ]
+    },
+    {
+     "code": "46",
+     "nom": "Lot",
+     "parts": [
+      {
+       "eco": "garonne",
+       "part": 62.2
+      },
+      {
+       "eco": "dordogne",
+       "part": 37.8
+      }
+     ]
+    },
+    {
+     "code": "71",
+     "nom": "Saône-et-Loire",
+     "parts": [
+      {
+       "eco": "saone",
+       "part": 60.0
+      },
+      {
+       "eco": "loireamont",
+       "part": 37.4
+      },
+      {
+       "eco": "rhone",
+       "part": 2.6
+      }
+     ]
+    },
+    {
+     "code": "01",
+     "nom": "Ain",
+     "parts": [
+      {
+       "eco": "rhone",
+       "part": 63.1
+      },
+      {
+       "eco": "saone",
+       "part": 36.9
+      }
+     ]
+    },
+    {
+     "code": "17",
+     "nom": "Charente-Maritime",
+     "parts": [
+      {
+       "eco": "dordogne",
+       "part": 63.1
+      },
+      {
+       "eco": "loireaval",
+       "part": 36.9
+      }
+     ]
+    },
+    {
+     "code": "39",
+     "nom": "Jura",
+     "parts": [
+      {
+       "eco": "saone",
+       "part": 66.1
+      },
+      {
+       "eco": "rhone",
+       "part": 33.9
+      }
+     ]
+    },
+    {
+     "code": "33",
+     "nom": "Gironde",
+     "parts": [
+      {
+       "eco": "garonne",
+       "part": 66.7
+      },
+      {
+       "eco": "dordogne",
+       "part": 33.3
+      }
+     ]
+    },
+    {
+     "code": "15",
+     "nom": "Cantal",
+     "parts": [
+      {
+       "eco": "dordogne",
+       "part": 66.3
+      },
+      {
+       "eco": "garonne",
+       "part": 26.5
+      },
+      {
+       "eco": "loireamont",
+       "part": 7.3
+      }
+     ]
+    },
+    {
+     "code": "28",
+     "nom": "Eure-et-Loir",
+     "parts": [
+      {
+       "eco": "normandie",
+       "part": 73.8
+      },
+      {
+       "eco": "loireaval",
+       "part": 25.7
+      }
+     ]
+    },
+    {
+     "code": "08",
+     "nom": "Ardennes",
+     "parts": [
+      {
+       "eco": "rhinmeuse",
+       "part": 77.2
+      },
+      {
+       "eco": "seineamont",
+       "part": 22.8
+      }
+     ]
+    },
+    {
+     "code": "02",
+     "nom": "Aisne",
+     "parts": [
+      {
+       "eco": "seineamont",
+       "part": 76.9
+      },
+      {
+       "eco": "escaut",
+       "part": 21.9
+      }
+     ]
+    },
+    {
+     "code": "41",
+     "nom": "Loir-et-Cher",
+     "parts": [
+      {
+       "eco": "loireamont",
+       "part": 79.5
+      },
+      {
+       "eco": "loireaval",
+       "part": 20.5
+      }
+     ]
+    },
+    {
+     "code": "45",
+     "nom": "Loiret",
+     "parts": [
+      {
+       "eco": "loireamont",
+       "part": 68.6
+      },
+      {
+       "eco": "seineamont",
+       "part": 20.0
+      },
+      {
+       "eco": "idf",
+       "part": 8.6
+      },
+      {
+       "eco": "loireaval",
+       "part": 2.9
+      }
+     ]
+    },
+    {
+     "code": "64",
+     "nom": "Pyrénées-Atlantiques",
+     "parts": [
+      {
+       "eco": "garonne",
+       "part": 84.5
+      },
+      {
+       "eco": "dordogne",
+       "part": 15.5
+      }
+     ]
+    },
+    {
+     "code": "58",
+     "nom": "Nièvre",
+     "parts": [
+      {
+       "eco": "loireamont",
+       "part": 85.5
+      },
+      {
+       "eco": "seineamont",
+       "part": 14.5
+      }
+     ]
+    },
+    {
+     "code": "42",
+     "nom": "Loire",
+     "parts": [
+      {
+       "eco": "loireamont",
+       "part": 84.9
+      },
+      {
+       "eco": "rhone",
+       "part": 14.1
+      },
+      {
+       "eco": "mediterranee",
+       "part": 1.1
+      }
+     ]
+    },
+    {
+     "code": "10",
+     "nom": "Aube",
+     "parts": [
+      {
+       "eco": "seineamont",
+       "part": 86.4
+      },
+      {
+       "eco": "idf",
+       "part": 13.6
+      }
+     ]
+    },
+    {
+     "code": "52",
+     "nom": "Haute-Marne",
+     "parts": [
+      {
+       "eco": "seineamont",
+       "part": 82.6
+      },
+      {
+       "eco": "saone",
+       "part": 12.9
+      },
+      {
+       "eco": "rhinmeuse",
+       "part": 4.5
+      }
+     ]
+    },
+    {
+     "code": "21",
+     "nom": "Côte-d'Or",
+     "parts": [
+      {
+       "eco": "saone",
+       "part": 86.5
+      },
+      {
+       "eco": "seineamont",
+       "part": 11.9
+      },
+      {
+       "eco": "loireamont",
+       "part": 1.6
+      }
+     ]
+    },
+    {
+     "code": "48",
+     "nom": "Lozère",
+     "parts": [
+      {
+       "eco": "garonne",
+       "part": 81.4
+      },
+      {
+       "eco": "loireamont",
+       "part": 10.0
+      },
+      {
+       "eco": "mediterranee",
+       "part": 8.5
+      }
+     ]
+    }
+   ],
+   "regions_eclatees": [
+    {
+     "region": "Centre-Val de Loire",
+     "n": 4,
+     "parts": [
+      {
+       "eco": "loireamont",
+       "part": 71.0
+      },
+      {
+       "eco": "normandie",
+       "part": 12.3
+      },
+      {
+       "eco": "loireaval",
+       "part": 8.9
+      },
+      {
+       "eco": "seineamont",
+       "part": 5.3
+      }
+     ]
+    },
+    {
+     "region": "Nouvelle-Aquitaine",
+     "n": 4,
+     "parts": [
+      {
+       "eco": "garonne",
+       "part": 38.0
+      },
+      {
+       "eco": "dordogne",
+       "part": 37.5
+      },
+      {
+       "eco": "loireamont",
+       "part": 14.7
+      },
+      {
+       "eco": "loireaval",
+       "part": 9.8
+      }
+     ]
+    },
+    {
+     "region": "Bourgogne-Franche-Comté",
+     "n": 3,
+     "parts": [
+      {
+       "eco": "saone",
+       "part": 67.4
+      },
+      {
+       "eco": "seineamont",
+       "part": 15.1
+      },
+      {
+       "eco": "loireamont",
+       "part": 13.8
+      }
+     ]
+    },
+    {
+     "region": "Grand Est",
+     "n": 2,
+     "parts": [
+      {
+       "eco": "rhinmeuse",
+       "part": 78.6
+      },
+      {
+       "eco": "seineamont",
+       "part": 19.4
+      }
+     ]
+    },
+    {
+     "region": "Hauts-de-France",
+     "n": 2,
+     "parts": [
+      {
+       "eco": "escaut",
+       "part": 76.5
+      },
+      {
+       "eco": "seineamont",
+       "part": 18.8
+      }
+     ]
+    },
+    {
+     "region": "Auvergne-Rhône-Alpes",
+     "n": 2,
+     "parts": [
+      {
+       "eco": "rhone",
+       "part": 67.1
+      },
+      {
+       "eco": "loireamont",
+       "part": 23.5
+      }
+     ]
+    },
+    {
+     "region": "Occitanie",
+     "n": 2,
+     "parts": [
+      {
+       "eco": "garonne",
+       "part": 51.9
+      },
+      {
+       "eco": "mediterranee",
+       "part": 46.9
+      }
+     ]
+    },
+    {
+     "region": "Corse",
+     "n": 1,
+     "parts": [
+      {
+       "eco": "mediterranee",
+       "part": 100.0
+      }
+     ]
+    },
+    {
+     "region": "Bretagne",
+     "n": 1,
+     "parts": [
+      {
+       "eco": "bretagne",
+       "part": 99.7
+      }
+     ]
+    },
+    {
+     "region": "Provence-Alpes-Côte d'Azur",
+     "n": 1,
+     "parts": [
+      {
+       "eco": "mediterranee",
+       "part": 99.4
+      }
+     ]
+    },
+    {
+     "region": "Île-de-France",
+     "n": 1,
+     "parts": [
+      {
+       "eco": "idf",
+       "part": 98.2
+      }
+     ]
+    },
+    {
+     "region": "Pays de la Loire",
+     "n": 1,
+     "parts": [
+      {
+       "eco": "loireaval",
+       "part": 96.5
+      }
+     ]
+    },
+    {
+     "region": "Normandie",
+     "n": 1,
+     "parts": [
+      {
+       "eco": "normandie",
+       "part": 95.6
+      }
+     ]
+    }
+   ],
+   "pop_changeant_de_collectivite": 13444317,
+   "part_changeant_de_collectivite": 20.3
+  },
+  "prelevements_nationaux_Mm3": {
+   "AEP": 5301,
+   "IRR": 3127,
+   "IND": 2339,
+   "ENE": 18774,
+   "CAN": 5113,
+   "BAR": 757365
+  },
+  "sources": {
+   "decoupage": "Sous-bassins DCE administratifs, Sandre/OFB (WFS, 2026)",
+   "population": "INSEE, populations légales (API Découpage administratif)",
+   "occupation_sol": "Corine Land Cover 2018, SDES — 5 postes, par commune",
+   "prelevements": "BNPE via Hub'Eau, moyenne 2020-2022",
+   "pib": "INSEE, comptes régionaux base 2020, PIB/hab 2024 (estimation par répartition démographique)"
+  }
+ },
+ "ecoregions": [
+  {
+   "key": "escaut",
+   "nom": "Flandre-Artois-Picardie",
+   "pop": 4586346,
+   "pop_part": 6.9,
+   "area_km2": 18789,
+   "area_part": 3.4,
+   "densite": 244.1,
+   "communes": 2352,
+   "departements": 5,
+   "pib_meur": 150849,
+   "pib_hab": 32891,
+   "clc_pct": {
+    "artificialise": 12.1,
+    "agricole": 79.1,
+    "foret_naturel": 7.6,
+    "zones_humides": 0.75,
+    "eau": 0.46
+   },
+   "prel_Mm3": {
+    "AEP": 293.1,
+    "IRR": 61.2,
+    "IND": 122.1,
+    "ENE": 0.0,
+    "CAN": 334.7,
+    "BAR": 0.0
+   },
+   "prel_conso_Mm3": 811.2,
+   "prel_conso_part": 2.3,
+   "prel_hab_m3": 177,
+   "prel_part_irrigation": 7.5,
+   "regions_recoupees": [
+    {
+     "nom": "Hauts-de-France",
+     "part_pop": 100.0
+    }
+   ],
+   "villes": [
+    {
+     "nom": "Lille",
+     "pop": 238246
+    },
+    {
+     "nom": "Amiens",
+     "pop": 136449
+    },
+    {
+     "nom": "Tourcoing",
+     "pop": 98772
+    },
+    {
+     "nom": "Roubaix",
+     "pop": 98286
+    },
+    {
+     "nom": "Dunkerque",
+     "pop": 86263
+    },
+    {
+     "nom": "Calais",
+     "pop": 67571
+    },
+    {
+     "nom": "Villeneuve-d'Ascq",
+     "pop": 62868
+    },
+    {
+     "nom": "Saint-Quentin",
+     "pop": 52813
+    }
+   ],
+   "sous_bassins": [
+    {
+     "code": "FRA_ESCA",
+     "pop": 4586346
+    }
+   ],
+   "hydro": {
+    "station": "La Somme canalisée à Boismont",
+    "code": "E6480930",
+    "cours_eau": "La Somme Canalisée",
+    "surface_bv_km2": 6100.0,
+    "module_m3s": 42.3,
+    "jours": 7306,
+    "debit_specifique_ls_km2": 6.9,
+    "volume_annuel_Mm3": 1335.0
+   }
+  },
+  {
+   "key": "rhinmeuse",
+   "nom": "Vosges-Ardenne",
+   "pop": 4555882,
+   "pop_part": 6.9,
+   "area_km2": 32731,
+   "area_part": 6.0,
+   "densite": 139.2,
+   "communes": 3336,
+   "departements": 10,
+   "pib_meur": 160957,
+   "pib_hab": 35330,
+   "clc_pct": {
+    "artificialise": 8.1,
+    "agricole": 53.2,
+    "foret_naturel": 37.7,
+    "zones_humides": 0.08,
+    "eau": 0.85
+   },
+   "prel_Mm3": {
+    "AEP": 338.6,
+    "IRR": 108.3,
+    "IND": 449.0,
+    "ENE": 970.3,
+    "CAN": 685.6,
+    "BAR": 0.2
+   },
+   "prel_conso_Mm3": 2551.7,
+   "prel_conso_part": 7.4,
+   "prel_hab_m3": 560,
+   "prel_part_irrigation": 4.2,
+   "regions_recoupees": [
+    {
+     "nom": "Grand Est",
+     "part_pop": 96.0
+    },
+    {
+     "nom": "Hauts-de-France",
+     "part_pop": 4.0
+    }
+   ],
+   "villes": [
+    {
+     "nom": "Strasbourg",
+     "pop": 293771
+    },
+    {
+     "nom": "Metz",
+     "pop": 122572
+    },
+    {
+     "nom": "Mulhouse",
+     "pop": 104978
+    },
+    {
+     "nom": "Nancy",
+     "pop": 103671
+    },
+    {
+     "nom": "Colmar",
+     "pop": 66970
+    },
+    {
+     "nom": "Charleville-Mézières",
+     "pop": 45560
+    },
+    {
+     "nom": "Thionville",
+     "pop": 42658
+    }
+   ],
+   "sous_bassins": [
+    {
+     "code": "FRC_RHIN",
+     "pop": 1927537
+    },
+    {
+     "code": "FRC_MOSE",
+     "pop": 2002016
+    },
+    {
+     "code": "FRB1_MEUS",
+     "pop": 444538
+    },
+    {
+     "code": "FRB2_SAMB",
+     "pop": 181791
+    }
+   ],
+   "hydro": {
+    "station": "Le Rhin à Lauterbourg",
+    "code": "A3020090",
+    "cours_eau": "Le Rhin",
+    "surface_bv_km2": 49300.0,
+    "module_m3s": 1155.3,
+    "jours": 7306,
+    "debit_specifique_ls_km2": 23.4,
+    "volume_annuel_Mm3": 36458.0
+   }
+  },
+  {
+   "key": "idf",
+   "nom": "Île-de-France",
+   "pop": 12394246,
+   "pop_part": 18.7,
+   "area_km2": 13409,
+   "area_part": 2.4,
+   "densite": 924.3,
+   "communes": 1325,
+   "departements": 15,
+   "pib_meur": 855974,
+   "pib_hab": 69062,
+   "clc_pct": {
+    "artificialise": 19.7,
+    "agricole": 57.9,
+    "foret_naturel": 21.2,
+    "zones_humides": 0.2,
+    "eau": 0.98
+   },
+   "prel_Mm3": {
+    "AEP": 787.2,
+    "IRR": 60.9,
+    "IND": 245.4,
+    "ENE": 216.8,
+    "CAN": 98.7,
+    "BAR": 26238.6
+   },
+   "prel_conso_Mm3": 1409.0,
+   "prel_conso_part": 4.1,
+   "prel_hab_m3": 114,
+   "prel_part_irrigation": 4.3,
+   "regions_recoupees": [
+    {
+     "nom": "Île-de-France",
+     "part_pop": 98.7
+    }
+   ],
+   "villes": [
+    {
+     "nom": "Paris",
+     "pop": 2103778
+    },
+    {
+     "nom": "Saint-Denis",
+     "pop": 149077
+    },
+    {
+     "nom": "Boulogne-Billancourt",
+     "pop": 119019
+    },
+    {
+     "nom": "Montreuil",
+     "pop": 111934
+    },
+    {
+     "nom": "Argenteuil",
+     "pop": 106130
+    },
+    {
+     "nom": "Nanterre",
+     "pop": 97783
+    },
+    {
+     "nom": "Vitry-sur-Seine",
+     "pop": 93963
+    },
+    {
+     "nom": "Asnières-sur-Seine",
+     "pop": 93941
+    }
+   ],
+   "sous_bassins": [
+    {
+     "code": "FRH_IF",
+     "pop": 12394246
+    }
+   ],
+   "hydro": {
+    "station": "La Seine à Paris",
+    "code": "F7000001",
+    "cours_eau": "La Seine",
+    "surface_bv_km2": 43800.0,
+    "module_m3s": 371.7,
+    "jours": 8028,
+    "debit_specifique_ls_km2": 8.5,
+    "volume_annuel_Mm3": 11730.0
+   }
+  },
+  {
+   "key": "seineamont",
+   "nom": "Champagne-Brie",
+   "pop": 2916255,
+   "pop_part": 4.4,
+   "area_km2": 49306,
+   "area_part": 9.0,
+   "densite": 59.1,
+   "communes": 3820,
+   "departements": 14,
+   "pib_meur": 105063,
+   "pib_hab": 36027,
+   "clc_pct": {
+    "artificialise": 4.3,
+    "agricole": 66.9,
+    "foret_naturel": 28.1,
+    "zones_humides": 0.08,
+    "eau": 0.62
+   },
+   "prel_Mm3": {
+    "AEP": 289.6,
+    "IRR": 96.1,
+    "IND": 110.5,
+    "ENE": 1.1,
+    "CAN": 1460.6,
+    "BAR": 59498.3
+   },
+   "prel_conso_Mm3": 1957.7,
+   "prel_conso_part": 5.6,
+   "prel_hab_m3": 671,
+   "prel_part_irrigation": 4.9,
+   "regions_recoupees": [
+    {
+     "nom": "Hauts-de-France",
+     "part_pop": 38.5
+    },
+    {
+     "nom": "Grand Est",
+     "part_pop": 37.1
+    },
+    {
+     "nom": "Bourgogne-Franche-Comté",
+     "part_pop": 14.5
+    },
+    {
+     "nom": "Île-de-France",
+     "part_pop": 5.1
+    },
+    {
+     "nom": "Centre-Val de Loire",
+     "part_pop": 4.7
+    }
+   ],
+   "villes": [
+    {
+     "nom": "Reims",
+     "pop": 177674
+    },
+    {
+     "nom": "Troyes",
+     "pop": 62088
+    },
+    {
+     "nom": "Beauvais",
+     "pop": 55550
+    },
+    {
+     "nom": "Châlons-en-Champagne",
+     "pop": 42971
+    },
+    {
+     "nom": "Compiègne",
+     "pop": 40761
+    }
+   ],
+   "sous_bassins": [
+    {
+     "code": "FRH_SEAM",
+     "pop": 943843
+    },
+    {
+     "code": "FRH_MARN",
+     "pop": 501723
+    },
+    {
+     "code": "FRH_OISE",
+     "pop": 1470689
+    }
+   ],
+   "hydro": {
+    "station": "L'Oise à Creil et à Pont-Sainte-Maxence",
+    "code": "H2080001",
+    "cours_eau": "L'Oise",
+    "surface_bv_km2": 14200.0,
+    "module_m3s": 105.1,
+    "jours": 7306,
+    "debit_specifique_ls_km2": 7.4,
+    "volume_annuel_Mm3": 3317.0
+   }
+  },
+  {
+   "key": "normandie",
+   "nom": "Normandie",
+   "pop": 3675339,
+   "pop_part": 5.6,
+   "area_km2": 31635,
+   "area_part": 5.8,
+   "densite": 116.2,
+   "communes": 2859,
+   "departements": 12,
+   "pib_meur": 132369,
+   "pib_hab": 36015,
+   "clc_pct": {
+    "artificialise": 6.8,
+    "agricole": 79.0,
+    "foret_naturel": 13.5,
+    "zones_humides": 0.19,
+    "eau": 0.46
+   },
+   "prel_Mm3": {
+    "AEP": 306.6,
+    "IRR": 26.1,
+    "IND": 215.4,
+    "ENE": 0.0,
+    "CAN": 26.0,
+    "BAR": 49066.1
+   },
+   "prel_conso_Mm3": 574.1,
+   "prel_conso_part": 1.7,
+   "prel_hab_m3": 156,
+   "prel_part_irrigation": 4.5,
+   "regions_recoupees": [
+    {
+     "nom": "Normandie",
+     "part_pop": 87.0
+    },
+    {
+     "nom": "Centre-Val de Loire",
+     "part_pop": 8.7
+    },
+    {
+     "nom": "Île-de-France",
+     "part_pop": 2.2
+    },
+    {
+     "nom": "Hauts-de-France",
+     "part_pop": 1.7
+    }
+   ],
+   "villes": [
+    {
+     "nom": "Le Havre",
+     "pop": 166687
+    },
+    {
+     "nom": "Rouen",
+     "pop": 117662
+    },
+    {
+     "nom": "Caen",
+     "pop": 109400
+    },
+    {
+     "nom": "Cherbourg-en-Cotentin",
+     "pop": 78258
+    },
+    {
+     "nom": "Évreux",
+     "pop": 49360
+    }
+   ],
+   "sous_bassins": [
+    {
+     "code": "FRH_SEAV",
+     "pop": 2365970
+    },
+    {
+     "code": "FRH_CONO",
+     "pop": 1309369
+    }
+   ],
+   "hydro": {
+    "station": "L'Eure à Louviers",
+    "code": "H4380210",
+    "cours_eau": "L'Eure",
+    "surface_bv_km2": 5935.0,
+    "module_m3s": 22.1,
+    "jours": 7306,
+    "debit_specifique_ls_km2": 3.7,
+    "volume_annuel_Mm3": 697.0
+   }
+  },
+  {
+   "key": "bretagne",
+   "nom": "Bretagne",
+   "pop": 3579598,
+   "pop_part": 5.4,
+   "area_km2": 29665,
+   "area_part": 5.4,
+   "densite": 120.7,
+   "communes": 1259,
+   "departements": 7,
+   "pib_meur": 130964,
+   "pib_hab": 36586,
+   "clc_pct": {
+    "artificialise": 7.2,
+    "agricole": 79.9,
+    "foret_naturel": 12.4,
+    "zones_humides": 0.29,
+    "eau": 0.31
+   },
+   "prel_Mm3": {
+    "AEP": 244.7,
+    "IRR": 8.6,
+    "IND": 24.1,
+    "ENE": 0.0,
+    "CAN": 4.4,
+    "BAR": 1476.8
+   },
+   "prel_conso_Mm3": 281.9,
+   "prel_conso_part": 0.8,
+   "prel_hab_m3": 79,
+   "prel_part_irrigation": 3.1,
+   "regions_recoupees": [
+    {
+     "nom": "Bretagne",
+     "part_pop": 96.1
+    },
+    {
+     "nom": "Pays de la Loire",
+     "part_pop": 3.7
+    }
+   ],
+   "villes": [
+    {
+     "nom": "Rennes",
+     "pop": 230890
+    },
+    {
+     "nom": "Brest",
+     "pop": 142346
+    },
+    {
+     "nom": "Quimper",
+     "pop": 64385
+    },
+    {
+     "nom": "Lorient",
+     "pop": 58329
+    },
+    {
+     "nom": "Vannes",
+     "pop": 55790
+    },
+    {
+     "nom": "Saint-Malo",
+     "pop": 47439
+    },
+    {
+     "nom": "Saint-Brieuc",
+     "pop": 44364
+    }
+   ],
+   "sous_bassins": [
+    {
+     "code": "FRG_VICO",
+     "pop": 3579598
+    }
+   ],
+   "hydro": {
+    "station": "La Vilaine à Rieux",
+    "code": "J9300611",
+    "cours_eau": null,
+    "surface_bv_km2": 10149.2,
+    "module_m3s": 80.6,
+    "jours": 7282,
+    "debit_specifique_ls_km2": 7.9,
+    "volume_annuel_Mm3": 2544.0
+   }
+  },
+  {
+   "key": "loireaval",
+   "nom": "Anjou-Vendée",
+   "pop": 4743387,
+   "pop_part": 7.2,
+   "area_km2": 45688,
+   "area_part": 8.3,
+   "densite": 103.8,
+   "communes": 1942,
+   "departements": 14,
+   "pib_meur": 176466,
+   "pib_hab": 37203,
+   "clc_pct": {
+    "artificialise": 6.4,
+    "agricole": 82.7,
+    "foret_naturel": 9.6,
+    "zones_humides": 0.8,
+    "eau": 0.5
+   },
+   "prel_Mm3": {
+    "AEP": 342.8,
+    "IRR": 326.7,
+    "IND": 26.4,
+    "ENE": 724.5,
+    "CAN": 2.0,
+    "BAR": 3137.8
+   },
+   "prel_conso_Mm3": 1422.3,
+   "prel_conso_part": 4.1,
+   "prel_hab_m3": 300,
+   "prel_part_irrigation": 23.0,
+   "regions_recoupees": [
+    {
+     "nom": "Pays de la Loire",
+     "part_pop": 79.4
+    },
+    {
+     "nom": "Nouvelle-Aquitaine",
+     "part_pop": 12.7
+    },
+    {
+     "nom": "Centre-Val de Loire",
+     "part_pop": 4.9
+    },
+    {
+     "nom": "Normandie",
+     "part_pop": 3.0
+    }
+   ],
+   "villes": [
+    {
+     "nom": "Nantes",
+     "pop": 327734
+    },
+    {
+     "nom": "Angers",
+     "pop": 159022
+    },
+    {
+     "nom": "Le Mans",
+     "pop": 146249
+    },
+    {
+     "nom": "La Rochelle",
+     "pop": 79851
+    },
+    {
+     "nom": "Saint-Nazaire",
+     "pop": 74568
+    },
+    {
+     "nom": "Niort",
+     "pop": 59854
+    },
+    {
+     "nom": "La Roche-sur-Yon",
+     "pop": 54849
+    },
+    {
+     "nom": "Cholet",
+     "pop": 54404
+    }
+   ],
+   "sous_bassins": [
+    {
+     "code": "FRG_LACV",
+     "pop": 3190981
+    },
+    {
+     "code": "FRG_MSL",
+     "pop": 1552406
+    }
+   ],
+   "hydro": {
+    "station": "La Loire à Saint-Nazaire",
+    "code": "M8420010",
+    "cours_eau": "la Loire",
+    "surface_bv_km2": 117480.0,
+    "module_m3s": 778.9,
+    "jours": 3500,
+    "debit_specifique_ls_km2": 6.6,
+    "volume_annuel_Mm3": 24580.0
+   }
+  },
+  {
+   "key": "loireamont",
+   "nom": "Val de Loire-Auvergne",
+   "pop": 5062716,
+   "pop_part": 7.7,
+   "area_km2": 81207,
+   "area_part": 14.8,
+   "densite": 62.3,
+   "communes": 3578,
+   "departements": 23,
+   "pib_meur": 192206,
+   "pib_hab": 37965,
+   "clc_pct": {
+    "artificialise": 4.0,
+    "agricole": 67.4,
+    "foret_naturel": 27.9,
+    "zones_humides": 0.03,
+    "eau": 0.68
+   },
+   "prel_Mm3": {
+    "AEP": 385.1,
+    "IRR": 251.8,
+    "IND": 69.7,
+    "ENE": 693.0,
+    "CAN": 313.3,
+    "BAR": 25156.8
+   },
+   "prel_conso_Mm3": 1712.8,
+   "prel_conso_part": 4.9,
+   "prel_hab_m3": 338,
+   "prel_part_irrigation": 14.7,
+   "regions_recoupees": [
+    {
+     "nom": "Auvergne-Rhône-Alpes",
+     "part_pop": 38.1
+    },
+    {
+     "nom": "Centre-Val de Loire",
+     "part_pop": 36.3
+    },
+    {
+     "nom": "Nouvelle-Aquitaine",
+     "part_pop": 17.8
+    },
+    {
+     "nom": "Bourgogne-Franche-Comté",
+     "part_pop": 7.7
+    }
+   ],
+   "villes": [
+    {
+     "nom": "Saint-Étienne",
+     "pop": 173136
+    },
+    {
+     "nom": "Clermont-Ferrand",
+     "pop": 146351
+    },
+    {
+     "nom": "Tours",
+     "pop": 139259
+    },
+    {
+     "nom": "Limoges",
+     "pop": 129937
+    },
+    {
+     "nom": "Orléans",
+     "pop": 116357
+    },
+    {
+     "nom": "Poitiers",
+     "pop": 89916
+    },
+    {
+     "nom": "Bourges",
+     "pop": 64186
+    },
+    {
+     "nom": "Blois",
+     "pop": 47219
+    }
+   ],
+   "sous_bassins": [
+    {
+     "code": "FRG_LMOY",
+     "pop": 1905613
+    },
+    {
+     "code": "FRG_VICR",
+     "pop": 1007800
+    },
+    {
+     "code": "FRG_ALA",
+     "pop": 2149303
+    }
+   ],
+   "hydro": {
+    "station": "La Loire à Langeais",
+    "code": "K6830020",
+    "cours_eau": "la Loire",
+    "surface_bv_km2": 56480.0,
+    "module_m3s": 369.1,
+    "jours": 7306,
+    "debit_specifique_ls_km2": 6.5,
+    "volume_annuel_Mm3": 11648.0
+   }
+  },
+  {
+   "key": "garonne",
+   "nom": "Gascogne-Pyrénées",
+   "pop": 5552712,
+   "pop_part": 8.4,
+   "area_km2": 72792,
+   "area_part": 13.3,
+   "densite": 76.3,
+   "communes": 4452,
+   "departements": 18,
+   "pib_meur": 200396,
+   "pib_hab": 36090,
+   "clc_pct": {
+    "artificialise": 4.1,
+    "agricole": 56.5,
+    "foret_naturel": 38.9,
+    "zones_humides": 0.03,
+    "eau": 0.52
+   },
+   "prel_Mm3": {
+    "AEP": 497.1,
+    "IRR": 608.9,
+    "IND": 99.2,
+    "ENE": 177.2,
+    "CAN": 77.0,
+    "BAR": 44.4
+   },
+   "prel_conso_Mm3": 1459.4,
+   "prel_conso_part": 4.2,
+   "prel_hab_m3": 263,
+   "prel_part_irrigation": 41.7,
+   "regions_recoupees": [
+    {
+     "nom": "Occitanie",
+     "part_pop": 57.3
+    },
+    {
+     "nom": "Nouvelle-Aquitaine",
+     "part_pop": 42.1
+    },
+    {
+     "nom": "Auvergne-Rhône-Alpes",
+     "part_pop": 0.7
+    }
+   ],
+   "villes": [
+    {
+     "nom": "Toulouse",
+     "pop": 514819
+    },
+    {
+     "nom": "Bordeaux",
+     "pop": 267991
+    },
+    {
+     "nom": "Pau",
+     "pop": 80441
+    },
+    {
+     "nom": "Mérignac",
+     "pop": 78090
+    },
+    {
+     "nom": "Pessac",
+     "pop": 67339
+    },
+    {
+     "nom": "Montauban",
+     "pop": 62945
+    },
+    {
+     "nom": "Bayonne",
+     "pop": 54306
+    },
+    {
+     "nom": "Albi",
+     "pop": 51290
+    }
+   ],
+   "sous_bassins": [
+    {
+     "code": "FRF_GARO",
+     "pop": 3243649
+    },
+    {
+     "code": "FRF_TARN",
+     "pop": 847340
+    },
+    {
+     "code": "FRF_LOT",
+     "pop": 368804
+    },
+    {
+     "code": "FRF_ADOU",
+     "pop": 1092919
+    }
+   ],
+   "hydro": {
+    "station": "La Garonne à la Réole",
+    "code": "O9190010",
+    "cours_eau": "La Garonne",
+    "surface_bv_km2": 51479.0,
+    "module_m3s": 500.1,
+    "jours": 7306,
+    "debit_specifique_ls_km2": 9.7,
+    "volume_annuel_Mm3": 15782.0
+   }
+  },
+  {
+   "key": "dordogne",
+   "nom": "Périgord-Saintonge",
+   "pop": 2483160,
+   "pop_part": 3.8,
+   "area_km2": 44489,
+   "area_part": 8.1,
+   "densite": 55.8,
+   "communes": 2206,
+   "departements": 14,
+   "pib_meur": 90503,
+   "pib_hab": 36447,
+   "clc_pct": {
+    "artificialise": 4.4,
+    "agricole": 51.9,
+    "foret_naturel": 41.3,
+    "zones_humides": 0.64,
+    "eau": 1.78
+   },
+   "prel_Mm3": {
+    "AEP": 235.5,
+    "IRR": 279.5,
+    "IND": 65.6,
+    "ENE": 4773.0,
+    "CAN": 0.0,
+    "BAR": 0.0
+   },
+   "prel_conso_Mm3": 5353.6,
+   "prel_conso_part": 15.4,
+   "prel_hab_m3": 2156,
+   "prel_part_irrigation": 5.2,
+   "regions_recoupees": [
+    {
+     "nom": "Nouvelle-Aquitaine",
+     "part_pop": 93.0
+    },
+    {
+     "nom": "Auvergne-Rhône-Alpes",
+     "part_pop": 4.3
+    },
+    {
+     "nom": "Occitanie",
+     "part_pop": 2.7
+    }
+   ],
+   "villes": [
+    {
+     "nom": "Brive-la-Gaillarde",
+     "pop": 47095
+    },
+    {
+     "nom": "Angoulême",
+     "pop": 41908
+    }
+   ],
+   "sous_bassins": [
+    {
+     "code": "FRF_DORD",
+     "pop": 1123849
+    },
+    {
+     "code": "FRF_CHAR",
+     "pop": 628175
+    },
+    {
+     "code": "FRF_COAC",
+     "pop": 731136
+    }
+   ],
+   "hydro": {
+    "station": "La Dordogne à Pessac-sur-Dordogne",
+    "code": "P5550010",
+    "cours_eau": "La Dordogne",
+    "surface_bv_km2": 14976.0,
+    "module_m3s": 240.5,
+    "jours": 7304,
+    "debit_specifique_ls_km2": 16.1,
+    "volume_annuel_Mm3": 7590.0
+   }
+  },
+  {
+   "key": "saone",
+   "nom": "Bourgogne-Comté",
+   "pop": 2187852,
+   "pop_part": 3.3,
+   "area_km2": 26930,
+   "area_part": 4.9,
+   "densite": 81.2,
+   "communes": 2527,
+   "departements": 10,
+   "pib_meur": 76875,
+   "pib_hab": 35137,
+   "clc_pct": {
+    "artificialise": 5.8,
+    "agricole": 56.9,
+    "foret_naturel": 36.3,
+    "zones_humides": 0.16,
+    "eau": 0.96
+   },
+   "prel_Mm3": {
+    "AEP": 169.2,
+    "IRR": 9.8,
+    "IND": 63.1,
+    "ENE": 0.0,
+    "CAN": 542.3,
+    "BAR": 21457.3
+   },
+   "prel_conso_Mm3": 784.4,
+   "prel_conso_part": 2.3,
+   "prel_hab_m3": 359,
+   "prel_part_irrigation": 1.3,
+   "regions_recoupees": [
+    {
+     "nom": "Bourgogne-Franche-Comté",
+     "part_pop": 86.3
+    },
+    {
+     "nom": "Auvergne-Rhône-Alpes",
+     "part_pop": 11.6
+    },
+    {
+     "nom": "Grand Est",
+     "part_pop": 2.1
+    }
+   ],
+   "villes": [
+    {
+     "nom": "Dijon",
+     "pop": 161830
+    },
+    {
+     "nom": "Besançon",
+     "pop": 118489
+    },
+    {
+     "nom": "Belfort",
+     "pop": 45912
+    },
+    {
+     "nom": "Chalon-sur-Saône",
+     "pop": 45102
+    },
+    {
+     "nom": "Bourg-en-Bresse",
+     "pop": 42372
+    }
+   ],
+   "sous_bassins": [
+    {
+     "code": "FRD_SAON",
+     "pop": 1433157
+    },
+    {
+     "code": "FRD_DOUB",
+     "pop": 754695
+    }
+   ],
+   "hydro": {
+    "station": "La Saône à Mâcon [amont]",
+    "code": "U4300010",
+    "cours_eau": "La Saône",
+    "surface_bv_km2": 26058.0,
+    "module_m3s": 359.8,
+    "jours": 7306,
+    "debit_specifique_ls_km2": 13.8,
+    "volume_annuel_Mm3": 11354.0
+   }
+  },
+  {
+   "key": "rhone",
+   "nom": "Rhône-Alpes",
+   "pop": 5640803,
+   "pop_part": 8.5,
+   "area_km2": 33933,
+   "area_part": 6.2,
+   "densite": 166.2,
+   "communes": 2078,
+   "departements": 12,
+   "pib_meur": 235828,
+   "pib_hab": 41808,
+   "clc_pct": {
+    "artificialise": 7.6,
+    "agricole": 34.5,
+    "foret_naturel": 56.7,
+    "zones_humides": 0.17,
+    "eau": 1.06
+   },
+   "prel_Mm3": {
+    "AEP": 460.8,
+    "IRR": 226.3,
+    "IND": 498.6,
+    "ENE": 10758.4,
+    "CAN": 71.1,
+    "BAR": 357601.5
+   },
+   "prel_conso_Mm3": 12015.2,
+   "prel_conso_part": 34.7,
+   "prel_hab_m3": 2130,
+   "prel_part_irrigation": 1.9,
+   "regions_recoupees": [
+    {
+     "nom": "Auvergne-Rhône-Alpes",
+     "part_pop": 97.6
+    },
+    {
+     "nom": "Bourgogne-Franche-Comté",
+     "part_pop": 1.8
+    },
+    {
+     "nom": "Provence-Alpes-Côte d'Azur",
+     "part_pop": 0.6
+    }
+   ],
+   "villes": [
+    {
+     "nom": "Lyon",
+     "pop": 519127
+    },
+    {
+     "nom": "Villeurbanne",
+     "pop": 163684
+    },
+    {
+     "nom": "Grenoble",
+     "pop": 156140
+    },
+    {
+     "nom": "Annecy",
+     "pop": 132117
+    },
+    {
+     "nom": "Vénissieux",
+     "pop": 65502
+    },
+    {
+     "nom": "Valence",
+     "pop": 64458
+    },
+    {
+     "nom": "Chambéry",
+     "pop": 59964
+    },
+    {
+     "nom": "Vaulx-en-Velin",
+     "pop": 53069
+    }
+   ],
+   "sous_bassins": [
+    {
+     "code": "FRD_HRHO",
+     "pop": 1560993
+    },
+    {
+     "code": "FRD_ISER",
+     "pop": 1423738
+    },
+    {
+     "code": "FRD_RHON",
+     "pop": 2656072
+    }
+   ],
+   "hydro": {
+    "station": "Le Rhône à Valence",
+    "code": "V4010010",
+    "cours_eau": "Le Rhône",
+    "surface_bv_km2": 66450.0,
+    "module_m3s": 1260.9,
+    "jours": 10469,
+    "debit_specifique_ls_km2": 19.0,
+    "volume_annuel_Mm3": 39791.0
+   }
+  },
+  {
+   "key": "mediterranee",
+   "nom": "Provence-Languedoc-Corse",
+   "pop": 8787285,
+   "pop_part": 13.3,
+   "area_km2": 68383,
+   "area_part": 12.5,
+   "densite": 128.5,
+   "communes": 3011,
+   "departements": 18,
+   "pib_meur": 349075,
+   "pib_hab": 39725,
+   "clc_pct": {
+    "artificialise": 6.0,
+    "agricole": 26.6,
+    "foret_naturel": 65.1,
+    "zones_humides": 0.93,
+    "eau": 1.34
+   },
+   "prel_Mm3": {
+    "AEP": 950.6,
+    "IRR": 1062.3,
+    "IND": 349.6,
+    "ENE": 459.3,
+    "CAN": 1497.3,
+    "BAR": 213687.3
+   },
+   "prel_conso_Mm3": 4319.1,
+   "prel_conso_part": 12.5,
+   "prel_hab_m3": 492,
+   "prel_part_irrigation": 24.6,
+   "regions_recoupees": [
+    {
+     "nom": "Provence-Alpes-Côte d'Azur",
+     "part_pop": 59.0
+    },
+    {
+     "nom": "Occitanie",
+     "part_pop": 32.7
+    },
+    {
+     "nom": "Auvergne-Rhône-Alpes",
+     "part_pop": 4.3
+    },
+    {
+     "nom": "Corse",
+     "part_pop": 4.0
+    }
+   ],
+   "villes": [
+    {
+     "nom": "Marseille",
+     "pop": 886040
+    },
+    {
+     "nom": "Nice",
+     "pop": 357737
+    },
+    {
+     "nom": "Montpellier",
+     "pop": 310240
+    },
+    {
+     "nom": "Toulon",
+     "pop": 179116
+    },
+    {
+     "nom": "Nîmes",
+     "pop": 151839
+    },
+    {
+     "nom": "Aix-en-Provence",
+     "pop": 149695
+    },
+    {
+     "nom": "Perpignan",
+     "pop": 121616
+    },
+    {
+     "nom": "Avignon",
+     "pop": 92188
+    }
+   ],
+   "sous_bassins": [
+    {
+     "code": "FRD_DURA",
+     "pop": 1065057
+    },
+    {
+     "code": "FRD_COCA",
+     "pop": 4157281
+    },
+    {
+     "code": "FRD_GARD",
+     "pop": 705834
+    },
+    {
+     "code": "FRD_COLR",
+     "pop": 2503627
+    },
+    {
+     "code": "FRE_CORS",
+     "pop": 355486
+    }
+   ],
+   "hydro": {
+    "station": "Le Rhône à Tarascon",
+    "code": "V7200010",
+    "cours_eau": "Le Rhône",
+    "surface_bv_km2": 95590.0,
+    "module_m3s": 1518.5,
+    "jours": 10959,
+    "debit_specifique_ls_km2": 15.9,
+    "volume_annuel_Mm3": 47920.0
+   }
+  }
+ ]
+}

@@ -1,0 +1,152 @@
+{
+ "escaut": {
+  "communes": 2352,
+  "catnat_arretes": 1887,
+  "catnat_communes": 924,
+  "catnat_part": 39.3,
+  "pprn_communes": 618,
+  "pprn_part_pop": 41.5,
+  "pprn_pop": 1901322,
+  "sub_communes": 42,
+  "sub_pop": 274937
+ },
+ "rhinmeuse": {
+  "communes": 3336,
+  "catnat_arretes": 1368,
+  "catnat_communes": 1051,
+  "catnat_part": 31.5,
+  "pprn_communes": 946,
+  "pprn_part_pop": 63.3,
+  "pprn_pop": 2883177,
+  "sub_communes": 0,
+  "sub_pop": 0
+ },
+ "idf": {
+  "communes": 1325,
+  "catnat_arretes": 1706,
+  "catnat_communes": 825,
+  "catnat_part": 62.3,
+  "pprn_communes": 486,
+  "pprn_part_pop": 63.0,
+  "pprn_pop": 7805939,
+  "sub_communes": 0,
+  "sub_pop": 0
+ },
+ "seineamont": {
+  "communes": 3820,
+  "catnat_arretes": 1691,
+  "catnat_communes": 1248,
+  "catnat_part": 32.7,
+  "pprn_communes": 1096,
+  "pprn_part_pop": 50.0,
+  "pprn_pop": 1458213,
+  "sub_communes": 0,
+  "sub_pop": 0
+ },
+ "normandie": {
+  "communes": 2859,
+  "catnat_arretes": 1102,
+  "catnat_communes": 772,
+  "catnat_part": 27.0,
+  "pprn_communes": 733,
+  "pprn_part_pop": 58.0,
+  "pprn_pop": 2132866,
+  "sub_communes": 140,
+  "sub_pop": 632485
+ },
+ "bretagne": {
+  "communes": 1259,
+  "catnat_arretes": 444,
+  "catnat_communes": 328,
+  "catnat_part": 26.1,
+  "pprn_communes": 287,
+  "pprn_part_pop": 44.3,
+  "pprn_pop": 1584960,
+  "sub_communes": 81,
+  "sub_pop": 426808
+ },
+ "loireaval": {
+  "communes": 1942,
+  "catnat_arretes": 917,
+  "catnat_communes": 675,
+  "catnat_part": 34.8,
+  "pprn_communes": 529,
+  "pprn_part_pop": 56.4,
+  "pprn_pop": 2675949,
+  "sub_communes": 72,
+  "sub_pop": 490685
+ },
+ "loireamont": {
+  "communes": 3578,
+  "catnat_arretes": 1654,
+  "catnat_communes": 1264,
+  "catnat_part": 35.3,
+  "pprn_communes": 956,
+  "pprn_part_pop": 62.4,
+  "pprn_pop": 3161107,
+  "sub_communes": 0,
+  "sub_pop": 0
+ },
+ "garonne": {
+  "communes": 4452,
+  "catnat_arretes": 2934,
+  "catnat_communes": 1925,
+  "catnat_part": 43.2,
+  "pprn_communes": 1871,
+  "pprn_part_pop": 71.9,
+  "pprn_pop": 3994975,
+  "sub_communes": 16,
+  "sub_pop": 503137
+ },
+ "dordogne": {
+  "communes": 2206,
+  "catnat_arretes": 789,
+  "catnat_communes": 561,
+  "catnat_part": 25.4,
+  "pprn_communes": 602,
+  "pprn_part_pop": 54.7,
+  "pprn_pop": 1357411,
+  "sub_communes": 63,
+  "sub_pop": 331246
+ },
+ "saone": {
+  "communes": 2527,
+  "catnat_arretes": 673,
+  "catnat_communes": 558,
+  "catnat_part": 22.1,
+  "pprn_communes": 740,
+  "pprn_part_pop": 58.4,
+  "pprn_pop": 1276747,
+  "sub_communes": 0,
+  "sub_pop": 0
+ },
+ "rhone": {
+  "communes": 2078,
+  "catnat_arretes": 748,
+  "catnat_communes": 551,
+  "catnat_part": 26.5,
+  "pprn_communes": 908,
+  "pprn_part_pop": 73.7,
+  "pprn_pop": 4155379,
+  "sub_communes": 0,
+  "sub_pop": 0
+ },
+ "mediterranee": {
+  "communes": 3011,
+  "catnat_arretes": 3263,
+  "catnat_communes": 1869,
+  "catnat_part": 62.1,
+  "pprn_communes": 1440,
+  "pprn_part_pop": 78.8,
+  "pprn_pop": 6926259,
+  "sub_communes": 56,
+  "sub_pop": 565829
+ },
+ "_national": {
+  "catnat_arretes": 19176,
+  "catnat_part": 36.1,
+  "pprn_part_pop": 62.4,
+  "sub_pop": 3225127,
+  "depuis": 2015
+ }
+}

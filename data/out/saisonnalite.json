@@ -1,0 +1,262 @@
+{
+ "escaut": {
+  "station": "La Somme canalisée à Boismont",
+  "mois": [
+   46.1,
+   51.1,
+   52.7,
+   48.8,
+   45.0,
+   42.8,
+   39.0,
+   36.1,
+   35.2,
+   34.6,
+   36.2,
+   40.9
+  ],
+  "mois_haut": 3,
+  "mois_bas": 10,
+  "rapport": 1.5
+ },
+ "rhinmeuse": {
+  "station": "Le Rhin à Lauterbourg",
+  "mois": [
+   1246.9,
+   1245.2,
+   1131.8,
+   1071.4,
+   1467.8,
+   1553.2,
+   1276.3,
+   1015.5,
+   881.9,
+   869.4,
+   946.7,
+   1159.5
+  ],
+  "mois_haut": 6,
+  "mois_bas": 10,
+  "rapport": 1.8
+ },
+ "idf": {
+  "station": "La Seine à Paris",
+  "mois": [
+   591.1,
+   678.2,
+   574.2,
+   409.5,
+   318.0,
+   310.2,
+   193.0,
+   164.2,
+   163.4,
+   212.7,
+   253.3,
+   438.4
+  ],
+  "mois_haut": 2,
+  "mois_bas": 9,
+  "rapport": 4.2
+ },
+ "seineamont": {
+  "station": "L'Oise à Creil et à Pont-Sainte-Maxence",
+  "mois": [
+   174.9,
+   208.8,
+   182.4,
+   126.2,
+   90.5,
+   76.9,
+   60.0,
+   46.5,
+   41.6,
+   54.0,
+   74.8,
+   130.1
+  ],
+  "mois_haut": 2,
+  "mois_bas": 9,
+  "rapport": 5.0
+ },
+ "normandie": {
+  "station": "L'Eure à Louviers",
+  "mois": [
+   29.5,
+   32.3,
+   30.3,
+   23.8,
+   21.8,
+   20.9,
+   15.2,
+   14.3,
+   15.2,
+   17.7,
+   19.9,
+   25.1
+  ],
+  "mois_haut": 2,
+  "mois_bas": 8,
+  "rapport": 2.3
+ },
+ "bretagne": {
+  "station": "La Vilaine à Rieux",
+  "mois": [
+   185.6,
+   189.3,
+   143.6,
+   86.2,
+   47.0,
+   39.7,
+   17.4,
+   9.9,
+   11.2,
+   30.3,
+   69.9,
+   140.7
+  ],
+  "mois_haut": 2,
+  "mois_bas": 8,
+  "rapport": 19.1
+ },
+ "loireaval": {
+  "station": "La Loire à Saint-Nazaire",
+  "mois": [
+   1352.5,
+   1558.8,
+   1314.0,
+   858.4,
+   747.4,
+   638.6,
+   297.5,
+   168.8,
+   196.4,
+   350.8,
+   615.3,
+   1061.5
+  ],
+  "mois_haut": 2,
+  "mois_bas": 8,
+  "rapport": 9.2
+ },
+ "loireamont": {
+  "station": "La Loire à Langeais",
+  "mois": [
+   622.8,
+   704.2,
+   605.0,
+   420.8,
+   410.0,
+   353.8,
+   187.1,
+   100.2,
+   119.1,
+   188.8,
+   253.3,
+   482.5
+  ],
+  "mois_haut": 2,
+  "mois_bas": 8,
+  "rapport": 7.0
+ },
+ "garonne": {
+  "station": "La Garonne à la Réole",
+  "mois": [
+   788.0,
+   926.8,
+   857.9,
+   563.1,
+   617.9,
+   435.7,
+   190.1,
+   131.2,
+   154.8,
+   237.8,
+   399.8,
+   720.3
+  ],
+  "mois_haut": 2,
+  "mois_bas": 8,
+  "rapport": 7.1
+ },
+ "dordogne": {
+  "station": "La Dordogne à Pessac-sur-Dordogne",
+  "mois": [
+   433.9,
+   421.0,
+   397.2,
+   230.6,
+   242.7,
+   186.9,
+   105.3,
+   54.3,
+   79.2,
+   126.3,
+   225.5,
+   391.4
+  ],
+  "mois_haut": 1,
+  "mois_bas": 8,
+  "rapport": 8.0
+ },
+ "saone": {
+  "station": "La Saône à Mâcon [amont]",
+  "mois": [
+   660.8,
+   683.4,
+   536.0,
+   389.3,
+   368.3,
+   252.2,
+   171.3,
+   73.5,
+   80.0,
+   197.1,
+   337.3,
+   583.8
+  ],
+  "mois_haut": 2,
+  "mois_bas": 8,
+  "rapport": 9.3
+ },
+ "rhone": {
+  "station": "Le Rhône à Valence",
+  "mois": [
+   1764.1,
+   1735.1,
+   1508.9,
+   1237.7,
+   1467.4,
+   1424.8,
+   1048.7,
+   713.9,
+   614.4,
+   857.5,
+   1109.8,
+   1678.5
+  ],
+  "mois_haut": 1,
+  "mois_bas": 9,
+  "rapport": 2.9
+ },
+ "mediterranee": {
+  "station": "Le Rhône à Tarascon",
+  "mois": [
+   1991.9,
+   2008.7,
+   1890.1,
+   1548.7,
+   1753.7,
+   1615.6,
+   1097.9,
+   778.7,
+   741.3,
+   1164.4,
+   1604.4,
+   2051.1
+  ],
+  "mois_haut": 12,
+  "mois_bas": 9,
+  "rapport": 2.8
+ }
+}

@@ -1,0 +1,6 @@
+.venv/
+data/raw/
+__pycache__/
+export/_*.html
+.DS_Store
+site/bassins-versants.html

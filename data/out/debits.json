@@ -1,0 +1,106 @@
+{
+ "escaut": {
+  "station": "La Somme canalisée à Boismont",
+  "code": "E6480930",
+  "cours_eau": "La Somme Canalisée",
+  "surface_bv_km2": 6100.0,
+  "module_m3s": 42.3,
+  "jours": 7306
+ },
+ "rhinmeuse": {
+  "station": "Le Rhin à Lauterbourg",
+  "code": "A3020090",
+  "cours_eau": "Le Rhin",
+  "surface_bv_km2": 49300.0,
+  "module_m3s": 1155.3,
+  "jours": 7306
+ },
+ "idf": {
+  "station": "La Seine à Paris",
+  "code": "F7000001",
+  "cours_eau": "La Seine",
+  "surface_bv_km2": 43800.0,
+  "module_m3s": 371.7,
+  "jours": 8028
+ },
+ "seineamont": {
+  "station": "L'Oise à Creil et à Pont-Sainte-Maxence",
+  "code": "H2080001",
+  "cours_eau": "L'Oise",
+  "surface_bv_km2": 14200.0,
+  "module_m3s": 105.1,
+  "jours": 7306
+ },
+ "normandie": {
+  "station": "L'Eure à Louviers",
+  "code": "H4380210",
+  "cours_eau": "L'Eure",
+  "surface_bv_km2": 5935.0,
+  "module_m3s": 22.1,
+  "jours": 7306
+ },
+ "bretagne": {
+  "station": "La Vilaine à Rieux",
+  "code": "J9300611",
+  "cours_eau": null,
+  "surface_bv_km2": 10149.2,
+  "module_m3s": 80.6,
+  "jours": 7282
+ },
+ "loireaval": {
+  "station": "La Loire à Saint-Nazaire",
+  "code": "M8420010",
+  "cours_eau": "la Loire",
+  "surface_bv_km2": 117480.0,
+  "module_m3s": 778.9,
+  "jours": 3500
+ },
+ "loireamont": {
+  "station": "La Loire à Langeais",
+  "code": "K6830020",
+  "cours_eau": "la Loire",
+  "surface_bv_km2": 56480.0,
+  "module_m3s": 369.1,
+  "jours": 7306
+ },
+ "garonne": {
+  "station": "La Garonne à la Réole",
+  "code": "O9190010",
+  "cours_eau": "La Garonne",
+  "surface_bv_km2": 51479.0,
+  "module_m3s": 500.1,
+  "jours": 7306
+ },
+ "dordogne": {
+  "station": "La Dordogne à Pessac-sur-Dordogne",
+  "code": "P5550010",
+  "cours_eau": "La Dordogne",
+  "surface_bv_km2": 14976.0,
+  "module_m3s": 240.5,
+  "jours": 7304
+ },
+ "saone": {
+  "station": "La Saône à Mâcon [amont]",
+  "code": "U4300010",
+  "cours_eau": "La Saône",
+  "surface_bv_km2": 26058.0,
+  "module_m3s": 359.8,
+  "jours": 7306
+ },
+ "rhone": {
+  "station": "Le Rhône à Valence",
+  "code": "V4010010",
+  "cours_eau": "Le Rhône",
+  "surface_bv_km2": 66450.0,
+  "module_m3s": 1260.9,
+  "jours": 10469
+ },
+ "mediterranee": {
+  "station": "Le Rhône à Tarascon",
+  "code": "V7200010",
+  "cours_eau": "Le Rhône",
+  "surface_bv_km2": 95590.0,
+  "module_m3s": 1518.5,
+  "jours": 10959
+ }
+}

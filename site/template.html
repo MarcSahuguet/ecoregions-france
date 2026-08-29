@@ -1,0 +1,1204 @@
+<meta charset="utf-8">
+<title>Écorégions de France</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --paper:#e6eae6; --paper-2:#f3f5f1; --paper-3:#dbe1dc;
+  --ink:#12222a; --ink-2:#4c6068; --ink-3:#75878d;
+  --rule:#c3ccc6; --rule-2:#aab6af;
+  --water:#1c6580; --water-2:#3d8ba5; --warm:#a75f26; --ochre:#b8912f;
+  --nuke:#8c3c54; --leaf:#4c7a54;
+  --shadow:0 1px 2px rgba(18,34,42,.06),0 8px 24px -12px rgba(18,34,42,.18);
+  --serif:"Fraunces",Georgia,"Times New Roman",serif;
+  --sans:"Source Sans 3",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#0b1418; --paper-2:#121f25; --paper-3:#182930;
+    --ink:#e2e9e5; --ink-2:#9db0b4; --ink-3:#76898e;
+    --rule:#24363d; --rule-2:#31474f;
+    --water:#5fb0cb; --water-2:#84c6dc; --warm:#dd8f4c; --ochre:#dcb355;
+    --nuke:#d0728c; --leaf:#77b184;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 12px 32px -14px rgba(0,0,0,.7);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0b1418; --paper-2:#121f25; --paper-3:#182930;
+  --ink:#e2e9e5; --ink-2:#9db0b4; --ink-3:#76898e;
+  --rule:#24363d; --rule-2:#31474f;
+  --water:#5fb0cb; --water-2:#84c6dc; --warm:#dd8f4c; --ochre:#dcb355;
+  --nuke:#d0728c; --leaf:#77b184;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 12px 32px -14px rgba(0,0,0,.7);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
+  font-size:17px;line-height:1.62;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.prose{max-width:64ch}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:600;text-wrap:balance;margin:0;
+  font-variation-settings:"SOFT" 0,"WONK" 1}
+h1{font-size:clamp(2.6rem,6.4vw,4.6rem);line-height:.98;letter-spacing:-.02em}
+h2{font-size:clamp(1.8rem,3.4vw,2.6rem);line-height:1.06;letter-spacing:-.015em}
+h3{font-size:1.28rem;line-height:1.25}
+h4{font-size:1.05rem;font-family:var(--sans);font-weight:700}
+p{margin:0 0 1.05em}
+a{color:var(--water);text-decoration-thickness:1px;text-underline-offset:2px}
+.eyebrow{font-family:var(--mono);font-size:.71rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-3);margin:0 0 1.1rem}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums;font-feature-settings:"tnum"}
+:focus-visible{outline:2px solid var(--water);outline-offset:2px}
+
+/* ---------- masthead ---------- */
+header.mast{border-bottom:1px solid var(--rule);padding:clamp(3rem,7vw,6rem) 0 0}
+.mast .lede{font-size:clamp(1.12rem,1.9vw,1.32rem);color:var(--ink-2);max-width:56ch;margin-top:1.4rem}
+.mast .hl{color:var(--ink);box-shadow:inset 0 -.45em 0 color-mix(in srgb,var(--water) 18%,transparent)}
+.keyfigs{display:grid;grid-template-columns:repeat(auto-fit,minmax(158px,1fr));gap:0;
+  margin:clamp(2.4rem,5vw,4rem) 0 0;border-top:1px solid var(--rule)}
+.keyfig{padding:1.15rem 1.3rem 1.35rem;border-right:1px solid var(--rule)}
+.keyfig:last-child{border-right:0}
+.keyfig b{display:block;font-family:var(--serif);font-weight:600;font-size:2rem;line-height:1;
+  letter-spacing:-.02em}
+.keyfig span{display:block;font-size:.85rem;color:var(--ink-2);margin-top:.42rem;line-height:1.35}
+
+/* ---------- sections ---------- */
+section{padding:clamp(3.4rem,7vw,6rem) 0;border-bottom:1px solid var(--rule)}
+.shead{display:flex;flex-direction:column;gap:.9rem;margin-bottom:2.2rem}
+.shead p{margin:0;color:var(--ink-2);max-width:62ch}
+
+/* ---------- atelier carte ---------- */
+.atelier{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(300px,.92fr);gap:26px;align-items:start}
+.stage{position:relative;background:var(--paper-2);border:1px solid var(--rule);border-radius:3px;
+  box-shadow:var(--shadow);overflow:hidden}
+svg.map{display:block;width:100%;height:auto;touch-action:pan-y}
+svg.map path,.tfmap path{fill-rule:evenodd}   /* les trous ne dépendent pas de l'orientation */
+.eco{cursor:pointer;transition:opacity .18s ease,filter .18s ease}
+.eco:hover{filter:brightness(1.1) saturate(1.15)}
+.map.has-sel .eco:not(.sel){opacity:.42}
+.eco.sel{filter:brightness(1.06);stroke:var(--ink)!important;stroke-width:1.8!important}
+/* un calque superposé : les remplissages s'effacent, et la sélection devient la plus
+   transparente — c'est à l'intérieur d'elle qu'on veut lire le calque */
+.map.has-lay .eco{opacity:.5}
+.map.has-lay.has-sel .eco:not(.sel){opacity:.5}
+.map.has-lay.has-sel .eco.sel{opacity:.14;filter:none}
+.mapbox{position:relative}
+.mlbl{position:absolute;transform:translate(-50%,-50%);pointer-events:none;
+  font-size:.73rem;font-weight:600;line-height:1.15;text-align:center;color:var(--ink);
+  text-shadow:0 0 3px var(--paper-2),0 0 3px var(--paper-2),0 0 6px var(--paper-2);
+  white-space:nowrap;letter-spacing:.005em}
+.mlbl.inv{color:#fff;text-shadow:0 0 3px rgba(0,0,0,.8),0 0 7px rgba(0,0,0,.65)}
+.mlbl.inv span{color:#fff}
+.mlbl b{display:block;font-weight:600}
+.mlbl span{display:block;font-family:var(--mono);font-size:.69rem;font-weight:600;
+  color:var(--ink);letter-spacing:.01em;margin-top:.06rem}
+@media (max-width:620px){.mlbl{font-size:.58rem}.mlbl span{font-size:.56rem}}
+svg .lay[hidden]{display:none}
+.riv{fill:none;stroke:var(--water);stroke-width:.85;stroke-opacity:.5;stroke-linecap:round;pointer-events:none}
+.ovl{fill:none;pointer-events:none}
+.ovl.reg{stroke:var(--warm);stroke-width:1.15;stroke-dasharray:4 2.6;stroke-opacity:.9}
+.ovl.hyd{stroke:var(--nuke);stroke-width:.85;stroke-opacity:.75}
+.ovl.sub{stroke:var(--ink-3);stroke-width:.5;stroke-opacity:.6}
+.ovl.bas{stroke:var(--leaf);stroke-width:1.5;stroke-opacity:.85}
+.outline{fill:none;stroke:var(--ink-2);stroke-width:.7;stroke-opacity:.5;pointer-events:none}
+
+.controls{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;
+  padding:12px 14px;border-bottom:1px solid var(--rule);background:var(--paper-3)}
+.ctl{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.ctl > span{font-family:var(--mono);font-size:.66rem;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--ink-3);margin-right:2px}
+button.chip{font-family:var(--sans);font-size:.82rem;color:var(--ink-2);background:transparent;
+  border:1px solid var(--rule-2);border-radius:2px;padding:.28rem .6rem;cursor:pointer;
+  transition:all .15s ease}
+button.chip:hover{color:var(--ink);border-color:var(--ink-3)}
+button.chip[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+button.chip.lay[aria-pressed="true"]{background:transparent;color:var(--ink);
+  border-color:currentColor;box-shadow:inset 0 -2px 0 currentColor}
+button.chip.lay[aria-pressed="true"][data-c="reg"]{color:var(--warm)}
+button.chip.lay[aria-pressed="true"][data-c="hyd"]{color:var(--nuke)}
+button.chip.lay[aria-pressed="true"][data-c="bas"]{color:var(--leaf)}
+button.chip.lay[aria-pressed="true"][data-c="riv"]{color:var(--water)}
+
+.legend{display:flex;align-items:center;gap:10px;padding:10px 14px;border-top:1px solid var(--rule);
+  font-size:.8rem;color:var(--ink-2);flex-wrap:wrap}
+.ramp{display:flex;height:9px;width:180px;border:1px solid var(--rule-2)}
+.ramp i{flex:1}
+.tip{position:fixed;z-index:40;pointer-events:none;background:var(--ink);color:var(--paper);
+  padding:.42rem .6rem;border-radius:2px;font-size:.82rem;line-height:1.35;opacity:0;
+  transition:opacity .12s ease;max-width:250px}
+.tip b{font-weight:600}
+.tip .num{font-size:.9em}
+
+/* ---------- rail ---------- */
+.rail{background:var(--paper-2);border:1px solid var(--rule);border-radius:3px;
+  box-shadow:var(--shadow);position:sticky;top:14px}
+.rail .hd{padding:16px 18px 14px;border-bottom:1px solid var(--rule)}
+.rail .hd .kicker{font-family:var(--mono);font-size:.66rem;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--ink-3)}
+.rail .hd h3{margin:.35rem 0 .3rem}
+.rail .hd .sub{font-size:.9rem;color:var(--ink-2);font-style:italic;font-family:var(--serif)}
+.tabs{display:flex;border-bottom:1px solid var(--rule)}
+.tabs button{flex:1;background:transparent;border:0;border-bottom:2px solid transparent;
+  font-family:var(--sans);font-size:.83rem;color:var(--ink-3);padding:.6rem .3rem;cursor:pointer}
+.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--water);font-weight:600}
+.pane{padding:16px 18px 20px;display:none}
+.pane.on{display:block}
+.pane p{font-size:.94rem;color:var(--ink-2)}
+.metric{margin-bottom:.85rem}
+.metric .top{display:flex;justify-content:space-between;align-items:baseline;gap:8px;
+  font-size:.86rem;margin-bottom:.28rem}
+.metric .top em{font-style:normal;color:var(--ink-2)}
+.metric .top b{font-family:var(--mono);font-weight:500;font-variant-numeric:tabular-nums}
+.bar{height:6px;background:var(--paper-3);position:relative;overflow:hidden}
+.bar i{position:absolute;inset:0 auto 0 0;background:var(--water)}
+.bar i.warm{background:var(--warm)}
+.bar u{position:absolute;top:-2px;bottom:-2px;width:1px;background:var(--ink-3)}
+.stack{display:flex;height:22px;margin:.2rem 0 .5rem;border:1px solid var(--rule)}
+.stack i{position:relative}
+.stack i span{display:none}
+.skey{display:flex;flex-wrap:wrap;gap:.35rem 1rem;font-size:.76rem;color:var(--ink-2)}
+.skey i{display:inline-block;width:9px;height:9px;margin-right:.35rem;vertical-align:baseline}
+.rlist{list-style:none;padding:0;margin:.3rem 0 0;font-size:.87rem;color:var(--ink-2)}
+.rlist li{display:flex;justify-content:space-between;gap:10px;padding:.2rem 0;
+  border-bottom:1px dotted var(--rule)}
+.rlist li b{font-family:var(--mono);font-weight:400;color:var(--ink)}
+.note{font-size:.78rem;color:var(--ink-3);margin-top:.9rem;line-height:1.45}
+.press{list-style:none;padding:0;margin:.35rem 0 0;display:flex;flex-direction:column;gap:.6rem}
+.press li{padding-left:.75rem;border-left:2px solid var(--rule-2)}
+.press a{display:block;font-size:.89rem;line-height:1.35;color:var(--ink);
+  text-decoration:none;border-bottom:1px solid transparent}
+.press a:hover{color:var(--water);border-bottom-color:currentColor}
+.press a::after{content:" ↗";font-size:.78em;color:var(--ink-3);white-space:nowrap}
+.press .src{display:block;font-family:var(--mono);font-size:.68rem;letter-spacing:.05em;
+  text-transform:uppercase;color:var(--ink-3);margin-top:.18rem}
+.pill{display:inline-block;font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;
+  padding:.16rem .42rem;border:1px solid var(--rule-2);color:var(--ink-2);margin:0 .25rem .25rem 0}
+
+.mois{width:100%;height:56px;display:block;margin:.35rem 0 0}
+.mois rect{fill:var(--water)}
+.mois rect.bas{fill:var(--warm)}
+.moisx{display:grid;grid-template-columns:repeat(12,1fr);margin:.2rem 0 .3rem;
+  font-family:var(--mono);font-size:.64rem;line-height:1;color:var(--ink-3);text-align:center}
+.moisx span.on{color:var(--ink);font-weight:600}
+
+/* ---------- risque ---------- */
+(() => {
+  const N = RISQ._national;
+  document.getElementById('risq-reperes').innerHTML = [
+    {v: fr(N.catnat_arretes), t: `arrêtés de catastrophe naturelle pour inondation depuis ${N.depuis}`},
+    {v: fr(N.catnat_part,1)+' %', t: 'des communes en ont connu au moins un sur la période'},
+    {v: fr(N.pprn_part_pop,1)+' %', t: "de la population vit dans une commune couverte par un plan de prévention du risque inondation"},
+    {v: fr(N.sub_pop/1e6,1)+' M', t: "d'habitants dans une commune couverte par un plan submersion marine"},
+  ].map(r => `<div class="repere"><b class="num">${r.v}</b><span>${r.t}</span></div>`).join('');
+
+})();
+
+/* ---------- au-delà de la frontière ---------- */
+.tfmap{width:100%;height:auto;display:block;background:var(--paper-2);
+  border:1px solid var(--rule);border-radius:3px}
+.tfmap .fr{fill:none;stroke:var(--ink);stroke-width:1.6;stroke-opacity:.85}
+.tfmap .bs{fill-opacity:.42;stroke-width:.9;stroke-opacity:.9;cursor:pointer;
+  transition:fill-opacity .15s ease}
+.tfmap .bs:hover{fill-opacity:.7}
+.tflist{list-style:none;padding:0;margin:.35rem 0 0;display:flex;flex-direction:column}
+.tflist li{display:grid;grid-template-columns:10.2rem 1fr 3.4rem;gap:.7rem;align-items:center;
+  font-size:.86rem;padding:.24rem 0;border-bottom:1px solid var(--rule)}
+.tflist .jauge{height:7px;background:var(--paper-3);position:relative;overflow:hidden}
+.tflist .jauge i{position:absolute;inset:0 auto 0 0;background:var(--water)}
+.tflist .pc{font-family:var(--mono);font-size:.8rem;text-align:right;
+  font-variant-numeric:tabular-nums;color:var(--ink)}
+.tflist .nm{color:var(--ink)}
+.tflist small{font-size:.72rem;color:var(--ink-3);font-family:var(--mono);margin-left:.4rem}
+
+/* ---------- classement / barres comparatives ---------- */
+.rankwrap{overflow-x:auto}
+table.rank{width:100%;border-collapse:collapse;font-size:.88rem;min-width:380px;
+  color:var(--ink)}
+table.rank th{text-align:left;font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink-3);font-weight:400;padding:.5rem .6rem;
+  border-bottom:1px solid var(--rule-2)}
+table.rank td{color:var(--ink);padding:.42rem .6rem;border-bottom:1px solid var(--rule);vertical-align:middle}
+table.rank td.n{font-family:var(--mono);font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+table.rank tr:hover td{background:var(--paper-2)}
+table.rank .minibar{height:5px;width:46px;background:var(--paper-3);position:relative;
+  display:inline-block;margin-right:.5rem;vertical-align:2px}
+table.rank .minibar i{position:absolute;inset:0 auto 0 0;background:var(--water)}
+table.rank .swatch{width:11px;height:11px;display:inline-block;margin-right:.5rem;vertical-align:-1px}
+
+/* ---------- coût ---------- */
+.reperes{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1px;
+  background:var(--rule);border:1px solid var(--rule);margin:0 0 2.4rem}
+.repere{background:var(--paper);padding:1rem 1.15rem}
+.repere b{display:block;font-family:var(--serif);font-weight:600;font-size:1.55rem;line-height:1;
+  letter-spacing:-.015em;margin-bottom:.4rem}
+.repere span{font-size:.86rem;color:var(--ink-2);line-height:1.4}
+table.cost{width:100%;border-collapse:collapse;font-size:.88rem;color:var(--ink)}
+table.cost td{padding:.55rem .1rem;border-bottom:1px solid var(--rule);vertical-align:top}
+table.cost td.m{font-family:var(--mono);font-variant-numeric:tabular-nums;text-align:right;
+  white-space:nowrap;padding-left:1rem;color:var(--warm);font-weight:500}
+table.cost td.h{color:var(--ink-3)}
+table.cost td.h .m,table.cost .m.h{color:var(--ink-3)}
+.total{display:flex;flex-wrap:wrap;gap:.2rem 1.6rem;align-items:baseline;
+  margin:.9rem 0 0;padding:.8rem 0 0;border-top:2px solid var(--ink)}
+.total div{display:flex;flex-direction:column}
+.total b{font-family:var(--serif);font-weight:600;font-size:1.3rem;line-height:1.1;
+  letter-spacing:-.01em}
+.total span{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink-3)}
+.ratiowrap{margin-top:2.6rem;padding-top:2rem;border-top:1px solid var(--rule)}
+.ratio{list-style:none;padding:0;margin:.9rem 0 0;display:grid;gap:22px;
+  grid-template-columns:repeat(auto-fit,minmax(258px,1fr))}
+.ratio li{padding-left:.8rem;border-left:2px solid var(--leaf)}
+.ratio h5{margin:0;font-size:.95rem;font-family:var(--sans);font-weight:700;
+  display:flex;flex-direction:column;gap:.15rem}
+.ratio h5 em{font-style:normal;font-family:var(--mono);font-size:.76rem;font-weight:400;
+  color:var(--leaf);white-space:nowrap}
+.ratio p{margin:.2rem 0 0;font-size:.88rem;color:var(--ink-2);line-height:1.45}
+table.cost .d{display:block;font-size:.82rem;color:var(--ink-3);margin-top:.15rem;line-height:1.4}
+.opinion{list-style:none;padding:0;margin:.4rem 0 0;display:flex;flex-direction:column;gap:.9rem}
+.opinion li{display:grid;grid-template-columns:4.4rem 1fr;gap:.9rem;align-items:baseline;
+  padding-left:.8rem;border-left:2px solid var(--rule-2)}
+.opinion li.pour{border-left-color:var(--leaf)}
+.opinion li.contre{border-left-color:var(--warm)}
+.opinion b{font-family:var(--serif);font-weight:600;font-size:1.3rem;line-height:1;
+  letter-spacing:-.01em;text-align:right}
+.opinion li.pour b{color:var(--leaf)} .opinion li.contre b{color:var(--warm)}
+.opinion p{margin:0;font-size:.89rem;color:var(--ink-2);line-height:1.45}
+.opinion cite{display:block;font-family:var(--mono);font-size:.66rem;letter-spacing:.04em;
+  text-transform:uppercase;color:var(--ink-3);font-style:normal;margin-top:.28rem}
+.opinion cite a{color:inherit;text-decoration:none;border-bottom:1px solid var(--rule-2)}
+.opinion cite a:hover{color:var(--water);border-bottom-color:currentColor}
+.conds{display:grid;grid-template-columns:repeat(auto-fit,minmax(272px,1fr));gap:24px;
+  margin-top:2.6rem;padding-top:2rem;border-top:1px solid var(--rule)}
+.cond{display:flex;flex-direction:column;gap:.5rem}
+.cond .rank{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;color:var(--ink-3)}
+.cond h4{margin:0}
+.cond p{margin:0;font-size:.91rem;color:var(--ink-2)}
+.split{list-style:none;padding:0;margin:.3rem 0 0;font-size:.87rem}
+#splits{column-count:2;column-gap:26px}
+#splits li{break-inside:avoid}
+@media (max-width:620px){#splits{column-count:1}}
+.split li{display:grid;grid-template-columns:1fr auto;gap:.8rem;align-items:center;
+  padding:.32rem 0;border-bottom:1px solid var(--rule)}
+.split .bars{display:flex;height:8px;width:74px;border:1px solid var(--rule-2)}
+.split .bars i{height:100%}
+.split .nm{color:var(--ink)}
+.split .pc{font-family:var(--mono);font-size:.78rem;color:var(--ink-3);
+  font-variant-numeric:tabular-nums;white-space:nowrap}
+
+/* ---------- cas d'école ---------- */
+.cases{display:grid;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));gap:22px}
+.case{border-top:2px solid var(--ink);padding-top:.9rem}
+.case .big{font-family:var(--serif);font-weight:600;font-size:2.5rem;line-height:1;
+  letter-spacing:-.02em;display:block;margin-bottom:.4rem}
+.case h4{margin-bottom:.4rem}
+.case p{font-size:.93rem;color:var(--ink-2);margin:0}
+.case.w .big{color:var(--warm)} .case.n .big{color:var(--nuke)} .case.l .big{color:var(--leaf)}
+
+.dual{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:26px 40px}
+.objection{border-left:2px solid var(--rule-2);padding-left:1.1rem}
+.objection h4{margin-bottom:.35rem}
+.objection p{font-size:.93rem;color:var(--ink-2);margin:0}
+.srcs{columns:2 260px;column-gap:34px;font-size:.88rem;color:var(--ink-2)}
+.srcs dt{font-weight:600;color:var(--ink);margin-top:.85rem;break-after:avoid}
+.srcs dd{margin:0 0 .1rem}
+footer{padding:2.6rem 0 4rem;font-size:.85rem;color:var(--ink-3)}
+@media (max-width:900px){
+  .atelier{grid-template-columns:1fr}
+  .rail{position:static}
+  body{font-size:16px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<header class="mast">
+  <div class="wrap">
+    <p class="eyebrow">Cartographie · bassins versants · 13 écorégions</p>
+    <h1>La France<br>que dessine l'eau</h1>
+    <p class="lede">Et si les régions suivaient les lignes de partage des eaux plutôt que
+      l'histoire administrative ? <span class="hl">Le débat est ouvert depuis juillet 2026</span>,
+      mais aucune carte n'avait été publiée. En voici une, construite à partir des
+      référentiels officiels — et chiffrée écorégion par écorégion.</p>
+    <div class="keyfigs" id="keyfigs"></div>
+  </div>
+</header>
+
+<section id="carte">
+  <div class="wrap">
+    <div class="shead">
+      <p class="eyebrow">La carte</p>
+      <h2>Treize écorégions, une par grand ensemble hydrographique</h2>
+      <p>Chaque écorégion regroupe des sous-bassins qui partagent le même réseau d'eau.
+        Sélectionnez un territoire pour son portrait ; changez d'indicateur pour recolorer
+        la carte ; superposez les limites actuelles pour mesurer l'écart.</p>
+    </div>
+    <div class="atelier">
+      <div class="stage">
+        <div class="controls">
+          <div class="ctl" id="metrics"><span>Colorer par</span></div>
+          <div class="ctl" id="layers"><span>Superposer</span></div>
+        </div>
+        <div id="mapholder"></div>
+        <div class="legend" id="legend"></div>
+      </div>
+      <aside class="rail" id="rail"></aside>
+    </div>
+  </div>
+</section>
+
+<section id="pourquoi">
+  <div class="wrap">
+    <div class="shead">
+      <p class="eyebrow">Le raisonnement</p>
+      <h2>La France est déjà découpée par bassins — depuis 1964</h2>
+    </div>
+    <div class="dual">
+      <div class="prose">
+        <p>L'idée paraît neuve. Elle a soixante ans. La <b>loi sur l'eau du 16 décembre 1964</b>
+          a découpé le pays en six grands bassins hydrographiques, dotés chacun d'une agence de
+          l'eau, d'un comité de bassin — le « parlement de l'eau » — et d'un schéma directeur
+          opposable, le SDAGE. Ces institutions lèvent des redevances, financent l'assainissement
+          et arbitrent les usages. Elles ne coïncident avec aucune région.</p>
+        <p>Le pays vit donc depuis longtemps avec <b>deux cartes superposées</b> : celle des
+          régions, qui décide de l'économie, des lycées et des trains, et celle des bassins, qui
+          décide de l'eau. La proposition de bassins-régions consiste à n'en garder qu'une, et à
+          confier au bassin les compétences écologiques : eau, sols, biodiversité, forêts,
+          risques climatiques.</p>
+        <p>L'argument de fond est mécanique. Une rivière transporte vers l'aval tout ce que
+          l'amont y met — nitrates, pesticides, chaleur, sédiments — et l'aval n'a aucun pouvoir
+          sur l'amont dès qu'une frontière administrative les sépare. Faire coïncider le
+          territoire de décision et le territoire de l'écoulement supprime cette impasse.</p>
+      </div>
+      <div>
+        <h4>Combien de régions actuelles chaque écorégion recoupe-t-elle&nbsp;?</h4>
+        <div class="rankwrap"><table class="rank" id="fragtable"></table></div>
+        <p class="note">Une écorégion qui recoupe cinq régions actuelles signale un bassin dont
+          la gestion est aujourd'hui éclatée entre cinq exécutifs. Deux écorégions seulement —
+          la Flandre-Artois-Picardie et l'Île-de-France — tiennent dans une seule région.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="cas">
+  <div class="wrap">
+    <div class="shead">
+      <p class="eyebrow">Trois cas d'école</p>
+      <h2>Ce que le découpage rend visible</h2>
+      <p>Trois faits que la carte administrative actuelle dissimule, et que la carte des
+        bassins met au premier plan.</p>
+    </div>
+    <div class="cases" id="cases"></div>
+  </div>
+</section>
+
+<section id="risque">
+  <div class="wrap">
+    <div class="shead">
+      <p class="eyebrow">Le risque</p>
+      <h2>Inondation et submersion</h2>
+      <p>Le risque d'inondation est déjà planifié à l'échelle du bassin — c'est l'objet des
+        plans de gestion des risques d'inondation, un par grand bassin depuis la directive
+        européenne de 2007. Mais il est exécuté à l'échelle intercommunale, par la compétence
+        GEMAPI, obligatoire depuis 2018 et financée par une taxe plafonnée à 40 € par habitant.</p>
+    </div>
+    <div class="reperes" id="risq-reperes"></div>
+    <div class="dual">
+      <div class="prose">
+        <h4>Ce que le découpage changerait</h4>
+        <p>Peu de choses sur la planification : elle est déjà à cette échelle. Beaucoup sur le
+          financement. La taxe GEMAPI est levée par l'intercommunalité et plafonnée par habitant :
+          l'aval urbain a une base fiscale large et beaucoup à protéger, l'amont rural a peu
+          d'habitants — et c'est pourtant à l'amont qu'on ralentit l'eau, par les haies, les zones
+          humides, les champs d'expansion de crue. Aujourd'hui, rien ne permet de faire financer
+          par l'aval des travaux qui le protègent mais se situent en amont. Une écorégion le
+          pourrait, à l'échelle exacte de l'écoulement.</p>
+      </div>
+      <div class="prose">
+        <h4>Où le bassin versant est le mauvais outil</h4>
+        <p>Le littoral n'est pas un bassin. L'érosion et la submersion dépendent du niveau marin,
+          des tempêtes et du transit du sable, qui circule <b>le long</b> de la côte et traverse
+          les embouchures. Un découpage par bassin tranche le rivage perpendiculairement à ce
+          transit. Pour les 3,2 millions d'habitants couverts par un plan submersion, la maille
+          pertinente reste la cellule sédimentaire — et l'exécutant, l'intercommunalité.</p>
+        <p class="note"><a target="_blank" rel="noopener noreferrer" href="https://www.georisques.gouv.fr/donnees/bases-de-donnees/base-gaspar">Base
+          GASPAR</a>, Géorisques, millésime août 2026.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="frontiere">
+  <div class="wrap">
+    <div class="shead">
+      <p class="eyebrow">Au-delà de la frontière</p>
+      <h2>Les bassins ne s'arrêtent pas à la frontière</h2>
+      <p>La carte des écorégions s'arrête au trait de côte et aux frontières. Les bassins
+        versants, eux, continuent. Reconstitués en entier, ils montrent ce qu'une écorégion
+        contrôlerait vraiment — et ce qu'elle ne contrôlerait pas.</p>
+    </div>
+    <div class="dual">
+      <div><svg class="tfmap" id="tfmap" role="img"
+        aria-label="Bassins versants complets autour de la France"></svg></div>
+      <div>
+        <h4>Part française de chaque bassin</h4>
+        <ul class="tflist" id="tflist"></ul>
+        <p class="prose" style="margin-top:1rem">Trois écorégions gouverneraient une minorité
+          de leur bassin. Vosges-Ardenne déciderait pour <b id="tf-rhin"></b> du bassin du Rhin,
+          l'amont suisse et allemand lui échappant ; même asymétrie pour la Meuse et l'Escaut,
+          dont l'aval est néerlandais et belge — ce que la France y déverse, d'autres le boivent.
+          Le Rhône est le cas inverse : français à <b id="tf-rhone"></b>, mais les glaciers et le
+          lac qui règlent son étiage sont suisses.</p>
+        <p class="prose">L'objection vaut déjà pour l'organisation actuelle : c'est pourquoi des
+          commissions internationales gèrent ces trois fleuves depuis des décennies. Le découpage
+          par bassin ne crée pas cette dépendance, il la rend visible.</p>
+        <p class="note"><a target="_blank" rel="noopener noreferrer" href="https://www.hydrosheds.org/products/hydrobasins">HydroBASINS
+          niveau 6</a> (HydroSHEDS, CC-BY 4.0), surfaces en ETRS89-LAEA ; contours modélisés à
+          l'échelle mondiale.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="cout">
+  <div class="wrap">
+    <div class="shead">
+      <p class="eyebrow">Le coût</p>
+      <h2>Ce que ça coûterait</h2>
+      <p>Aucun chiffrage n'a été publié par les promoteurs de la réforme. On peut néanmoins
+        transposer le précédent de 2015, ligne par ligne, et mesurer l'ampleur du bouleversement
+        que ce découpage-ci implique.</p>
+    </div>
+    <div class="reperes" id="reperes"></div>
+    <div class="dual">
+      <div class="prose">
+        <h4>Un précédent qui s'est retourné</h4>
+        <p>La réforme de 2015 avait été vendue sur une promesse chiffrée : <b>10 milliards d'euros
+          d'économies annuelles</b>, jusqu'à 25 milliards selon certaines déclarations. La Cour des
+          comptes a tranché le 24 septembre 2019 : aucune économie, des surcoûts — sur les régimes
+          indemnitaires, les indemnités d'élus et les systèmes d'information. Cause identifiée :
+          l'absence de réorganisation réelle, les effectifs restant dans les anciennes capitales
+          régionales et les structures se juxtaposant au lieu de fusionner.</p>
+        <h4>Pourquoi ce découpage-ci serait plus lourd</h4>
+        <p>La réforme de 2015 fusionnait des régions entières <b>sans jamais découper un
+          département</b>. Ici, un tiers des départements sont scindés entre deux écorégions ou
+          plus. Or le département est l'échelon des collèges, de l'action sociale et des routes :
+          chaque scission multiplie les conventions, les transferts de personnel et les systèmes
+          à réconcilier. Le facteur de coût n'est pas le nombre de régions, c'est le nombre de
+          frontières nouvelles.</p>
+        <p>À l'inverse, un poste majeur est déjà financé : la compétence eau n'est pas à créer.
+          Les agences de bassin fonctionnent depuis 1964 et disposent de deux milliards d'euros
+          par an. Une écorégion qui absorbe une agence ne fonde pas une administration, elle en
+          déplace une.</p>
+      </div>
+      <div>
+        <h4>Le chiffrage, en ordre de grandeur</h4>
+        <table class="cost" id="estim"></table>
+        <div id="estimtot"></div>
+      </div>
+    </div>
+    <div class="ratiowrap">
+      <h4>Les rationalisations possibles</h4>
+      <ul class="ratio" id="ratio"></ul>
+    </div>
+    <div class="dual" style="margin-top:2.6rem;padding-top:2rem;border-top:1px solid var(--rule)">
+      <div>
+        <h4>Ce que l'opinion dit — et ne dit pas</h4>
+        <p class="note" style="margin-top:.2rem">Aucun sondage n'a testé cette proposition
+          elle-même. Ce qui suit mesure l'appétit de réforme territoriale en général, et le
+          critère que les Français réclament pour la conduire.</p>
+        <ul class="opinion" id="opinion"></ul>
+      </div>
+      <div class="prose">
+        <h4>L'obstacle n'est pas le montant</h4>
+        <p>Un surcoût de cet ordre représente 0,25 à 0,3 % des budgets régionaux : économiquement
+          marginal. Ce qui a tué la réforme précédente n'est pas sa facture, c'est l'écart entre
+          sa facture et sa promesse.</p>
+        <p>L'appétit de réforme existe, massif et documenté. Mais il porte sur un critère —
+          l'histoire et la culture — que l'hydrographie ne satisfait pas, et il place la région
+          en dernier parmi les échelons à renforcer. Un découpage écologique imposé contre le
+          sentiment d'appartenance se heurterait au mur qui a arrêté celui de 2015, en sens
+          inverse.</p>
+        <p>Trois conditions se dégagent de ces chiffres. Elles ne relèvent pas de la carte, mais
+          de la manière dont on la présente.</p>
+      </div>
+    </div>
+    <div class="conds" id="conditions"></div>
+  </div>
+</section>
+
+<section id="objections">
+  <div class="wrap">
+    <div class="shead">
+      <p class="eyebrow">Les objections</p>
+      <h2>Ce que cette carte ne résout pas</h2>
+      <p>Un découpage hydrographique règle des problèmes écologiques et en crée d'autres,
+        politiques. Les principales objections, avec les chiffres de cette même carte.</p>
+    </div>
+    <div class="dual" id="objs"></div>
+  </div>
+</section>
+
+<section id="methode">
+  <div class="wrap">
+    <div class="shead">
+      <p class="eyebrow">Méthode</p>
+      <h2>Comment cette carte a été construite</h2>
+    </div>
+    <div class="dual">
+      <div class="prose">
+        <p>Le point de départ n'est pas un tracé inventé : ce sont les <b>34 sous-bassins
+          DCE administratifs</b> du référentiel Sandre, produits par l'Office français de la
+          biodiversité pour l'application de la directive-cadre sur l'eau. Ils portent des noms
+          que l'administration utilise déjà — Marne, Durance, Allier-Loire amont, Vilaine et
+          côtiers bretons — et, étant « administratifs », ils suivent les limites communales :
+          <b>aucune commune n'est coupée en deux</b> par cette carte.</p>
+        <p>Ces 34 briques ont été regroupées en 13 écorégions sous trois contraintes : continuité
+          hydrographique (amont et aval d'un même réseau restent ensemble), respect des
+          circonscriptions de bassin de 1964, et recherche d'un équilibre démographique. Le
+          nombre 13 est celui du débat public ; il n'est pas dicté par l'hydrographie. Sous les
+          mêmes contraintes, 14 écorégions seraient tout aussi défendables — la Corse serait
+          alors autonome plutôt que rattachée à la Méditerranée.</p>
+        <p>Chaque indicateur est calculé, pas repris : les 34 745 communes métropolitaines sont
+          rattachées à leur sous-bassin par la table officielle, puis leurs populations,
+          surfaces, occupations du sol et volumes d'eau prélevés sont additionnés. Une seule
+          estimation subsiste, signalée comme telle : le PIB, réparti au prorata de la population
+          à partir du PIB par habitant régional.</p>
+        <p>Deux précautions de lecture. Les volumes prélevés pour <b>refroidir les centrales
+          nucléaires</b> sont, pour l'essentiel, restitués au cours d'eau — réchauffés, mais
+          restitués : ils gonflent les totaux sans être une consommation. Et les
+          <b>volumes turbinés</b> par les barrages hydroélectriques (757 milliards de m³ par an,
+          soit vingt fois tous les autres usages) sont exclus de tous les calculs, la même eau
+          étant comptée à chaque ouvrage traversé.</p>
+      </div>
+      <div>
+        <h4>Sources</h4>
+        <dl class="srcs">
+          <dt>Découpage</dt>
+          <dd><a target="_blank" rel="noopener noreferrer" href="https://www.sandre.eaufrance.fr/notice-doc/r%C3%A9f%C3%A9rentiel-hydrographique">Sous-bassins
+            DCE administratifs et régions hydrographiques</a> — référentiel Sandre / OFB,
+            service WFS, millésime 2026.</dd>
+          <dd><a target="_blank" rel="noopener noreferrer" href="https://www.data.gouv.fr/datasets/bd-topage-r-metropole-2025">BD TOPAGE®
+            2025</a>, IGN &amp; OFB, éditeur Sandre — bassins hydrographiques.</dd>
+          <dt>Population, communes</dt>
+          <dd>INSEE, populations légales, via l'<a target="_blank" rel="noopener noreferrer" href="https://geo.api.gouv.fr/decoupage-administratif">API
+            Découpage administratif</a> (Etalab).</dd>
+          <dt>Occupation du sol</dt>
+          <dd><a target="_blank" rel="noopener noreferrer" href="https://www.statistiques.developpement-durable.gouv.fr/corine-land-cover-0">Corine
+            Land Cover 2018</a>, programme Copernicus, statistiques communales en 5 postes
+            publiées par le SDES.</dd>
+          <dt>Eau prélevée</dt>
+          <dd><a target="_blank" rel="noopener noreferrer" href="https://hubeau.eaufrance.fr/page/api-prelevements-eau">Banque nationale des
+            prélèvements quantitatifs en eau (BNPE)</a>, via l'API Hub'Eau — moyenne des exercices
+            2020, 2021 et 2022.</dd>
+          <dt>Débits et saisonnalité</dt>
+          <dd><a target="_blank" rel="noopener noreferrer" href="https://hubeau.eaufrance.fr/page/api-hydrometrie">Hub'Eau hydrométrie</a>,
+            débits moyens journaliers 2015-2024 ; pour chaque écorégion, la station jaugeant le
+            plus grand bassin versant, agrégée par mois calendaire — des mesures, non un modèle.</dd>
+          <dt>Économie</dt>
+          <dd><a target="_blank" rel="noopener noreferrer" href="https://www.insee.fr/fr/statistiques/8391986">INSEE, comptes régionaux</a>
+            base 2020, PIB par habitant 2024.</dd>
+          <dt>Cours d'eau</dt>
+          <dd><a target="_blank" rel="noopener noreferrer" href="https://www.sandre.eaufrance.fr/notice-doc/r%C3%A9f%C3%A9rentiel-hydrographique">Sandre</a>,
+            cours d'eau de classe 1 (297 tronçons).</dd>
+          <dt>Risque d'inondation</dt>
+          <dd><a target="_blank" rel="noopener noreferrer" href="https://www.georisques.gouv.fr/donnees/bases-de-donnees/base-gaspar">Base
+            GASPAR</a> (Géorisques), millésime août 2026 : arrêtés de catastrophe naturelle et
+            plans de prévention des risques naturels opposables, au niveau communal
+            (<a target="_blank" rel="noopener noreferrer" href="https://www.data.gouv.fr/datasets/base-nationale-de-gestion-assistee-des-procedures-administratives-relatives-aux-risques-gaspar">jeu
+            de données</a>).</dd>
+          <dt>Bassins transfrontaliers</dt>
+          <dd><a target="_blank" rel="noopener noreferrer" href="https://www.hydrosheds.org/products/hydrobasins">HydroBASINS niveau 6</a>
+            (HydroSHEDS, WWF), licence CC-BY 4.0, dissous par bassin principal ; surfaces en
+            ETRS89-LAEA (EPSG:3035).</dd>
+          <dt>Coût de la réforme de 2015</dt>
+          <dd>Cour des comptes, rapport du 24 septembre 2019, relayé par
+            <a target="_blank" rel="noopener noreferrer" href="https://www.lagazettedescommunes.com/639645/la-fusion-des-regions-bien-a-occasionne-des-surcouts/">La
+            Gazette des communes</a> et
+            <a target="_blank" rel="noopener noreferrer" href="https://www.banquedesterritoires.fr/malgre-les-surcouts-la-cour-des-comptes-appelle-conforter-le-role-des-regions">la
+            Banque des Territoires</a>.</dd>
+          <dd>Budgets des régions :
+            <a target="_blank" rel="noopener noreferrer" href="https://www.centre-inffo.fr/site-regions-formation/actualites-regions/les-chiffres-cles-des-regions-2025-publication-de-regions-de-france">Régions
+            de France, chiffres clés 2025</a> (39,7 Md€ en 2024).</dd>
+          <dd>Agences de l'eau :
+            <a target="_blank" rel="noopener noreferrer" href="https://www.lesagencesdeleau.fr/actualites/programme-2025-2030-des-agences-de-leau-plus-de-2-milliards-deuros-par-pour-accompagner">12ᵉ
+            programme 2025-2030</a> ; <a target="_blank" rel="noopener noreferrer" href="https://www.filiere-eau.fr/acteurs-filiere-eau/redevances-agences-eau-qui-paie/">répartition
+            des redevances</a>, Filière Eau.</dd>
+          <dt>Opinion</dt>
+          <dd><a target="_blank" rel="noopener noreferrer" href="https://territorial.zepros.fr/75-des-francais-souhaitent-renforcer-la-decentralisation--89024">CSA
+            pour la délégation aux collectivités territoriales du Sénat</a>, 24 février-2 mars
+            2020, 1 007 personnes.</dd>
+          <dd><a target="_blank" rel="noopener noreferrer" href="https://abp.bzh/vers-une-france-federale-le-sondage-ifop-qui-bouscule-le-central-72071">Ifop
+            pour Régions et Peuples Solidaires</a>, août 2025, 2 000 personnes.</dd>
+          <dd><a target="_blank" rel="noopener noreferrer" href="https://www.jean-jaures.org/publication/le-regard-des-francais-sur-les-regions-et-sur-la-decentralisation/">Ifop
+            pour Régions de France</a>, octobre 2025, analysé par la Fondation Jean-Jaurès.</dd>
+          <dd><a target="_blank" rel="noopener noreferrer" href="https://institut-terram.org/publications/municipales-lecologie-a-lepreuve-des-territoires/">Institut
+            Terram</a>, sur l'acceptabilité et le financement des politiques écologiques ;
+            <a target="_blank" rel="noopener noreferrer" href="https://www.cieau.com/qualite-micropolluants-climat-ce-que-les-francais-attendent-desormais-de-leur-eau-du-robinet/">Centre
+            d'information sur l'eau</a>, attentes des Français 2026.</dd>
+        </dl>
+        <p class="note">Toutes les sources sont sous Licence Ouverte 2.0 ou équivalent.
+          Périmètre : France métropolitaine, Corse incluse. Les cinq bassins ultramarins
+          (Guadeloupe, Martinique, Guyane, La Réunion, Mayotte) constitueraient autant
+          d'écorégions supplémentaires ; ils ne sont pas cartographiés ici.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>Carte et calculs produits à partir de données publiques ouvertes. Le découpage en
+      13 écorégions présenté ici est une construction documentée, pas un document officiel :
+      aucune carte de ce type n'a été publiée par ses promoteurs.</p>
+  </div>
+</footer>
+
+<div class="tip" id="tip" role="status" aria-live="polite"></div>
+
+<script>
+const DATA = /*__DATA__*/;
+const G = DATA.geometry, IND = DATA.indicators, REC = DATA.recits;
+const E = IND.ecoregions, byKey = Object.fromEntries(E.map(e => [e.key, e]));
+const SAISON = DATA.saison, TF = DATA.transfrontalier, RISQ = DATA.risques;
+const fr = (n, d = 0) => n.toLocaleString('fr-FR', {minimumFractionDigits: d, maximumFractionDigits: d});
+
+/* ---- teintes d'identité : une par écorégion ---- */
+const TINT = {escaut:'#5b8ea6',rhinmeuse:'#7ba57e',idf:'#c0797f',seineamont:'#b9a86a',
+  normandie:'#7fa8bd',bretagne:'#8f8fbb',loireaval:'#9dba79',loireamont:'#cfa96b',
+  garonne:'#d19a70',dordogne:'#a98a7d',saone:'#74b0a4',rhone:'#a882b5',mediterranee:'#d0b167'};
+const SHORT = {escaut:'Flandre-Picardie',rhinmeuse:'Vosges-Ardenne',idf:'Île-de-France',seineamont:'Champagne-Brie',normandie:'Normandie',bretagne:'Bretagne',loireaval:'Anjou-Vendée',loireamont:'Val de Loire',garonne:'Gascogne',dordogne:'Périgord',saone:'Bourgogne-Comté',rhone:'Rhône-Alpes',mediterranee:'Provence-Languedoc'};
+const NUDGE = {idf:[-6,-14],seineamont:[42,26],normandie:[-24,6],loireaval:[-30,30],
+  garonne:[-20,20],dordogne:[-10,-10],mediterranee:[-60,10],rhone:[6,10],saone:[0,10]};
+const RAMP_EAU = ['#cddfdd','#a4c6c6','#78aab0','#4d8a97','#2f6a7c','#1a4a5d'];
+const RAMP_PRES = ['#e6ddca','#dcc79b','#cfa965','#bd8637','#9c6524','#754715'];
+
+const METRICS = [
+  {id:'identite', lab:'Identité', ramp:null,
+   fmt:e => e.nom, sfmt:e => fr(e.pop/1e6,1)+' M'},
+  {id:'densite', lab:'Densité', ramp:RAMP_PRES, unit:'hab/km²', scale:'log',
+   get:e => e.densite, fmt:e => fr(e.densite,0)+' hab/km²',
+   sfmt:e => fr(e.densite,0)+' h/km²'},
+  {id:'pib', lab:'PIB/hab', ramp:RAMP_PRES, unit:'€/hab',
+   get:e => e.pib_hab, fmt:e => fr(e.pib_hab)+' €/hab',
+   sfmt:e => fr(e.pib_hab/1000,1)+' k€'},
+  {id:'prel', lab:'Eau prélevée', ramp:RAMP_PRES, unit:'m³/hab/an', scale:'log',
+   get:e => e.prel_hab_m3, fmt:e => fr(e.prel_hab_m3)+' m³/hab/an',
+   sfmt:e => fr(e.prel_hab_m3)+' m³'},
+  {id:'irrig', lab:'Part irrigation', ramp:RAMP_PRES, unit:'% des prélèvements',
+   get:e => e.prel_part_irrigation, fmt:e => fr(e.prel_part_irrigation,1)+' % des prélèvements',
+   sfmt:e => fr(e.prel_part_irrigation,1)+' %'},
+  {id:'artif', lab:'Sols artificialisés', ramp:RAMP_PRES, unit:'% du sol',
+   get:e => e.clc_pct.artificialise, fmt:e => fr(e.clc_pct.artificialise,1)+' % du sol',
+   sfmt:e => fr(e.clc_pct.artificialise,1)+' %'},
+  {id:'agri', lab:'Sols agricoles', ramp:RAMP_EAU, unit:'% du sol',
+   get:e => e.clc_pct.agricole, fmt:e => fr(e.clc_pct.agricole,1)+' % du sol',
+   sfmt:e => fr(e.clc_pct.agricole,1)+' %'},
+  {id:'foret', lab:'Forêts, milieux naturels', ramp:RAMP_EAU, unit:'% du sol',
+   get:e => e.clc_pct.foret_naturel, fmt:e => fr(e.clc_pct.foret_naturel,1)+' % du sol',
+   sfmt:e => fr(e.clc_pct.foret_naturel,1)+' %'},
+  {id:'debit', lab:'Débit spécifique', ramp:RAMP_EAU, unit:'l/s/km²',
+   get:e => e.hydro ? e.hydro.debit_specifique_ls_km2 : null,
+   fmt:e => e.hydro ? fr(e.hydro.debit_specifique_ls_km2,1)+' l/s/km² à '+e.hydro.station : '—',
+   sfmt:e => e.hydro ? fr(e.hydro.debit_specifique_ls_km2,1)+' l/s/km²' : '—'},
+  {id:'canaux', lab:'Part des canaux', ramp:RAMP_PRES, unit:'% des prélèvements',
+   get:e => 100 * e.prel_Mm3.CAN / e.prel_conso_Mm3,
+   fmt:e => fr(100 * e.prel_Mm3.CAN / e.prel_conso_Mm3, 1)+' % des prélèvements',
+   sfmt:e => fr(100 * e.prel_Mm3.CAN / e.prel_conso_Mm3, 1)+' %'},
+  {id:'saison', lab:'Contraste saisonnier', ramp:RAMP_PRES, unit:'× entre le mois le plus haut et le plus bas',
+   get:e => SAISON[e.key] ? SAISON[e.key].rapport : null,
+   fmt:e => SAISON[e.key] ? '×\u202f'+fr(SAISON[e.key].rapport,1)+' entre février et août' : '—',
+   sfmt:e => SAISON[e.key] ? '×\u202f'+fr(SAISON[e.key].rapport,1) : '—'},
+  {id:'fragmentation', lab:'Régions recoupées', ramp:RAMP_PRES, unit:'régions actuelles',
+   get:e => e.regions_recoupees.length,
+   fmt:e => e.regions_recoupees.length+(e.regions_recoupees.length>1?' régions recoupées':' seule région'),
+   sfmt:e => e.regions_recoupees.length+(e.regions_recoupees.length>1?' régions':' région')},
+];
+const LAYERS = [
+  {id:'riv', lab:"Cours d'eau", on:false, c:'riv'},
+  {id:'reg', lab:'Régions actuelles', on:false, c:'reg'},
+  {id:'hyd', lab:'Tracé hydrographique réel', on:false, c:'hyd'},
+  {id:'sub', lab:'34 sous-bassins', on:false, c:'sub'},
+  {id:'bas', lab:'Bassins de 1964', on:false, c:'bas'},
+];
+let metric = METRICS[0], sel = null, tab = 'eco';
+
+/* ---------- chiffres clés ---------- */
+(() => {
+  const nb = IND.meta;
+  const prelTot = E.reduce((s,e) => s + e.prel_conso_Mm3, 0);
+  const figs = [
+    ['13', 'écorégions, agrégées à partir de 34 sous-bassins officiels'],
+    [fr(nb.pop_totale/1e6,1).replace('.',',')+' M', 'habitants répartis, commune par commune'],
+    ['0', 'commune coupée en deux par ces limites'],
+    [fr(prelTot/1000,1)+' Md', "m³ d'eau prélevés par an, hors turbinage"],
+    ['1964', "l'année où la France s'est déjà découpée par bassins"],
+  ];
+  document.getElementById('keyfigs').innerHTML = figs.map(([b,s]) =>
+    `<div class="keyfig"><b class="num">${b}</b><span>${s}</span></div>`).join('');
+})();
+
+/* ---------- carte ---------- */
+const vb = G.viewBox;
+function buildMap() {
+  const p = (arr, cls) => arr.map(o => `<path class="${cls}" d="${o.path}"/>`).join('');
+  const eco = E.map(e => {
+    const g = G.ecoregions.find(x => x.key === e.key);
+    return `<path class="eco" id="eco-${e.key}" data-k="${e.key}" d="${g.path}"
+      tabindex="0" role="button" aria-label="${e.nom}"><title>${e.nom}</title></path>`;
+  }).join('');
+  const labels = G.ecoregions.map(g => {
+    const e = byKey[g.key], o = NUDGE[g.key] || [0,0];
+    const x = 100*(g.label[0]+o[0]+12)/(vb[2]+24), y = 100*(g.label[1]+o[1]+12)/(vb[3]+24);
+    return `<div class="mlbl" data-k="${g.key}" style="left:${x.toFixed(2)}%;top:${y.toFixed(2)}%">
+      <b>${SHORT[g.key]}</b><span class="mv" data-k="${g.key}"></span></div>`;
+  }).join('');
+  document.getElementById('mapholder').innerHTML = `<div class="mapbox">` +
+    `<svg class="map" id="map" viewBox="-12 -12 ${vb[2]+24} ${vb[3]+24}" role="img"
+        aria-label="Carte des 13 écorégions hydrographiques de France métropolitaine">
+      <g id="gEco">${eco}</g>
+      <path class="outline" d="${G.outline}"/>
+      <g id="lay-riv" class="lay">${p(G.rivers,'riv')}</g>
+      <g id="lay-sub" class="lay" hidden>${p(G.subbasins,'ovl sub')}</g>
+      <g id="lay-bas" class="lay" hidden>${p(G.basins,'ovl bas')}</g>
+      <g id="lay-hyd" class="lay" hidden>${p(G.regionsHydro,'ovl hyd')}</g>
+      <g id="lay-reg" class="lay" hidden>${p(G.regionsAdmin,'ovl reg')}</g>
+    </svg>` + labels + `</div>`;
+}
+function ramp(m) {
+  if (!m.ramp) return null;
+  const vals = E.map(m.get).filter(v => v != null);
+  let lo = Math.min(...vals), hi = Math.max(...vals);
+  const t = v => {
+    if (v == null) return null;
+    if (m.scale === 'log') return (Math.log(v+1)-Math.log(lo+1))/(Math.log(hi+1)-Math.log(lo+1));
+    return (v - lo) / (hi - lo);
+  };
+  return {lo, hi, color: v => {
+    const x = t(v);
+    if (x == null) return 'var(--paper-3)';
+    return m.ramp[Math.min(m.ramp.length-1, Math.floor(x * m.ramp.length * .999))];
+  }};
+}
+function paint() {
+  const r = ramp(metric);
+  E.forEach(e => {
+    const el = document.getElementById('eco-' + e.key);
+    el.setAttribute('fill', r ? r.color(metric.get(e)) : TINT[e.key]);
+    el.setAttribute('fill-opacity', r ? .92 : .8);
+    el.setAttribute('stroke', 'var(--paper-2)');
+    el.setAttribute('stroke-width', '1.1');
+  });
+  const sombre = hex => {                     // luminance relative, pour inverser le libellé
+    if (!hex || hex[0] !== '#') return false;
+    const n = parseInt(hex.slice(1), 16);
+    return (0.2126*(n>>16 & 255) + 0.7152*(n>>8 & 255) + 0.0722*(n & 255)) / 255 < 0.5;
+  };
+  document.querySelectorAll('.mlbl').forEach(el => {
+    const e = byKey[el.dataset.k];
+    el.querySelector('.mv').textContent = metric.sfmt(e);
+    el.classList.toggle('inv', sombre(r ? r.color(metric.get(e)) : TINT[e.key]));
+  });
+  const lg = document.getElementById('legend');
+  if (!r) {
+    lg.innerHTML = `<span>Une teinte par écorégion. Choisissez un indicateur pour comparer
+      les territoires.</span>`;
+  } else {
+    lg.innerHTML = `<span>${metric.lab}</span>
+      <span class="num">${fr(r.lo, r.lo < 10 ? 1 : 0)}</span>
+      <span class="ramp">${metric.ramp.map(c => `<i style="background:${c}"></i>`).join('')}</span>
+      <span class="num">${fr(r.hi, r.hi < 10 ? 1 : 0)}</span>
+      <span>${metric.unit}${metric.scale === 'log' ? ' · échelle logarithmique' : ''}</span>`;
+  }
+}
+function buildControls() {
+  document.getElementById('metrics').insertAdjacentHTML('beforeend', METRICS.map(m =>
+    `<button class="chip met" data-m="${m.id}" aria-pressed="${m===metric}">${m.lab}</button>`).join(''));
+  document.getElementById('layers').insertAdjacentHTML('beforeend', LAYERS.map(l =>
+    `<button class="chip lay" data-l="${l.id}" data-c="${l.c}" aria-pressed="${l.on}">${l.lab}</button>`).join(''));
+  document.querySelectorAll('button.met').forEach(b => b.onclick = () => {
+    metric = METRICS.find(m => m.id === b.dataset.m);
+    document.querySelectorAll('button.met').forEach(x =>
+      x.setAttribute('aria-pressed', x === b));
+    paint();
+  });
+  document.querySelectorAll('button.lay').forEach(b => b.onclick = () => {
+    const on = b.getAttribute('aria-pressed') !== 'true';
+    b.setAttribute('aria-pressed', on);
+    document.getElementById('lay-' + b.dataset.l).toggleAttribute('hidden', !on);
+    majCalques();
+  });
+  LAYERS.forEach(l => document.getElementById('lay-' + l.id).toggleAttribute('hidden', !l.on));
+  majCalques();
+}
+
+function majCalques() {
+  const actifs = [...document.querySelectorAll('button.lay')]
+    .some(b => b.getAttribute('aria-pressed') === 'true');
+  document.getElementById('map').classList.toggle('has-lay', actifs);
+}
+
+/* ---------- infobulle ---------- */
+const tip = document.getElementById('tip');
+function bindMap() {
+  const map = document.getElementById('map');
+  map.querySelectorAll('.eco').forEach(el => {
+    const e = byKey[el.dataset.k];
+    el.addEventListener('pointerenter', ev => {
+      tip.innerHTML = `<b>${e.nom}</b><br><span class="num">${fr(e.pop/1e6,2)} M</span> hab · ` +
+        `<span class="num">${fr(e.area_km2)}</span> km²` +
+        (metric.ramp ? `<br>${metric.lab} : <span class="num">${metric.fmt(e)}</span>` : '');
+      tip.style.opacity = 1;
+    });
+    el.addEventListener('pointermove', ev => {
+      tip.style.left = Math.min(window.innerWidth - 260, ev.clientX + 14) + 'px';
+      tip.style.top = Math.max(8, ev.clientY - 52) + 'px';
+    });
+    el.addEventListener('pointerleave', () => tip.style.opacity = 0);
+    el.addEventListener('click', () => select(e.key));
+    el.addEventListener('keydown', ev => {
+      if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); select(e.key); }
+    });
+  });
+}
+function select(k) {
+  sel = (sel === k) ? null : k;
+  const map = document.getElementById('map');
+  map.classList.toggle('has-sel', !!sel);
+  map.querySelectorAll('.eco').forEach(el => el.classList.toggle('sel', el.dataset.k === sel));
+  rail();
+}
+
+/* ---------- rail ---------- */
+const NAT = (() => {
+  const n = {pop: 0, area: 0, prel: 0, pib: 0};
+  E.forEach(e => { n.pop += e.pop; n.area += e.area_km2; n.prel += e.prel_conso_Mm3;
+                   n.pib += e.pib_meur; });
+  n.densite = n.pop / n.area; n.pib_hab = n.pib * 1e6 / n.pop; n.prel_hab = n.prel * 1e6 / n.pop;
+  const w = k => E.reduce((s,e) => s + e.clc_pct[k] * e.area_km2, 0) / n.area;
+  n.artif = w('artificialise'); n.agri = w('agricole'); n.foret = w('foret_naturel');
+  n.humide = w('zones_humides');
+  n.irrig = 100 * E.reduce((s,e) => s + e.prel_Mm3.IRR, 0) / n.prel;
+  return n;
+})();
+const USAGE_COL = {AEP:'var(--water)', IRR:'var(--ochre)', IND:'var(--ink-3)',
+                   ENE:'var(--nuke)', CAN:'var(--leaf)'};
+const USAGE_LAB = {AEP:'Eau potable', IRR:'Irrigation', IND:'Industrie',
+                   ENE:'Refroidissement des centrales', CAN:'Canaux'};
+function metricRow(lab, val, natVal, max, fmt, warm) {
+  const w = Math.max(1, Math.min(100, 100 * val / max));
+  const nx = Math.max(0, Math.min(100, 100 * natVal / max));
+  return `<div class="metric"><div class="top"><em>${lab}</em><b>${fmt(val)}</b></div>
+    <div class="bar"><i class="${warm?'warm':''}" style="width:${w}%"></i>
+    <u style="left:${nx}%" title="moyenne nationale"></u></div></div>`;
+}
+const MOIS = ['janvier','février','mars','avril','mai','juin','juillet','août',
+              'septembre','octobre','novembre','décembre'];
+const MOISI = ['J','F','M','A','M','J','J','A','S','O','N','D'];
+function graphMois(s) {
+  const max = Math.max(...s.mois), n = 12, w = 100 / n;
+  const barres = s.mois.map((v, i) => {
+    const h = 46 * v / max, cl = (i + 1 === s.mois_bas) ? ' class="bas"' : '';
+    return `<rect${cl} x="${(i*w+w*0.16).toFixed(2)}" y="${(46-h).toFixed(2)}"
+      width="${(w*0.68).toFixed(2)}" height="${h.toFixed(2)}"><title>${MOIS[i]} : ${fr(v,0)} m³/s</title></rect>`;
+  }).join('');
+  const lettres = MOISI.map((m, i) => {
+    const fort = (i + 1 === s.mois_bas || i + 1 === s.mois_haut) ? ' class="on"' : '';
+    return `<span${fort}>${m}</span>`;
+  }).join('');
+  return `<svg class="mois" viewBox="0 0 100 46" preserveAspectRatio="none"
+    role="img" aria-label="Débit moyen mois par mois">${barres}</svg>
+    <div class="moisx" aria-hidden="true">${lettres}</div>`;
+}
+
+function rail() {
+  const el = document.getElementById('rail');
+  if (!sel) {
+    el.innerHTML = `<div class="hd"><span class="kicker">Portrait</span>
+      <h3>Choisissez une écorégion</h3>
+      <p class="sub">Treize territoires, du plus dense au plus vide</p></div>
+      <div class="pane on"><p>Chaque écorégion a son portrait : ce qui la rend cohérente, ce
+      qu'elle consomme, ce qu'elle risque. Cliquez sur la carte, ou dans la liste ci-dessous.</p>
+      <ul class="rlist">${E.slice().sort((a,b)=>b.pop-a.pop).map(e =>
+        `<li><span><i class="swatch" style="background:${TINT[e.key]};display:inline-block;
+          width:10px;height:10px;margin-right:.5rem"></i>${e.nom}</span>
+          <b class="num">${fr(e.pop/1e6,2)} M</b></li>`).join('')}</ul>
+      <p class="note">Les repères verticaux sur les barres marquent la moyenne nationale.</p>
+      </div>`;
+    el.querySelectorAll('.rlist li').forEach((li, i) => {
+      const k = E.slice().sort((a,b)=>b.pop-a.pop)[i].key;
+      li.style.cursor = 'pointer';
+      li.onclick = () => select(k);
+    });
+    return;
+  }
+  const e = byKey[sel], r = REC[sel], h = e.hydro, sais = SAISON[sel];
+  const maxPrelHab = Math.max(...E.map(x => x.prel_hab_m3));
+  const prelTotal = Object.values(e.prel_Mm3).reduce((s,v)=>s+v,0) - e.prel_Mm3.BAR;
+  const stack = ks => `<div class="stack">${ks.map(([k,v,c]) =>
+      v <= 0 ? '' : `<i style="background:${c};flex:${v}" title="${k} : ${fr(v,1)}"></i>`).join('')}</div>`;
+  el.innerHTML = `
+   <div class="hd">
+     <span class="kicker">Écorégion · ${e.sous_bassins.length} sous-bassin${e.sous_bassins.length>1?'s':''}</span>
+     <h3>${e.nom}</h3>
+     <p class="sub">${r.sous_titre}</p>
+   </div>
+   <div class="tabs" role="tablist">
+     <button role="tab" data-t="eco" aria-selected="${tab==='eco'}">Écologie</button>
+     <button role="tab" data-t="econ" aria-selected="${tab==='econ'}">Économie</button>
+     <button role="tab" data-t="res" aria-selected="${tab==='res'}">Ressources</button>
+   </div>
+   <div class="pane ${tab==='eco'?'on':''}" data-p="eco">
+     <p>${r.texte}</p>
+     <h4>Occupation du sol</h4>
+     ${stack([['Artificialisé',e.clc_pct.artificialise,'var(--warm)'],
+              ['Agricole',e.clc_pct.agricole,'var(--ochre)'],
+              ['Forêts et milieux naturels',e.clc_pct.foret_naturel,'var(--leaf)'],
+              ['Zones humides',e.clc_pct.zones_humides,'var(--water-2)'],
+              ['Surfaces en eau',e.clc_pct.eau,'var(--water)']])}
+     <div class="skey">
+       <span><i style="background:var(--warm)"></i>Artificialisé ${fr(e.clc_pct.artificialise,1)} %</span>
+       <span><i style="background:var(--ochre)"></i>Agricole ${fr(e.clc_pct.agricole,1)} %</span>
+       <span><i style="background:var(--leaf)"></i>Forêts, naturel ${fr(e.clc_pct.foret_naturel,1)} %</span>
+       <span><i style="background:var(--water-2)"></i>Humide ${fr(e.clc_pct.zones_humides,2)} %</span>
+     </div>
+     <h4 style="margin-top:1.1rem">Vulnérabilité principale</h4>
+     <p style="margin-bottom:.9rem">${r.tension}</p>
+     <h4>Dans la presse</h4>
+     <ul class="press">${(r.presse || []).map(a => `<li>
+       <a href="${a.url}" target="_blank" rel="noopener noreferrer">${a.titre}</a>
+       <span class="src">${a.source}${a.date ? ' · ' + a.date : ''}</span></li>`).join('')}</ul>
+   </div>
+   <div class="pane ${tab==='econ'?'on':''}" data-p="econ">
+     ${metricRow('Population', e.pop/1e6, NAT.pop/1e6/13, Math.max(...E.map(x=>x.pop))/1e6,
+        v => fr(v,2)+' M hab')}
+     ${metricRow('Densité', e.densite, NAT.densite, Math.max(...E.map(x=>x.densite)),
+        v => fr(v,0)+' hab/km²', true)}
+     ${metricRow('PIB par habitant (estimé)', e.pib_hab, NAT.pib_hab,
+        Math.max(...E.map(x=>x.pib_hab)), v => fr(v)+' €')}
+     ${metricRow('Superficie', e.area_km2, NAT.area/13, Math.max(...E.map(x=>x.area_km2)),
+        v => fr(v)+' km²')}
+     <h4>Villes principales</h4>
+     <p style="margin:.2rem 0 .8rem">${e.villes.map(v=>v.nom).join(' · ') || 'Aucune ville de plus de 40 000 habitants'}</p>
+     <h4>Régions actuelles recoupées</h4>
+     <ul class="rlist">${e.regions_recoupees.map(x =>
+        `<li><span>${x.nom}</span><b class="num">${fr(x.part_pop,1)} %</b></li>`).join('')}</ul>
+     <p class="note">${e.communes} communes, ${e.departements} départements.
+       PIB estimé : ${fr(e.pib_meur/1000)} Md€, réparti au prorata de la population à partir du
+       PIB par habitant régional (INSEE 2024).</p>
+   </div>
+   <div class="pane ${tab==='res'?'on':''}" data-p="res">
+     ${metricRow("Eau prélevée par habitant", e.prel_hab_m3, NAT.prel_hab, maxPrelHab,
+        v => fr(v)+' m³/an', true)}
+     ${metricRow("Part de l'irrigation", e.prel_part_irrigation, NAT.irrig,
+        Math.max(...E.map(x=>x.prel_part_irrigation)), v => fr(v,1)+' %', true)}
+     <h4>À quoi sert l'eau prélevée</h4>
+     ${stack([['AEP',e.prel_Mm3.AEP,USAGE_COL.AEP],['IRR',e.prel_Mm3.IRR,USAGE_COL.IRR],
+              ['IND',e.prel_Mm3.IND,USAGE_COL.IND],['ENE',e.prel_Mm3.ENE,USAGE_COL.ENE],
+              ['CAN',e.prel_Mm3.CAN,USAGE_COL.CAN]])}
+     <ul class="rlist">${Object.keys(USAGE_LAB).filter(k => e.prel_Mm3[k] > 0).map(k =>
+        `<li><span><i class="swatch" style="background:${USAGE_COL[k]};display:inline-block;
+          width:10px;height:10px;margin-right:.5rem"></i>${USAGE_LAB[k]}</span>
+          <b class="num">${fr(e.prel_Mm3[k],0)} Mm³</b></li>`).join('')}
+       <li><span><b>Total hors turbinage</b></span><b class="num">${fr(prelTotal,0)} Mm³</b></li>
+     </ul>
+     ${sais ? `<h4 style="margin-top:1.1rem">Le régime du fleuve, mois par mois</h4>
+       ${graphMois(sais)}
+       <ul class="rlist">
+         <li><span>Mois le plus haut</span><b class="num">${MOIS[sais.mois_haut-1]} · ${fr(sais.mois[sais.mois_haut-1],0)} m³/s</b></li>
+         <li><span>Mois le plus bas</span><b class="num">${MOIS[sais.mois_bas-1]} · ${fr(sais.mois[sais.mois_bas-1],0)} m³/s</b></li>
+         <li><span>Contraste saisonnier</span><b class="num">×\u202f${fr(sais.rapport,1)}</b></li>
+       </ul>` : ''}
+     ${h ? `<h4 style="margin-top:1.1rem">Le plus grand cours d'eau jaugé</h4>
+       <ul class="rlist">
+         <li><span>${h.station}</span><b class="num">${fr(h.module_m3s,1)} m³/s</b></li>
+         <li><span>Bassin drainé</span><b class="num">${fr(h.surface_bv_km2)} km²</b></li>
+         <li><span>Débit spécifique</span><b class="num">${fr(h.debit_specifique_ls_km2,1)} l/s/km²</b></li>
+       </ul>
+       <p class="note">Débit moyen calculé sur ${fr(h.jours)} jours de mesure entre 2015 et 2024
+         (<a target="_blank" rel="noopener noreferrer" href="https://hubeau.eaufrance.fr/page/api-hydrometrie">Hub'Eau</a>). Ce débit ne mesure pas toute l'eau de l'écorégion, seulement ce que draine
+         cette station.</p>` : ''}
+     <p class="note">Les volumes de refroidissement des centrales sont prélevés puis, pour
+       l'essentiel, restitués au cours d'eau. Le turbinage hydroélectrique est exclu.</p>
+   </div>`;
+  el.querySelectorAll('.tabs button').forEach(b => b.onclick = () => {
+    tab = b.dataset.t;
+    el.querySelectorAll('.tabs button').forEach(x => x.setAttribute('aria-selected', x === b));
+    el.querySelectorAll('.pane').forEach(p => p.classList.toggle('on', p.dataset.p === tab));
+  });
+}
+
+/* ---------- tableau de fragmentation ---------- */
+(() => {
+  const rows = E.slice().sort((a,b) => b.regions_recoupees.length - a.regions_recoupees.length
+                                    || b.departements - a.departements);
+  const maxR = Math.max(...E.map(e => e.regions_recoupees.length));
+  document.getElementById('fragtable').innerHTML =
+    `<thead><tr><th>Écorégion</th><th style="text-align:right">Régions actuelles</th>
+      <th style="text-align:right">Départements</th></tr></thead><tbody>` +
+    rows.map(e => `<tr data-k="${e.key}" style="cursor:pointer">
+      <td><i class="swatch" style="background:${TINT[e.key]}"></i>${e.nom}</td>
+      <td class="n"><span class="minibar"><i style="width:${100*e.regions_recoupees.length/maxR}%"></i></span>${e.regions_recoupees.length}</td>
+      <td class="n">${e.departements}</td></tr>`).join('') + `</tbody>`;
+  document.querySelectorAll('#fragtable tbody tr').forEach(tr => tr.onclick = () => {
+    select(tr.dataset.k);
+    document.getElementById('carte').scrollIntoView({behavior:'smooth', block:'start'});
+  });
+})();
+
+/* ---------- cas d'école ---------- */
+(() => {
+  const rhone = byKey.rhone, gar = byKey.garonne, idf = byKey.idf, dor = byKey.dordogne;
+  const cases = [
+    {c:'n', big:fr(rhone.prel_conso_part,1)+' %', t:"des prélèvements français, dans un seul couloir",
+     p:`L'écorégion Rhône-Alpes prélève ${fr(rhone.prel_conso_Mm3)} millions de m³ par an, dont
+        ${fr(rhone.prel_Mm3.ENE)} pour refroidir quatre centrales nucléaires. Aujourd'hui, ce couloir
+        est géré par une région parmi treize ; demain, il serait le sujet central d'une institution
+        entière. L'eau y est en grande partie restituée, mais réchauffée — et son régime dépend de
+        glaciers qui reculent.`},
+    {c:'w', big:fr(gar.prel_part_irrigation,0)+' %', t:"de l'eau du Sud-Ouest part dans les champs",
+     p:`Dans la Gascogne-Pyrénées, l'irrigation absorbe ${fr(gar.prel_Mm3.IRR)} millions de m³,
+        soit ${fr(gar.prel_part_irrigation,0)} % des prélèvements contre ${fr(NAT.irrig,0)} % en
+        moyenne nationale. Toulouse et Bordeaux, aujourd'hui dans deux régions distinctes,
+        dépendent du même fleuve et des mêmes étiages d'été.`},
+    {c:'l', big:fr(idf.hydro.module_m3s,0)+' m³/s', t:"pour un habitant du pays sur cinq",
+     p:`La Seine à Paris ne roule que ${fr(idf.hydro.module_m3s,0)} m³/s en moyenne, pour
+        ${fr(idf.pop/1e6,1)} millions d'habitants et ${fr(idf.pib_meur/1000)} milliards d'euros de PIB.
+        La qualité de cette eau se décide en amont, dans une écorégion de
+        ${fr(byKey.seineamont.pop/1e6,1)} millions d'habitants dont les deux tiers du sol sont
+        cultivés. Aucune institution ne réunit aujourd'hui les deux.`},
+  ];
+  document.getElementById('cases').innerHTML = cases.map(c =>
+    `<div class="case ${c.c}"><span class="big num">${c.big}</span>
+      <h4>${c.t}</h4><p>${c.p}</p></div>`).join('');
+})();
+
+/* ---------- risque ---------- */
+(() => {
+  const N = RISQ._national;
+  document.getElementById('risq-reperes').innerHTML = [
+    {v: fr(N.catnat_arretes), t: `arrêtés de catastrophe naturelle pour inondation depuis ${N.depuis}`},
+    {v: fr(N.catnat_part,1)+' %', t: 'des communes en ont connu au moins un sur la période'},
+    {v: fr(N.pprn_part_pop,1)+' %', t: "de la population vit dans une commune couverte par un plan de prévention du risque inondation"},
+    {v: fr(N.sub_pop/1e6,1)+' M', t: "d'habitants dans une commune couverte par un plan submersion marine"},
+  ].map(r => `<div class="repere"><b class="num">${r.v}</b><span>${r.t}</span></div>`).join('');
+})();
+
+/* ---------- au-delà de la frontière ---------- */
+(() => {
+  const vb = TF.viewBox;
+  const PARTAGE = 95;                        // en deçà, le bassin est réellement partagé
+  const COUL = {"Rhin":"#3f8fb0","Meuse":"#7ba57e","Escaut":"#c0797f","Rhône":"#a882b5"};
+  const coul = b => COUL[b.nom] || TINT[b.eco];
+  const bs = TF.bassins.slice().sort((a, b) => b.part_fr - a.part_fr).map(b => {
+    const t = b.part_fr < PARTAGE;
+    return `<path class="bs" d="${b.path}" fill="${t ? coul(b) : 'var(--ink-3)'}"
+      stroke="${t ? coul(b) : 'var(--ink-3)'}" fill-opacity="${t ? .5 : .14}"
+      ><title>${b.nom} : ${fr(b.total_km2)} km², dont ${fr(b.part_fr,1)} % en France</title></path>`;
+  }).join('');
+  document.getElementById('tfmap').setAttribute('viewBox', `0 0 ${vb[2]} ${vb[3]}`);
+  document.getElementById('tfmap').innerHTML = bs + `<path class="fr" d="${TF.france}"/>`;
+
+  const liste = TF.bassins.filter(b => b.part_fr < PARTAGE).sort((a, b) => a.part_fr - b.part_fr);
+  document.getElementById('tflist').innerHTML = liste.map(b =>
+    `<li><span class="nm">${b.nom}<small>${fr(b.total_km2)} km²</small></span>
+      <span class="jauge"><i style="width:${b.part_fr}%;background:${coul(b)}"></i></span>
+      <span class="pc">${fr(b.part_fr,1)} %</span></li>`).join('') +
+    `<li><span class="nm">Les autres<small>Loire, Seine…</small></span>
+      <span class="jauge"><i style="width:99.5%"></i></span>
+      <span class="pc">≈ 100 %</span></li>`;
+  const p = n => {                            // le nom vient d'une heuristique côté Python
+    const b = TF.bassins.find(x => x.nom === n);
+    return b ? fr(b.part_fr, 1) + ' %' : 'une part minoritaire';
+  };
+  document.getElementById('tf-rhin').textContent = p('Rhin');
+  document.getElementById('tf-rhone').textContent = p('Rhône');
+})();
+
+/* ---------- coût et acceptabilité ---------- */
+(() => {
+  const C = DATA.couts, P = IND.meta.perturbation;
+  document.getElementById('reperes').innerHTML = [
+    {v: fr(P.part_changeant_de_collectivite, 1) + ' %',
+     t: `de la population — ${fr(P.pop_changeant_de_collectivite/1e6, 1)} millions de personnes — `
+      + `changerait de collectivité de rattachement`},
+    {v: P.departements_partages['5'] + ' / ' + P.departements_total,
+     t: `départements seraient partagés entre deux écorégions ou plus `
+      + `(${P.departements_partages['1']} au seuil de 1 % de leur population)`},
+    ...C.reperes.map(r => ({v: r.valeur, t: r.texte})),
+  ].map(r => `<div class="repere"><b class="num">${r.v}</b><span>${r.t}</span></div>`).join('');
+
+  const E = C.estimation, T = C.estimationTotal;
+  document.getElementById('estim').innerHTML = E.map(r =>
+    `<tr><td class="${r.hypothese ? 'h' : ''}">${r.poste}
+        <span class="d">${r.methode}</span></td>
+      <td class="m ${r.hypothese ? 'h' : ''}">${r.montant}<span class="d">${r.nature}</span></td></tr>`
+    ).join('');
+  document.getElementById('estimtot').innerHTML =
+    `<div class="total">
+       <div><b class="num">${T.perenne}</b><span>pérenne</span></div>
+       <div><b class="num">${T.unique}</b><span>non récurrent</span></div>
+     </div>
+     <p class="note">${T.reperes}. Estimation faite ici par transposition du précédent de 2015,
+       ligne par ligne : ce n'est pas un chiffrage officiel, et la ligne en gris repose sur une
+       hypothèse, faute de précédent.</p>`;
+  document.getElementById('ratio').innerHTML = C.rationalisations.map(r =>
+    `<li><h5>${r.titre}<em>${r.montant}</em></h5><p>${r.texte}</p></li>`).join('');
+
+  document.getElementById('opinion').innerHTML = C.opinion.map(o =>
+    `<li class="${o.sens}"><b class="num">${o.chiffre}</b>
+      <p>${o.texte}<cite><a href="${o.url}" target="_blank" rel="noopener noreferrer">${o.source}</a></cite></p>
+    </li>`).join('');
+
+  document.getElementById('conditions').innerHTML = C.conditions.map((c, i) =>
+    `<div class="cond"><span class="rank">Condition ${i + 1}</span>
+      <h4>${c.titre}</h4><p>${c.texte}</p></div>`).join('');
+})();
+
+/* ---------- objections ---------- */
+(() => {
+  const objs = [
+    ['Les identités historiques ne sont pas des bassins',
+     `Une seule écorégion coïncide avec une identité déjà constituée : la Bretagne. Ailleurs, le
+      découpage ignore l'Alsace, la Normandie ou la Provence en tant que telles. L'argument
+      hydrologique est solide ; il ne dit rien de l'attachement des habitants à un nom, une langue
+      ou une histoire. Un découpage écologique imposé contre le sentiment d'appartenance se heurte
+      au même mur que la réforme de 2015.`],
+    ["L'écart démographique reste énorme",
+     `De ${fr(Math.min(...E.map(e=>e.pop))/1e6,1)} millions d'habitants pour la Bourgogne-Comté à
+      ${fr(Math.max(...E.map(e=>e.pop))/1e6,1)} millions pour l'Île-de-France : un rapport de
+      ${fr(Math.max(...E.map(e=>e.pop))/Math.min(...E.map(e=>e.pop)),1)} à 1. C'est mieux que les
+      régions actuelles — où le rapport dépasse 35 à 1 entre l'Île-de-France et la Corse — mais
+      cela reste une république à deux vitesses, où le vote d'un habitant de l'amont ne pèse pas
+      comme celui de l'aval.`],
+    ["Le tracé retenu n'est pas exactement la ligne de partage des eaux",
+     `Pour ne couper aucune commune, cette carte utilise la version administrative des
+      sous-bassins : les limites suivent les frontières communales, pas la crête topographique.
+      Superposez la couche « tracé hydrographique réel » sur la carte : l'écart est faible mais
+      visible. Choisir la rigueur hydrologique absolue reviendrait à couper des milliers de
+      communes en deux.`],
+    ['Une écorégion ne fait pas une économie',
+     `Les régions de 2015 ont été dessinées pour la compétitivité économique, avec des métropoles
+      comme moteurs. Le bassin versant, lui, ignore les bassins d'emploi, les réseaux ferroviaires
+      et les aires urbaines. Le Périgord-Saintonge compte
+      ${fr(byKey.dordogne.pop/1e6,1)} millions d'habitants et aucune ville de plus de
+      60 000 habitants — mais elle contient la centrale du Blayais et ses
+      ${fr(byKey.dordogne.prel_Mm3.ENE)} millions de m³ prélevés.`],
+    ['Amont et aval ne veulent pas la même chose',
+     `Réunir amont et aval dans une même assemblée ne supprime pas le conflit : il le déplace à
+      l'intérieur de l'institution. Qui arbitre entre l'irrigant de l'amont et le pêcheur de
+      l'estuaire, entre la ville qui boit et l'agriculture qui produit ? Les comités de bassin
+      affrontent cette question depuis 1964 sans l'avoir tranchée.`],
+    ['Et les cinq bassins ultramarins',
+     `La Guadeloupe, la Martinique, la Guyane, La Réunion et Mayotte constituent chacune une
+      circonscription de bassin à part entière. Un découpage hydrographique cohérent en ferait
+      cinq écorégions supplémentaires — soit 18, et non 13. Cette carte, comme le débat qui l'a
+      motivée, s'arrête à la métropole.`],
+  ];
+  document.getElementById('objs').innerHTML = objs.map(([t,p]) =>
+    `<div class="objection"><h4>${t}</h4><p>${p}</p></div>`).join('');
+})();
+
+buildMap(); buildControls(); paint(); bindMap(); rail();
+</script>

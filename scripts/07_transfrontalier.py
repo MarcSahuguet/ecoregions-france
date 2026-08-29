@@ -1,0 +1,128 @@
+#!/usr/bin/env python3
+"""Les bassins ne s'arrêtent pas à la frontière.
+
+Reconstitue les bassins versants complets (parties étrangères comprises) à partir de
+HydroBASINS (HydroSHEDS, WWF, CC-BY 4.0, niveau 6 dissous par MAIN_BAS), mesure la part
+française de chacun, et prépare une carte d'ensemble européenne.
+Surfaces calculées en ETRS89-LAEA (EPSG:3035), projection équivalente.
+Sortie : data/out/transfrontalier.json
+"""
+import json, os, sys, collections
+sys.path.insert(0, os.path.dirname(__file__))
+import shapefile
+from shapely.geometry import shape
+from shapely.ops import unary_union, transform
+from shapely import make_valid
+from pyproj import Transformer
+from groups import SB2ECO, ECOREGIONS
+
+RAW, OUT = "data/raw", "data/out"
+MIN_FR = 4000            # km² en France, en deçà on ignore le bassin
+
+# HydroBASINS ne nomme pas les bassins : on les nomme d'après les sous-bassins français
+# qu'ils contiennent, du plus englobant au plus local.
+FLEUVES = [("Rhin", {"FRC_RHIN", "FRC_MOSE"}), ("Meuse", {"FRB1_MEUS", "FRB2_SAMB"}),
+           ("Escaut", {"FRA_ESCA"}),
+           ("Rhône", {"FRD_SAON", "FRD_RHON", "FRD_HRHO", "FRD_ISER", "FRD_DURA", "FRD_DOUB"}),
+           ("Seine", {"FRH_SEAM", "FRH_SEAV", "FRH_MARN", "FRH_OISE", "FRH_IF"}),
+           ("Loire", {"FRG_ALA", "FRG_LMOY"}), ("Côtiers vendéens", {"FRG_LACV"}),
+           ("Maine", {"FRG_MSL"}), ("Vienne", {"FRG_VICR"}),
+           ("Garonne", {"FRF_GARO", "FRF_TARN", "FRF_LOT"}), ("Adour", {"FRF_ADOU"}),
+           ("Dordogne", {"FRF_DORD"}), ("Charente", {"FRF_CHAR"}),
+           ("Vilaine", {"FRG_VICO"}), ("Corse", {"FRE_CORS"}),
+           ("Côtiers de la Côte d'Azur", {"FRD_COCA"}),
+           ("Côtiers du Languedoc", {"FRD_COLR"})]
+NOMS = dict((k, n) for k, n, _ in ECOREGIONS)
+
+to3035 = Transformer.from_crs("EPSG:4326", "EPSG:3035", always_xy=True).transform
+l93to3035 = Transformer.from_crs("EPSG:2154", "EPSG:3035", always_xy=True).transform
+
+def main():
+    # --- France et sous-bassins, en 3035 ---------------------------------------
+    sb = {}
+    for f in json.load(open(f"{RAW}/SsBassinDCEAdmin_FXX.geojson"))["features"]:
+        p = f["properties"]
+        g = transform(l93to3035, make_valid(shape(f["geometry"])))
+        g = g.simplify(1000, preserve_topology=True).buffer(0)
+        sb[p["CdEuSsBassinDCEAdmin"]] = (p["NomSsBassinDCEAdmin"], g)
+    france = unary_union([g for _, g in sb.values()]).buffer(0)
+    pts = {code: (nom, g.representative_point()) for code, (nom, g) in sb.items()}
+    from shapely.prepared import prep
+    print(f"France : {france.area/1e6:,.0f} km²")
+
+    # --- HydroBASINS niveau 6, dissous par bassin principal --------------------
+    r = shapefile.Reader(f"{RAW}/hybas_eu/hybas_eu_lev06_v1c.shp")
+    champs = [f[0] for f in r.fields[1:]]
+    # Deux passes : on repère d'abord les bassins principaux qui touchent l'emprise,
+    # puis on prend TOUS leurs polygones — y compris ceux qui en sortent. Filtrer
+    # polygone par polygone tronquerait la surface totale publiée du bassin.
+    EMPRISE = (-8, 38, 20, 56)                           # en degrés
+    brut = []
+    proches = set()
+    for sr in r.iterShapeRecords():
+        rec = dict(zip(champs, sr.record))
+        x0, y0, x1, y1 = sr.shape.bbox
+        brut.append((rec["MAIN_BAS"], sr.shape))
+        if not (x1 < EMPRISE[0] or x0 > EMPRISE[2] or y1 < EMPRISE[1] or y0 > EMPRISE[3]):
+            proches.add(rec["MAIN_BAS"])
+    groupes = collections.defaultdict(list)
+    for mb, sh in brut:
+        if mb not in proches: continue
+        g = transform(to3035, shape(sh.__geo_interface__)).simplify(1500, preserve_topology=True)
+        groupes[mb].append(make_valid(g).buffer(0))
+    print(f"{len(groupes)} bassins principaux dans l'emprise, "
+          f"{sum(len(v) for v in groupes.values())} polygones (parties étrangères comprises)")
+
+    res = []
+    for mb, parts in groupes.items():
+        bassin = unary_union(parts).buffer(0)
+        inter = bassin.intersection(france)
+        if inter.is_empty or inter.area / 1e6 < MIN_FR:
+            continue
+        # nom : d'après les sous-bassins français dont le point représentatif tombe dedans
+        pb = prep(bassin)
+        dedans = [(code, nom) for code, (nom, pt) in pts.items() if pb.contains(pt)]
+        if not dedans:
+            continue
+        codes = {c for c, _ in dedans}
+        best = next(((nom, nom) for nom, cs in FLEUVES if cs & codes),
+                    max(dedans, key=lambda cn: sb[cn[0]][1].area))
+        eco = collections.Counter()
+        for code, _ in dedans:
+            eco[SB2ECO[code]] += sb[code][1].area
+        res.append({"main_bas": mb, "sous_bassin": best[1], "eco": eco.most_common(1)[0][0],
+                    "total_km2": round(bassin.area / 1e6),
+                    "france_km2": round(inter.area / 1e6),
+                    "part_fr": round(100 * inter.area / bassin.area, 1),
+                    "geom": bassin})
+    res.sort(key=lambda d: -d["total_km2"])
+    for d in res:
+        print(f"  {d['sous_bassin'][:28]:28s} {d['total_km2']:8,d} km²  "
+              f"dont France {d['france_km2']:7,d}  ({d['part_fr']:5.1f} %)  -> {NOMS[d['eco']]}")
+
+    # --- cadre de la carte d'ensemble ------------------------------------------
+    tout = unary_union([d["geom"] for d in res] + [france]).buffer(0)
+    xmin, ymin, xmax, ymax = tout.bounds
+    ech = 900.0 / (xmax - xmin)
+    def svg(g, simpl=4000):
+        g = g.simplify(simpl, preserve_topology=True).buffer(0)
+        out = []
+        for p in getattr(g, "geoms", [g]):
+            if p.geom_type != "Polygon" or p.area < 3e8: continue
+            pts = [f"{(x-xmin)*ech:.1f},{(ymax-y)*ech:.1f}" for x, y in p.exterior.coords]
+            ded = [pts[0]] + [q for i, q in enumerate(pts[1:], 1) if q != pts[i-1]]
+            if len(ded) > 3: out.append("M" + ded[0] + "L" + "L".join(ded[1:]) + "Z")
+        return "".join(out)
+
+    data = {"viewBox": [0, 0, round((xmax-xmin)*ech, 1), round((ymax-ymin)*ech, 1)],
+            "france": svg(france),
+            "bassins": [{"nom": d["sous_bassin"], "eco": d["eco"], "ecoNom": NOMS[d["eco"]],
+                         "total_km2": d["total_km2"], "france_km2": d["france_km2"],
+                         "part_fr": d["part_fr"], "path": svg(d["geom"])} for d in res]}
+    json.dump(data, open(f"{OUT}/transfrontalier.json", "w"), ensure_ascii=False,
+              separators=(",", ":"))
+    print(f"écrit {OUT}/transfrontalier.json "
+          f"({os.path.getsize(f'{OUT}/transfrontalier.json')/1024:.0f} ko)")
+
+if __name__ == "__main__":
+    main()
