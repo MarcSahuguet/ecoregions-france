@@ -438,11 +438,14 @@ footer{padding:2.6rem 0 4rem;font-size:.85rem;color:var(--ink-3)}
           versées progressivement.</p>
       </div>
       <div>
-        <h4>Combien de régions actuelles chaque écorégion recoupe-t-elle&nbsp;?</h4>
-        <div class="rankwrap"><table class="rank" id="fragtable"></table></div>
-        <p class="note">Une écorégion qui recoupe cinq régions actuelles signale un bassin dont
-          la gestion est aujourd'hui éclatée entre cinq exécutifs. Deux écorégions seulement —
-          la Flandre-Artois-Picardie et l'Île-de-France — tiennent dans une seule région.</p>
+        <h4>Le Rhône sous trois exécutifs différents</h4>
+        <div id="rhone-map-wrap" style="border:1px solid var(--rule);border-radius:3px;
+          background:var(--paper-3);overflow:hidden;margin-bottom:.75rem">
+          <svg id="rhone-minimap" style="display:block;width:100%;height:auto"></svg>
+        </div>
+        <div id="rhone-legend" style="display:flex;flex-wrap:wrap;gap:.4rem .9rem;
+          margin-bottom:.6rem;font-size:.78rem;color:var(--ink-2)"></div>
+        <p class="note" id="rhone-note"></p>
       </div>
     </div>
   </div>
@@ -1111,18 +1114,82 @@ function rail() {
 (() => {
   const rows = E.slice().sort((a,b) => b.regions_recoupees.length - a.regions_recoupees.length
                                     || b.departements - a.departements);
-  const maxR = Math.max(...E.map(e => e.regions_recoupees.length));
-  document.getElementById('fragtable').innerHTML =
-    `<thead><tr><th>Écorégion</th><th style="text-align:right">Régions actuelles</th>
-      <th style="text-align:right">Départements</th></tr></thead><tbody>` +
-    rows.map(e => `<tr data-k="${e.key}" style="cursor:pointer">
-      <td><i class="swatch" style="background:${TINT[e.key]}"></i>${e.nom}</td>
-      <td class="n"><span class="minibar"><i style="width:${100*e.regions_recoupees.length/maxR}%"></i></span>${e.regions_recoupees.length}</td>
-      <td class="n">${e.departements}</td></tr>`).join('') + `</tbody>`;
-  document.querySelectorAll('#fragtable tbody tr').forEach(tr => tr.onclick = () => {
-    select(tr.dataset.k);
-    document.getElementById('carte').scrollIntoView({behavior:'smooth', block:'start'});
-  });
+  /* mini-carte Rhône : régions admin clippées sur l'écorégion */
+  (() => {
+    const ecoRhone = G.ecoregions.find(e => e.key === 'rhone');
+    const vb = G.viewBox; // [0,0,W,H]
+    const ADMIN_COLORS = {
+      'Auvergne-Rhône-Alpes': '#C87A4A',
+      'Bourgogne-Franche-Comté': '#7A5A8A',
+      "Provence-Alpes-Côte d'Azur": '#5BA3A0'
+    };
+    const rhoneRegs = byKey.rhone.regions_recoupees;
+    const NS3 = 'http://www.w3.org/2000/svg';
+    const svg = document.getElementById('rhone-minimap');
+    svg.setAttribute('viewBox', `0 0 ${vb[2]} ${vb[3]}`);
+
+    // clipPath sur le contour de l'écorégion Rhône
+    const defs = document.createElementNS(NS3, 'defs');
+    const clip = document.createElementNS(NS3, 'clipPath');
+    clip.setAttribute('id', 'clipRhone');
+    const clipPath = document.createElementNS(NS3, 'path');
+    clipPath.setAttribute('d', ecoRhone.path);
+    clipPath.setAttribute('fill-rule', 'evenodd');
+    clip.appendChild(clipPath); defs.appendChild(clip); svg.appendChild(defs);
+
+    // fond gris France entière
+    const bg = document.createElementNS(NS3, 'path');
+    bg.setAttribute('d', G.outline); bg.setAttribute('fill', 'var(--paper-3)');
+    bg.setAttribute('stroke', 'var(--rule)'); bg.setAttribute('stroke-width', '1');
+    svg.appendChild(bg);
+
+    // régions admin clippées
+    const gClip = document.createElementNS(NS3, 'g');
+    gClip.setAttribute('clip-path', 'url(#clipRhone)');
+    G.regionsAdmin.forEach(r => {
+      const col = ADMIN_COLORS[r.name];
+      if (!col) return;
+      const p = document.createElementNS(NS3, 'path');
+      p.setAttribute('d', r.path); p.setAttribute('fill', col);
+      p.setAttribute('fill-rule', 'evenodd');
+      p.setAttribute('stroke', 'rgba(255,255,255,0.25)'); p.setAttribute('stroke-width', '1.5');
+      gClip.appendChild(p);
+    });
+    svg.appendChild(gClip);
+
+    // contour écorégion en surimpression
+    const outline = document.createElementNS(NS3, 'path');
+    outline.setAttribute('d', ecoRhone.path);
+    outline.setAttribute('fill', 'none'); outline.setAttribute('fill-rule', 'evenodd');
+    outline.setAttribute('stroke', 'var(--ink)'); outline.setAttribute('stroke-width', '2');
+    svg.appendChild(outline);
+
+    // cours du Rhône (rivières dont le nom contient "Rhône")
+    G.rivers.filter(r => r.name && r.name.toLowerCase().includes('rhône')).forEach(r => {
+      const p = document.createElementNS(NS3, 'path');
+      p.setAttribute('d', r.path); p.setAttribute('fill', 'none');
+      p.setAttribute('stroke', '#1c6580'); p.setAttribute('stroke-width', '3');
+      p.setAttribute('stroke-linecap', 'round');
+      svg.appendChild(p);
+    });
+
+    // légende
+    const leg = document.getElementById('rhone-legend');
+    Object.entries(ADMIN_COLORS).forEach(([nom, col]) => {
+      const share = rhoneRegs.find(r => r.nom === nom);
+      leg.insertAdjacentHTML('beforeend',
+        `<span style="display:flex;align-items:center;gap:.3rem">
+          <span style="width:10px;height:10px;border-radius:2px;background:${col};flex-shrink:0"></span>
+          ${nom}${share ? ` <b>(${fr(share.part_pop,0)} %)</b>` : ''}
+        </span>`);
+    });
+
+    // note
+    document.getElementById('rhone-note').innerHTML =
+      `L'écorégion Rhône-Alpes recoupe <b>3 régions actuelles</b> et <b>${byKey.rhone.departements} départements</b>.
+       Les arbitrages entre refroidissement des centrales, irrigation et eau potable
+       se négocient aujourd'hui entre trois exécutifs sans autorité commune sur le fleuve.`;
+  })();
 })();
 
 /* ---------- cas d'école ---------- */
