@@ -837,6 +837,10 @@ function buildControls() {
   });
   document.querySelectorAll('button.lay').forEach(b => b.onclick = () => {
     const on = b.getAttribute('aria-pressed') !== 'true';
+    document.querySelectorAll('button.lay').forEach(x => {
+      x.setAttribute('aria-pressed', 'false');
+      document.getElementById('lay-' + x.dataset.l).toggleAttribute('hidden', true);
+    });
     b.setAttribute('aria-pressed', on);
     document.getElementById('lay-' + b.dataset.l).toggleAttribute('hidden', !on);
     majCalques();
