@@ -804,7 +804,7 @@ let metric = METRICS[0], sel = null, tab = 'eco';
     ['13', 'écorégions, agrégées à partir de 34 sous-bassins officiels'],
     [fr(nb.pop_totale/1e6,1).replace('.',',')+' M', 'habitants répartis, commune par commune'],
     ['0', 'commune coupée en deux par ces limites'],
-    [fr(prelTot/1000,1)+' Md', "m³ d'eau prélevés par an, hors turbinage"],
+    [fr(prelTot/1000,1)+' Md', "m³ d'eau prélevés par an (hors hydroélectricité)"],
     ['1964', "l'année où la France s'est déjà découpée par bassins"],
   ];
   document.getElementById('keyfigs').innerHTML = figs.map(([b,s]) =>
@@ -1077,7 +1077,7 @@ function rail() {
         `<li><span><i class="swatch" style="background:${USAGE_COL[k]};display:inline-block;
           width:10px;height:10px;margin-right:.5rem"></i>${USAGE_LAB[k]}</span>
           <b class="num">${fr(e.prel_Mm3[k],0)} Mm³</b></li>`).join('')}
-       <li><span><b>Total hors turbinage</b></span><b class="num">${fr(prelTotal,0)} Mm³</b></li>
+       <li><span style="font-size:.8em;color:var(--ink-2)">Total (hors hydroélectricité)</span><b class="num">${fr(prelTotal,0)} Mm³</b></li>
      </ul>
      ${sais ? `<h4 style="margin-top:1.1rem">Régime hydrologique mensuel</h4>
        ${graphMois(sais)}
@@ -1096,7 +1096,9 @@ function rail() {
          (<a target="_blank" rel="noopener noreferrer" href="https://hubeau.eaufrance.fr/page/api-hydrometrie">Hub'Eau</a>). Ce débit ne mesure pas toute l'eau de l'écorégion, seulement ce que draine
          cette station.</p>` : ''}
      <p class="note">Les volumes de refroidissement des centrales sont prélevés puis, pour
-       l'essentiel, restitués au cours d'eau. Le turbinage hydroélectrique est exclu.</p>
+       l'essentiel, restitués au cours d'eau. L'eau utilisée pour produire de l'électricité
+       en faisant tourner des turbines (hydroélectricité) est exclue : elle traverse les barrages
+       sans être consommée.</p>
    </div>`;
   el.querySelectorAll('.tabs button').forEach(b => b.onclick = () => {
     tab = b.dataset.t;
