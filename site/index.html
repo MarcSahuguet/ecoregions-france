@@ -1125,12 +1125,14 @@ function rail() {
     const svg = document.getElementById('loire-minimap');
     svg.setAttribute('viewBox', '216.5 293.8 557.4 475.4');
 
-    // clipPath sur l'écorégion Loire-Auvergne
+    // clipPath sur le bassin versant Loire-Bretagne (1964)
+    const BASIN_COLOR = '#2d6a9f';
+    const loireBasin = G.basins.find(b => b.name === 'Loire-Bretagne');
     const defs = document.createElementNS(NS3, 'defs');
     const clip = document.createElementNS(NS3, 'clipPath');
     clip.setAttribute('id', 'clipLoire');
     const clipPath = document.createElementNS(NS3, 'path');
-    clipPath.setAttribute('d', ecoLoire.path);
+    clipPath.setAttribute('d', loireBasin ? loireBasin.path : ecoLoire.path);
     clipPath.setAttribute('fill-rule', 'evenodd');
     clip.appendChild(clipPath); defs.appendChild(clip); svg.appendChild(defs);
 
@@ -1175,16 +1177,7 @@ function rail() {
     });
     svg.appendChild(gClip);
 
-    // contour écorégion
-    const outline = document.createElementNS(NS3, 'path');
-    outline.setAttribute('d', ecoLoire.path);
-    outline.setAttribute('fill', 'none'); outline.setAttribute('fill-rule', 'evenodd');
-    outline.setAttribute('stroke', 'var(--ink)'); outline.setAttribute('stroke-width', '2.5');
-    svg.appendChild(outline);
-
     // contour bassin versant Loire-Bretagne (périmètre des agences de l'eau, 1964)
-    const BASIN_COLOR = '#2d6a9f';
-    const loireBasin = G.basins.find(b => b.name === 'Loire-Bretagne');
     if (loireBasin) {
       const bp = document.createElementNS(NS3, 'path');
       bp.setAttribute('d', loireBasin.path); bp.setAttribute('fill', 'none');
