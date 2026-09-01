@@ -785,10 +785,6 @@ const METRICS = [
    get:e => SAISON[e.key] ? SAISON[e.key].rapport : null,
    fmt:e => SAISON[e.key] ? '×\u202f'+fr(SAISON[e.key].rapport,1)+' entre février et août' : '—',
    sfmt:e => SAISON[e.key] ? '×\u202f'+fr(SAISON[e.key].rapport,1) : '—'},
-  {id:'fragmentation', lab:'Régions recoupées', ramp:RAMP_PRES, unit:'régions actuelles',
-   get:e => e.regions_recoupees.length,
-   fmt:e => e.regions_recoupees.length+(e.regions_recoupees.length>1?' régions recoupées':' seule région'),
-   sfmt:e => e.regions_recoupees.length+(e.regions_recoupees.length>1?' régions':' région')},
 ];
 const LAYERS = [
   {id:'riv', lab:"Cours d'eau", on:false, c:'riv'},
