@@ -438,7 +438,7 @@ footer{padding:2.6rem 0 4rem;font-size:.85rem;color:var(--ink-3)}
           versées progressivement.</p>
       </div>
       <div>
-        <h4>La Loire sous quatre exécutifs différents</h4>
+        <h4>La Loire sous cinq exécutifs différents</h4>
         <div id="loire-map-wrap" style="border:1px solid var(--rule);border-radius:3px;
           background:var(--paper-3);overflow:hidden;margin-bottom:.75rem">
           <svg id="loire-minimap" style="display:block;width:100%;height:auto"></svg>
@@ -1117,7 +1117,8 @@ function rail() {
       'Auvergne-Rhône-Alpes': '#C87A4A',
       'Centre-Val de Loire':   '#6B9E78',
       'Nouvelle-Aquitaine':    '#7A5A8A',
-      'Bourgogne-Franche-Comté':'#B8A95C'
+      'Bourgogne-Franche-Comté':'#B8A95C',
+      'Pays de la Loire':      '#4a8fa8'
     };
     const loireRegs = byKey.loireamont.regions_recoupees;
     const NS3 = 'http://www.w3.org/2000/svg';
@@ -1260,9 +1261,9 @@ function rail() {
 
     // note
     document.getElementById('loire-note').innerHTML =
-      `L'écorégion Val de Loire-Auvergne recoupe <b>4 régions actuelles</b> et
+      `La Loire traverse <b>5 régions actuelles</b> et plus de
        <b>${byKey.loireamont.departements} départements</b> — aucune n'a autorité sur
-       l'ensemble du bassin. Les quatre exécutifs gèrent chacun leur tronçon sans pouvoir
+       l'ensemble du fleuve. Les cinq exécutifs gèrent chacun leur tronçon sans pouvoir
        agir sur ce que l'amont leur envoie.`;
   })();
 })();
