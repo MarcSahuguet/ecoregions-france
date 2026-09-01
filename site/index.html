@@ -97,6 +97,18 @@ section{padding:clamp(3.4rem,7vw,6rem) 0;border-bottom:1px solid var(--rule)}
 .cmp-btn.prim:hover{background:var(--water-2)}
 #cmp-body{padding:1.2rem 1.4rem 1.5rem;flex:1}
 .cmp-intro{font-size:.88rem;color:var(--ink-2);margin-bottom:1.2rem;line-height:1.5}
+.cmp-maps{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.4rem}
+.cmp-map-panel{display:flex;flex-direction:column;gap:.45rem}
+.cmp-map-label{display:flex;align-items:center;gap:.5rem}
+.cmp-map-tag{font-size:.63rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
+  color:#fff;padding:.18em .5em;border-radius:2px;flex-shrink:0}
+.tag-before{background:#64748B}.tag-after{background:var(--water)}
+.cmp-map-title{font-size:.82rem;font-weight:600;color:var(--ink)}
+.cmp-svgwrap{background:var(--paper-3);border:1px solid var(--rule);border-radius:3px;overflow:hidden}
+.cmp-svgwrap svg{display:block;width:100%;height:auto}
+.cmp-svgwrap svg path{fill-rule:evenodd;stroke:var(--paper-3);stroke-width:1.5;stroke-linejoin:round}
+.cmp-svgwrap svg text{pointer-events:none;dominant-baseline:middle;text-anchor:middle;
+  font-family:var(--sans);font-weight:600;paint-order:stroke}
 .cmp-table{width:100%;border-collapse:collapse;font-size:.85rem}
 .cmp-table th{font-size:.7rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
   color:var(--ink-3);padding:.55rem .9rem;text-align:left;border-bottom:2px solid var(--rule)}
@@ -1282,6 +1294,22 @@ buildMap(); buildControls(); paint(); bindMap(); rail();
         </div>
       </div>
       <div id="cmp-body">
+        <div class="cmp-maps">
+          <div class="cmp-map-panel">
+            <div class="cmp-map-label">
+              <span class="cmp-map-tag tag-before">Aujourd'hui</span>
+              <span class="cmp-map-title">13 régions administratives</span>
+            </div>
+            <div class="cmp-svgwrap"><svg id="cmpSvgAdm"></svg></div>
+          </div>
+          <div class="cmp-map-panel">
+            <div class="cmp-map-label">
+              <span class="cmp-map-tag tag-after">Proposition</span>
+              <span class="cmp-map-title">13 écorégions hydrographiques</span>
+            </div>
+            <div class="cmp-svgwrap"><svg id="cmpSvgEco"></svg></div>
+          </div>
+        </div>
         <p class="cmp-intro">Six critères qui motivent ce redécoupage — mesurés sur les données officielles de cette carte.</p>
         <table class="cmp-table">
           <thead>
@@ -1360,6 +1388,65 @@ buildMap(); buildControls(); paint(); bindMap(); rail();
   document.getElementById('cmp-rows').innerHTML = rows.map(([c,b,a]) =>
     `<tr><td class="crit">${c}</td><td class="val-before">${b}</td><td class="val-after">${a}</td></tr>`
   ).join('');
+
+  /* --- cartes SVG dans la modale --- */
+  const ADM_COL = ['#4E79A7','#7FA7C9','#6B9E78','#A8C89E','#C09E50',
+    '#7B6BA8','#C87A4A','#5BA3A0','#B85C6C','#8FA847','#7090B8','#C9A455','#9B6B7A'];
+  const ECO_COL = {escaut:'#5E829E',rhinmeuse:'#6B8C6B',idf:'#8B8FA8',seineamont:'#B8A95C',
+    normandie:'#5B8A82',bretagne:'#3D7AA8',loireaval:'#7BA870',loireamont:'#618A72',
+    garonne:'#3D7A72',dordogne:'#A07850',saone:'#7A5A8A',rhone:'#4A7CB0',mediterranee:'#C4885A'};
+  const SHORT_ECO = {escaut:'Flandre-\nArtois',rhinmeuse:'Vosges-\nArdenne',idf:'IDF',
+    seineamont:'Champagne-\nBrie',normandie:'Normandie',bretagne:'Bretagne',
+    loireaval:'Anjou-\nVendée',loireamont:'Val de Loire-\nAuvergne',
+    garonne:'Gascogne-\nPyrénées',dordogne:'Périgord-\nSaintonge',
+    saone:'Bourgogne-\nComté',rhone:'Rhône-\nAlpes',mediterranee:'Provence-\nLanguedoc'};
+  const SHORT_ADM = {'Île-de-France':'IDF','Centre-Val de Loire':'Centre-\nVal de Loire',
+    'Bourgogne-Franche-Comté':'Bourgogne-\nFranche-Comté','Normandie':'Normandie',
+    'Hauts-de-France':'Hauts-de-\nFrance','Grand Est':'Grand Est',
+    'Pays de la Loire':'Pays de\nla Loire','Bretagne':'Bretagne',
+    'Nouvelle-Aquitaine':'Nouvelle-\nAquitaine','Occitanie':'Occitanie',
+    'Auvergne-Rhône-Alpes':'Auvergne-\nRhône-Alpes',"Provence-Alpes-Côte d'Azur":'PACA','Corse':'Corse'};
+  const NS2 = 'http://www.w3.org/2000/svg';
+  const vb = G.viewBox;
+
+  function cmpAddText(svg, lines, x, y, fs) {
+    lines.forEach((txt, i) => {
+      const t = document.createElementNS(NS2, 'text');
+      t.setAttribute('x', x); t.setAttribute('y', y + (i - (lines.length-1)/2) * fs * 1.2);
+      t.setAttribute('font-size', fs); t.setAttribute('fill', 'rgba(255,255,255,0.95)');
+      t.setAttribute('stroke', 'rgba(0,0,0,0.5)'); t.setAttribute('stroke-width', '2.5');
+      t.textContent = txt; svg.appendChild(t);
+    });
+  }
+
+  /* SVG admin */
+  const svgA = document.getElementById('cmpSvgAdm');
+  svgA.setAttribute('viewBox', `0 0 ${vb[2]} ${vb[3]}`);
+  G.regionsAdmin.forEach((r, i) => {
+    const p = document.createElementNS(NS2, 'path');
+    p.setAttribute('d', r.path); p.setAttribute('fill', ADM_COL[i % ADM_COL.length]);
+    p.dataset.name = r.name; svgA.appendChild(p);
+  });
+  requestAnimationFrame(() => {
+    svgA.querySelectorAll('path').forEach((p, i) => {
+      const bb = p.getBBox();
+      const lines = (SHORT_ADM[p.dataset.name] || p.dataset.name).split('\n');
+      const area = bb.width * bb.height;
+      const fs = area > 80000 ? 26 : area > 30000 ? 20 : area > 8000 ? 15 : 11;
+      cmpAddText(svgA, lines, bb.x + bb.width/2, bb.y + bb.height/2, fs);
+    });
+  });
+
+  /* SVG éco */
+  const svgE = document.getElementById('cmpSvgEco');
+  svgE.setAttribute('viewBox', `0 0 ${vb[2]} ${vb[3]}`);
+  G.ecoregions.forEach(e => {
+    const p = document.createElementNS(NS2, 'path');
+    p.setAttribute('d', e.path); p.setAttribute('fill', ECO_COL[e.key] || '#888');
+    svgE.appendChild(p);
+    const lines = (SHORT_ECO[e.key] || e.name).split('\n');
+    cmpAddText(svgE, lines, e.label[0], e.label[1], 22);
+  });
 })();
 
 window.ouvrirComparaison = function() {
