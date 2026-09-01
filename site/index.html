@@ -1202,28 +1202,17 @@ function rail() {
       svg.appendChild(p);
     });
 
-    // label "la Loire" en textPath le long du fleuve
-    const loireSegs = G.rivers.filter(r => r.name && r.name === 'la Loire');
-    if (loireSegs.length) {
-      const rp = document.createElementNS(NS3, 'path');
-      rp.setAttribute('id', 'loireRiverRef');
-      rp.setAttribute('d', loireSegs[0].path);
-      defs.appendChild(rp);
-
-      const lblText = document.createElementNS(NS3, 'text');
-      lblText.setAttribute('font-family', 'var(--sans)'); lblText.setAttribute('font-size', '17');
-      lblText.setAttribute('font-style', 'italic'); lblText.setAttribute('font-weight', '600');
-      lblText.setAttribute('fill', '#1c6580');
-      lblText.setAttribute('stroke', 'rgba(255,255,255,0.75)'); lblText.setAttribute('stroke-width', '3');
-      lblText.setAttribute('paint-order', 'stroke');
-      const tp = document.createElementNS(NS3, 'textPath');
-      tp.setAttribute('href', '#loireRiverRef');
-      tp.setAttribute('startOffset', '18%');
-      tp.setAttribute('side', 'left');
-      tp.textContent = 'la Loire';
-      lblText.appendChild(tp);
-      svg.appendChild(lblText);
-    }
+    // label "la Loire" — positionné entre Tours et Nantes, légèrement incliné
+    const lbl = document.createElementNS(NS3, 'text');
+    lbl.setAttribute('x', '350'); lbl.setAttribute('y', '408');
+    lbl.setAttribute('transform', 'rotate(-4, 350, 408)');
+    lbl.setAttribute('font-family', 'var(--sans)'); lbl.setAttribute('font-size', '16');
+    lbl.setAttribute('font-style', 'italic'); lbl.setAttribute('font-weight', '600');
+    lbl.setAttribute('fill', '#1c6580'); lbl.setAttribute('text-anchor', 'middle');
+    lbl.setAttribute('stroke', 'rgba(255,255,255,0.8)'); lbl.setAttribute('stroke-width', '3');
+    lbl.setAttribute('paint-order', 'stroke');
+    lbl.textContent = 'la Loire';
+    svg.appendChild(lbl);
 
     // villes
     const CITIES = [
