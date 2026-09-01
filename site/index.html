@@ -1196,22 +1196,35 @@ function rail() {
       svg.appendChild(p);
     });
 
-    // label "la Loire" sur le fleuve — positionné au centre de l'écorégion
-    const lbl = document.createElementNS(NS3, 'text');
-    lbl.setAttribute('x', '537.5'); lbl.setAttribute('y', '505');
-    lbl.setAttribute('font-family', 'var(--sans)'); lbl.setAttribute('font-size', '18');
-    lbl.setAttribute('font-style', 'italic'); lbl.setAttribute('font-weight', '600');
-    lbl.setAttribute('fill', '#1c6580'); lbl.setAttribute('text-anchor', 'middle');
-    lbl.setAttribute('stroke', 'rgba(255,255,255,0.7)'); lbl.setAttribute('stroke-width', '3');
-    lbl.setAttribute('paint-order', 'stroke');
-    lbl.textContent = 'la Loire';
-    svg.appendChild(lbl);
+    // label "la Loire" en textPath le long du fleuve
+    const loireSegs = G.rivers.filter(r => r.name && r.name === 'la Loire');
+    if (loireSegs.length) {
+      const rp = document.createElementNS(NS3, 'path');
+      rp.setAttribute('id', 'loireRiverRef');
+      rp.setAttribute('d', loireSegs[0].path);
+      defs.appendChild(rp);
+
+      const lblText = document.createElementNS(NS3, 'text');
+      lblText.setAttribute('font-family', 'var(--sans)'); lblText.setAttribute('font-size', '17');
+      lblText.setAttribute('font-style', 'italic'); lblText.setAttribute('font-weight', '600');
+      lblText.setAttribute('fill', '#1c6580');
+      lblText.setAttribute('stroke', 'rgba(255,255,255,0.75)'); lblText.setAttribute('stroke-width', '3');
+      lblText.setAttribute('paint-order', 'stroke');
+      const tp = document.createElementNS(NS3, 'textPath');
+      tp.setAttribute('href', '#loireRiverRef');
+      tp.setAttribute('startOffset', '18%');
+      tp.setAttribute('side', 'left');
+      tp.textContent = 'la Loire';
+      lblText.appendChild(tp);
+      svg.appendChild(lblText);
+    }
 
     // villes
     const CITIES = [
       { name: 'Nantes',             x: 256.5, y: 422.7, anchor: 'middle',  dy: -8 },
       { name: 'Tours',              x: 421.1, y: 397.0, anchor: 'middle',  dy: -8 },
       { name: 'Clermont-Ferrand',   x: 599.9, y: 586.0, anchor: 'middle',  dy: -8 },
+      { name: 'Bordeaux',           x: 325.0, y: 689.0, anchor: 'middle',  dy: -8 },
     ];
     CITIES.forEach(c => {
       const dot = document.createElementNS(NS3, 'circle');
