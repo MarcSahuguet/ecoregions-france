@@ -438,14 +438,14 @@ footer{padding:2.6rem 0 4rem;font-size:.85rem;color:var(--ink-3)}
           versées progressivement.</p>
       </div>
       <div>
-        <h4>Le Rhône sous trois exécutifs différents</h4>
-        <div id="rhone-map-wrap" style="border:1px solid var(--rule);border-radius:3px;
+        <h4>La Loire sous quatre exécutifs différents</h4>
+        <div id="loire-map-wrap" style="border:1px solid var(--rule);border-radius:3px;
           background:var(--paper-3);overflow:hidden;margin-bottom:.75rem">
-          <svg id="rhone-minimap" style="display:block;width:100%;height:auto"></svg>
+          <svg id="loire-minimap" style="display:block;width:100%;height:auto"></svg>
         </div>
-        <div id="rhone-legend" style="display:flex;flex-wrap:wrap;gap:.4rem .9rem;
+        <div id="loire-legend" style="display:flex;flex-wrap:wrap;gap:.4rem .9rem;
           margin-bottom:.6rem;font-size:.78rem;color:var(--ink-2)"></div>
-        <p class="note" id="rhone-note"></p>
+        <p class="note" id="loire-note"></p>
       </div>
     </div>
   </div>
@@ -1114,26 +1114,26 @@ function rail() {
 (() => {
   const rows = E.slice().sort((a,b) => b.regions_recoupees.length - a.regions_recoupees.length
                                     || b.departements - a.departements);
-  /* mini-carte Rhône : régions admin clippées sur l'écorégion */
+  /* mini-carte Loire : régions admin clippées sur l'écorégion Val de Loire-Auvergne */
   (() => {
-    const ecoRhone = G.ecoregions.find(e => e.key === 'rhone');
-    const vb = G.viewBox; // [0,0,W,H]
+    const ecoLoire = G.ecoregions.find(e => e.key === 'loireamont');
     const ADMIN_COLORS = {
       'Auvergne-Rhône-Alpes': '#C87A4A',
-      'Bourgogne-Franche-Comté': '#7A5A8A',
-      "Provence-Alpes-Côte d'Azur": '#5BA3A0'
+      'Centre-Val de Loire':   '#6B9E78',
+      'Nouvelle-Aquitaine':    '#7A5A8A',
+      'Bourgogne-Franche-Comté':'#B8A95C'
     };
-    const rhoneRegs = byKey.rhone.regions_recoupees;
+    const loireRegs = byKey.loireamont.regions_recoupees;
     const NS3 = 'http://www.w3.org/2000/svg';
-    const svg = document.getElementById('rhone-minimap');
-    svg.setAttribute('viewBox', '663.6 423.4 304.7 375.3');
+    const svg = document.getElementById('loire-minimap');
+    svg.setAttribute('viewBox', '310.2 293.8 463.7 475.4');
 
-    // clipPath sur le contour de l'écorégion Rhône
+    // clipPath sur l'écorégion Loire-Auvergne
     const defs = document.createElementNS(NS3, 'defs');
     const clip = document.createElementNS(NS3, 'clipPath');
-    clip.setAttribute('id', 'clipRhone');
+    clip.setAttribute('id', 'clipLoire');
     const clipPath = document.createElementNS(NS3, 'path');
-    clipPath.setAttribute('d', ecoRhone.path);
+    clipPath.setAttribute('d', ecoLoire.path);
     clipPath.setAttribute('fill-rule', 'evenodd');
     clip.appendChild(clipPath); defs.appendChild(clip); svg.appendChild(defs);
 
@@ -1145,50 +1145,62 @@ function rail() {
 
     // régions admin clippées
     const gClip = document.createElementNS(NS3, 'g');
-    gClip.setAttribute('clip-path', 'url(#clipRhone)');
+    gClip.setAttribute('clip-path', 'url(#clipLoire)');
     G.regionsAdmin.forEach(r => {
       const col = ADMIN_COLORS[r.name];
       if (!col) return;
       const p = document.createElementNS(NS3, 'path');
       p.setAttribute('d', r.path); p.setAttribute('fill', col);
       p.setAttribute('fill-rule', 'evenodd');
-      p.setAttribute('stroke', 'rgba(255,255,255,0.25)'); p.setAttribute('stroke-width', '1.5');
+      p.setAttribute('stroke', 'rgba(255,255,255,0.3)'); p.setAttribute('stroke-width', '1.5');
       gClip.appendChild(p);
     });
     svg.appendChild(gClip);
 
-    // contour écorégion en surimpression
+    // contour écorégion
     const outline = document.createElementNS(NS3, 'path');
-    outline.setAttribute('d', ecoRhone.path);
+    outline.setAttribute('d', ecoLoire.path);
     outline.setAttribute('fill', 'none'); outline.setAttribute('fill-rule', 'evenodd');
-    outline.setAttribute('stroke', 'var(--ink)'); outline.setAttribute('stroke-width', '2');
+    outline.setAttribute('stroke', 'var(--ink)'); outline.setAttribute('stroke-width', '2.5');
     svg.appendChild(outline);
 
-    // cours du Rhône (rivières dont le nom contient "Rhône")
-    G.rivers.filter(r => r.name && r.name.toLowerCase().includes('rhône')).forEach(r => {
+    // cours de la Loire
+    G.rivers.filter(r => r.name && r.name === 'la Loire').forEach(r => {
       const p = document.createElementNS(NS3, 'path');
       p.setAttribute('d', r.path); p.setAttribute('fill', 'none');
-      p.setAttribute('stroke', '#1c6580'); p.setAttribute('stroke-width', '3');
+      p.setAttribute('stroke', '#1c6580'); p.setAttribute('stroke-width', '3.5');
       p.setAttribute('stroke-linecap', 'round');
       svg.appendChild(p);
     });
 
+    // label "la Loire" sur le fleuve — positionné au centre de l'écorégion
+    const lbl = document.createElementNS(NS3, 'text');
+    lbl.setAttribute('x', '537.5'); lbl.setAttribute('y', '505');
+    lbl.setAttribute('font-family', 'var(--sans)'); lbl.setAttribute('font-size', '18');
+    lbl.setAttribute('font-style', 'italic'); lbl.setAttribute('font-weight', '600');
+    lbl.setAttribute('fill', '#1c6580'); lbl.setAttribute('text-anchor', 'middle');
+    lbl.setAttribute('stroke', 'rgba(255,255,255,0.7)'); lbl.setAttribute('stroke-width', '3');
+    lbl.setAttribute('paint-order', 'stroke');
+    lbl.textContent = 'la Loire';
+    svg.appendChild(lbl);
+
     // légende
-    const leg = document.getElementById('rhone-legend');
-    Object.entries(ADMIN_COLORS).forEach(([nom, col]) => {
-      const share = rhoneRegs.find(r => r.nom === nom);
+    const leg = document.getElementById('loire-legend');
+    loireRegs.forEach(reg => {
+      const col = ADMIN_COLORS[reg.nom] || '#888';
       leg.insertAdjacentHTML('beforeend',
         `<span style="display:flex;align-items:center;gap:.3rem">
           <span style="width:10px;height:10px;border-radius:2px;background:${col};flex-shrink:0"></span>
-          ${nom}${share ? ` <b>(${fr(share.part_pop,0)} %)</b>` : ''}
+          ${reg.nom} <b>(${fr(reg.part_pop,0)}&thinsp;%)</b>
         </span>`);
     });
 
     // note
-    document.getElementById('rhone-note').innerHTML =
-      `L'écorégion Rhône-Alpes recoupe <b>3 régions actuelles</b> et <b>${byKey.rhone.departements} départements</b>.
-       Les arbitrages entre refroidissement des centrales, irrigation et eau potable
-       se négocient aujourd'hui entre trois exécutifs sans autorité commune sur le fleuve.`;
+    document.getElementById('loire-note').innerHTML =
+      `L'écorégion Val de Loire-Auvergne recoupe <b>4 régions actuelles</b> et
+       <b>${byKey.loireamont.departements} départements</b> — aucune n'a autorité sur
+       l'ensemble du bassin. Les quatre exécutifs gèrent chacun leur tronçon sans pouvoir
+       agir sur ce que l'amont leur envoie.`;
   })();
 })();
 
