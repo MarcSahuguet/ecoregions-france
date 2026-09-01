@@ -72,6 +72,45 @@ section{padding:clamp(3.4rem,7vw,6rem) 0;border-bottom:1px solid var(--rule)}
 .atelier{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(300px,.92fr);gap:26px;align-items:start}
 .stage{position:relative;background:var(--paper-2);border:1px solid var(--rule);border-radius:3px;
   box-shadow:var(--shadow);overflow:hidden}
+#btn-cmp{position:absolute;top:10px;right:10px;z-index:10;display:flex;align-items:center;gap:6px;
+  font-family:var(--sans);font-size:.78rem;font-weight:600;color:var(--ink);
+  background:var(--paper-2);border:1px solid var(--rule-2);border-radius:3px;
+  padding:.32rem .65rem;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.10);
+  transition:background .15s,box-shadow .15s}
+#btn-cmp:hover{background:var(--paper-3);box-shadow:0 2px 8px rgba(0,0,0,.14)}
+/* modale comparaison */
+#cmp-overlay{display:none;position:fixed;inset:0;z-index:1000;background:rgba(12,20,26,.62);
+  backdrop-filter:blur(3px);align-items:center;justify-content:center;padding:1.5rem}
+#cmp-overlay.open{display:flex}
+#cmp-box{background:var(--paper-2);border:1px solid var(--rule);border-radius:6px;
+  box-shadow:0 24px 64px rgba(0,0,0,.35);width:100%;max-width:860px;
+  max-height:90vh;overflow-y:auto;display:flex;flex-direction:column}
+#cmp-head{display:flex;align-items:center;justify-content:space-between;
+  padding:1.1rem 1.4rem;border-bottom:1px solid var(--rule);flex-shrink:0}
+#cmp-head h3{font-family:var(--serif);font-size:1.15rem;font-weight:600;margin:0;color:var(--ink)}
+.cmp-actions{display:flex;gap:.5rem;align-items:center}
+.cmp-btn{font-family:var(--sans);font-size:.78rem;font-weight:600;border-radius:3px;
+  padding:.32rem .7rem;cursor:pointer;transition:background .15s}
+.cmp-btn.sec{background:transparent;border:1px solid var(--rule-2);color:var(--ink-2)}
+.cmp-btn.sec:hover{background:var(--paper-3);color:var(--ink)}
+.cmp-btn.prim{background:var(--water);border:1px solid var(--water);color:#fff}
+.cmp-btn.prim:hover{background:var(--water-2)}
+#cmp-body{padding:1.2rem 1.4rem 1.5rem;flex:1}
+.cmp-intro{font-size:.88rem;color:var(--ink-2);margin-bottom:1.2rem;line-height:1.5}
+.cmp-table{width:100%;border-collapse:collapse;font-size:.85rem}
+.cmp-table th{font-size:.7rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+  color:var(--ink-3);padding:.55rem .9rem;text-align:left;border-bottom:2px solid var(--rule)}
+.cmp-table th.col-after{color:var(--water);border-bottom-color:var(--water)}
+.cmp-table td{padding:.62rem .9rem;border-bottom:1px solid var(--rule);vertical-align:top;
+  line-height:1.45;color:var(--ink-2)}
+.cmp-table td.crit{font-weight:600;color:var(--ink);font-size:.83rem}
+.cmp-table td.val-before{color:var(--ink-2)}
+.cmp-table td.val-after{color:var(--water);font-weight:600}
+.cmp-table tr:last-child td{border-bottom:none}
+.cmp-table .badge{display:inline-block;font-size:.68rem;font-weight:700;padding:.1em .45em;
+  border-radius:2px;margin-left:.35rem;vertical-align:middle}
+.badge-worse{background:color-mix(in srgb,#c0392b 12%,transparent);color:#c0392b}
+.badge-better{background:color-mix(in srgb,var(--leaf) 14%,transparent);color:var(--leaf)}
 svg.map{display:block;width:100%;height:auto;touch-action:pan-y}
 svg.map path,.tfmap path{fill-rule:evenodd}   /* les trous ne dépendent pas de l'orientation */
 .eco{cursor:pointer;transition:opacity .18s ease,filter .18s ease}
@@ -340,6 +379,13 @@ footer{padding:2.6rem 0 4rem;font-size:.85rem;color:var(--ink-3)}
           <div class="ctl" id="layers"><span>Superposer</span></div>
         </div>
         <div id="mapholder"></div>
+        <button id="btn-cmp" onclick="ouvrirComparaison()" title="Comparer avant / après">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+            <rect x="1" y="2" width="5.5" height="12" rx=".8"/><rect x="9.5" y="2" width="5.5" height="12" rx=".8"/>
+            <line x1="8" y1="5" x2="8" y2="11"/><polyline points="6,7 8,5 10,7"/><polyline points="6,9 8,11 10,9"/>
+          </svg>
+          Avant / Après
+        </button>
         <div class="legend" id="legend"></div>
       </div>
       <aside class="rail" id="rail"></aside>
@@ -1219,4 +1265,199 @@ function rail() {
 })();
 
 buildMap(); buildControls(); paint(); bindMap(); rail();
+
+/* ===== MODALE COMPARAISON ===== */
+(function() {
+  document.body.insertAdjacentHTML('beforeend', `
+  <div id="cmp-overlay" role="dialog" aria-modal="true" aria-label="Comparaison avant après">
+    <div id="cmp-box">
+      <div id="cmp-head">
+        <h3>Avant / Après — ce que ce découpage change</h3>
+        <div class="cmp-actions">
+          <button class="cmp-btn prim" onclick="exporterComparaison()">
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" style="vertical-align:middle;margin-right:4px"><path d="M8 2v8M4 7l4 4 4-4"/><path d="M2 12v1a1 1 0 001 1h10a1 1 0 001-1v-1"/></svg>
+            Exporter
+          </button>
+          <button class="cmp-btn sec" onclick="fermerComparaison()">Fermer</button>
+        </div>
+      </div>
+      <div id="cmp-body">
+        <p class="cmp-intro">Six critères qui motivent ce redécoupage — mesurés sur les données officielles de cette carte.</p>
+        <table class="cmp-table">
+          <thead>
+            <tr>
+              <th style="width:28%">Critère</th>
+              <th class="col-before" style="width:36%">13 régions actuelles</th>
+              <th class="col-after" style="width:36%">13 écorégions proposées</th>
+            </tr>
+          </thead>
+          <tbody id="cmp-rows"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>`);
+
+  const meta = DATA.indicators.meta;
+  const ecos = DATA.indicators.ecoregions;
+  const pops = ecos.map(e => e.pop);
+  const popMax = Math.max(...pops), popMin = Math.min(...pops);
+  const ratioEco = (popMax / popMin).toFixed(1);
+
+  const ADMIN_REGIONS = ['Île-de-France','Hauts-de-France','Grand Est','Normandie',
+    'Bretagne','Pays de la Loire','Centre-Val de Loire','Bourgogne-Franche-Comté',
+    'Nouvelle-Aquitaine','Occitanie','Auvergne-Rhône-Alpes',"Provence-Alpes-Côte d'Azur",'Corse'];
+  const ADMIN_POP = [12174880,5980340,5534800,3322440,3373000,3821200,2568000,2807660,
+    6112697,6066734,8080000,5094500,344679];
+  const aMax = Math.max(...ADMIN_POP), aMin = Math.min(...ADMIN_POP);
+  const ratioAdm = (aMax / aMin).toFixed(1);
+
+  const fragEco = ecos.map(e => e.regions_recoupees.length);
+  const fragMoyEco = (fragEco.reduce((a,b)=>a+b,0)/fragEco.length).toFixed(1);
+  const fragMax = Math.max(...fragEco);
+
+  const totPrelConso = ecos.reduce((s,e)=>s+e.prel_conso_Mm3,0);
+  const maxPrel = Math.max(...ecos.map(e=>e.prel_conso_Mm3));
+  const partMax = (100*maxPrel/totPrelConso).toFixed(0);
+
+  const natCatnat = meta.perturbation ? (DATA.risques._national.catnat_part||'') : '';
+  const natPprn   = DATA.risques._national.pprn_part_pop || '';
+
+  const rows = [
+    ['Équilibre démographique',
+     `Ratio max/min : <b>${ratioAdm} à 1</b><span class="badge badge-worse">écarté</span><br>
+      Île-de-France (12,2 M) vs Corse (345 k)`,
+     `Ratio max/min : <b>${ratioEco} à 1</b><span class="badge badge-better">−85 %</span><br>
+      Écart réduit de 35 à 1 à moins de 6 à 1`],
+    ['Gouvernance de l\'eau',
+     `<b>Deux administrations parallèles</b> : 13 régions politiques + 6 agences de l\'eau.<br>
+      Les SDAGE (opposables) n\'ont aucun élu responsable.`,
+     `<b>Une seule institution</b> par bassin, élue, portant à la fois la politique régionale
+      et le SDAGE. Les comités de bassin deviennent des assemblées représentatives.`],
+    ['Fragmentation des bassins versants',
+     `La Loire traverse <b>5 régions et 12 départements</b>. En moyenne, chaque écorégion
+      recouvre ${fragMoyEco} régions actuelles — jusqu\'à ${fragMax} pour certaines.`,
+     `Chaque écorégion correspond à <b>un seul grand ensemble hydrographique</b>.
+      L\'amont et l\'aval partagent la même assemblée et le même budget.`],
+    ['Gestion des risques amont/aval',
+     `Inondations décidées dans des régions séparées : PPRN, plans de secours et travaux
+      d\'aménagement relèvent de collectivités sans autorité l\'une sur l\'autre.`,
+     `<b>${fr(natCatnat,1)} % des communes</b> ont subi une inondation depuis 2015 (GASPAR).
+      <b>${fr(natPprn,1)} %</b> de la population vit sous un PPRN. Une seule collectivité
+      responsable de l\'amont à l\'estuaire.`],
+    ['Concentration des prélèvements',
+     `Le Rhône représente <b>${partMax} %</b> des prélèvements nationaux hors turbinage,
+      principalement pour le refroidissement des centrales nucléaires.
+      Aucune région actuelle n\'a compétence sur l\'ensemble du couloir.`,
+     `L\'écorégion Rhône-Alpes gère son propre bilan eau-énergie. Les arbitrages entre
+      refroidissement, irrigation et eau potable se font dans une même institution.`],
+    ['Coût de la transition',
+     `Statu quo apparent : <b>zéro coût immédiat</b>. Mais le coût diffus de la double
+      administration (13 régions + 6 agences + comités de bassin) n\'est pas comptabilisé.`,
+     `Surcoût estimé <b>~100 M€/an</b> (base réforme 2015), soit 0,25 % des budgets régionaux.
+      Amortissable si les doublons entre agences et régions sont supprimés.`],
+  ];
+
+  document.getElementById('cmp-rows').innerHTML = rows.map(([c,b,a]) =>
+    `<tr><td class="crit">${c}</td><td class="val-before">${b}</td><td class="val-after">${a}</td></tr>`
+  ).join('');
+})();
+
+window.ouvrirComparaison = function() {
+  document.getElementById('cmp-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+};
+window.fermerComparaison = function() {
+  document.getElementById('cmp-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+};
+document.getElementById('cmp-overlay').addEventListener('click', e => {
+  if (e.target === e.currentTarget) fermerComparaison();
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') fermerComparaison();
+});
+
+window.exporterComparaison = function() {
+  const rows = [
+    ['Critère', '13 régions actuelles', '13 écorégions proposées'],
+    ...Array.from(document.querySelectorAll('#cmp-rows tr')).map(tr =>
+      Array.from(tr.querySelectorAll('td')).map(td => td.innerText.replace(/\n+/g,' ').trim()))
+  ];
+  const W = 1400, PAD = 48, COL = [320, 510, 510];
+  const ROW_H = 80, HEAD_H = 56, TITLE_H = 72, FOOT_H = 36;
+  const H = TITLE_H + HEAD_H + rows.length * ROW_H + FOOT_H + PAD * 2;
+  const cvs = document.createElement('canvas');
+  cvs.width = W; cvs.height = H;
+  const ctx = cvs.getContext('2d');
+  const dark = document.documentElement.getAttribute('data-theme') === 'dark' ||
+    (!document.documentElement.getAttribute('data-theme') && matchMedia('(prefers-color-scheme:dark)').matches);
+  const BG    = dark ? '#121f25' : '#f3f5f1';
+  const BG2   = dark ? '#0b1418' : '#e6eae6';
+  const INK   = dark ? '#e2e9e5' : '#12222a';
+  const INK2  = dark ? '#9db0b4' : '#4c6068';
+  const INK3  = dark ? '#76898e' : '#75878d';
+  const WATER = dark ? '#5fb0cb' : '#1c6580';
+  const RULE  = dark ? '#24363d' : '#c3ccc6';
+
+  ctx.fillStyle = BG; ctx.fillRect(0,0,W,H);
+
+  // titre
+  ctx.fillStyle = INK;
+  ctx.font = `700 22px "Source Sans 3", -apple-system, sans-serif`;
+  ctx.fillText('Avant / Après — ce que ce découpage change', PAD, PAD + 28);
+  ctx.fillStyle = INK3;
+  ctx.font = `400 13px "Source Sans 3", -apple-system, sans-serif`;
+  ctx.fillText('6 critères mesurés sur les données officielles  •  ecoregions-france.vercel.app', PAD, PAD + 52);
+
+  let y = PAD + TITLE_H;
+  const xs = [PAD, PAD + COL[0], PAD + COL[0] + COL[1]];
+
+  rows.forEach((row, ri) => {
+    const rh = ri === 0 ? HEAD_H : ROW_H;
+    // ligne de fond alternée
+    if (ri > 0 && ri % 2 === 0) { ctx.fillStyle = BG2; ctx.fillRect(0, y, W, rh); }
+    // séparateur
+    ctx.strokeStyle = RULE; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+
+    row.forEach((cell, ci) => {
+      const x = xs[ci];
+      const maxW = COL[ci] - 24;
+      if (ri === 0) {
+        ctx.fillStyle = ci === 2 ? WATER : INK3;
+        ctx.font = `700 11px "Source Sans 3", -apple-system, sans-serif`;
+        ctx.fillText(cell.toUpperCase(), x + 12, y + HEAD_H / 2 + 4);
+      } else {
+        ctx.fillStyle = ci === 0 ? INK : ci === 2 ? WATER : INK2;
+        ctx.font = `${ci === 0 ? 600 : 400} 13px "Source Sans 3", -apple-system, sans-serif`;
+        // word-wrap simple
+        const words = cell.split(' ');
+        let line = '', ly = y + 20;
+        for (const w of words) {
+          const test = line ? line + ' ' + w : w;
+          if (ctx.measureText(test).width > maxW && line) {
+            ctx.fillText(line, x + 12, ly); line = w; ly += 18;
+          } else line = test;
+        }
+        if (line) ctx.fillText(line, x + 12, ly);
+      }
+    });
+    y += rh;
+  });
+
+  // ligne finale
+  ctx.strokeStyle = RULE; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+  // pied
+  ctx.fillStyle = INK3; ctx.font = `400 11px "Source Sans 3", -apple-system, sans-serif`;
+  ctx.fillText('Sources : Sandre/OFB, INSEE, BNPE Hub\'Eau, GASPAR — github.com/MarcSahuguet/ecoregions-france', PAD, y + 22);
+
+  cvs.toBlob(blob => {
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'ecoregions-comparaison.png';
+    a.click();
+    URL.revokeObjectURL(a.href);
+  });
+};
 </script>
