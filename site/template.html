@@ -147,6 +147,12 @@ svg.map path,.tfmap path{fill-rule:evenodd}   /* les trous ne dépendent pas de 
 @media (max-width:620px){.mlbl{font-size:.58rem}.mlbl span{font-size:.56rem}}
 svg .lay[hidden]{display:none}
 .riv{fill:none;stroke:var(--water);stroke-width:.85;stroke-opacity:.5;stroke-linecap:round;pointer-events:none}
+.riv[data-n="la Loire"],.riv[data-n="Le Rhône"],.riv[data-n="La Seine"],.riv[data-n="La Garonne"],
+.riv[data-n="La Dordogne"],.riv[data-n="La Charente"],.riv[data-n="L'Adour"],
+.riv[data-n="la Vilaine"],.riv[data-n="La Saône"],.riv[data-n="L'Isère"],
+.riv[data-n="La Marne"],.riv[data-n="La Meuse"],.riv[data-n="Le Rhin"],
+.riv[data-n="La Moselle"],.riv[data-n="l'Allier"],.riv[data-n="la Vienne"],
+.riv[data-n="Le Tarn"],.riv[data-n="le Lot"],.riv[data-n="Le Doubs"]{stroke-width:2;stroke-opacity:.75}
 .ovl{fill:none;pointer-events:none}
 .ovl.reg{stroke:var(--warm);stroke-width:1.15;stroke-dasharray:4 2.6;stroke-opacity:.9}
 .ovl.hyd{stroke:var(--nuke);stroke-width:.85;stroke-opacity:.75}
@@ -813,7 +819,7 @@ let metric = METRICS[0], sel = null, tab = 'res';
 /* ---------- carte ---------- */
 const vb = G.viewBox;
 function buildMap() {
-  const p = (arr, cls) => arr.map(o => `<path class="${cls}" d="${o.path}"/>`).join('');
+  const p = (arr, cls) => arr.map(o => `<path class="${cls}" d="${o.path}"${o.name ? ` data-n="${o.name.replace(/"/g,'&quot;')}"` : ''}/>`).join('');
   const eco = E.map(e => {
     const g = G.ecoregions.find(x => x.key === e.key);
     return `<path class="eco" id="eco-${e.key}" data-k="${e.key}" d="${g.path}"
