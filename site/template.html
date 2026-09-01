@@ -1150,6 +1150,20 @@ function rail() {
     bg.setAttribute('stroke', 'var(--rule)'); bg.setAttribute('stroke-width', '1');
     svg.appendChild(bg);
 
+    // régions admin — surface totale (fond pâle, non clippé)
+    const gFull = document.createElementNS(NS3, 'g');
+    G.regionsAdmin.forEach(r => {
+      const col = ADMIN_COLORS[r.name];
+      if (!col) return;
+      const p = document.createElementNS(NS3, 'path');
+      p.setAttribute('d', r.path); p.setAttribute('fill', col);
+      p.setAttribute('fill-rule', 'evenodd'); p.setAttribute('fill-opacity', '0.18');
+      p.setAttribute('stroke', col); p.setAttribute('stroke-width', '0.8');
+      p.setAttribute('stroke-opacity', '0.35');
+      gFull.appendChild(p);
+    });
+    svg.appendChild(gFull);
+
     // régions admin clippées
     const gClip = document.createElementNS(NS3, 'g');
     gClip.setAttribute('clip-path', 'url(#clipLoire)');
@@ -1170,6 +1184,18 @@ function rail() {
     outline.setAttribute('fill', 'none'); outline.setAttribute('fill-rule', 'evenodd');
     outline.setAttribute('stroke', 'var(--ink)'); outline.setAttribute('stroke-width', '2.5');
     svg.appendChild(outline);
+
+    // contour bassin versant Loire-Bretagne (périmètre des agences de l'eau, 1964)
+    const BASIN_COLOR = '#2d6a9f';
+    const loireBasin = G.basins.find(b => b.name === 'Loire-Bretagne');
+    if (loireBasin) {
+      const bp = document.createElementNS(NS3, 'path');
+      bp.setAttribute('d', loireBasin.path); bp.setAttribute('fill', 'none');
+      bp.setAttribute('fill-rule', 'evenodd');
+      bp.setAttribute('stroke', BASIN_COLOR); bp.setAttribute('stroke-width', '2.5');
+      bp.setAttribute('stroke-dasharray', '9 5');
+      svg.appendChild(bp);
+    }
 
     // cours de la Loire
     G.rivers.filter(r => r.name && r.name === 'la Loire').forEach(r => {
@@ -1217,6 +1243,16 @@ function rail() {
 
     // légende
     const leg = document.getElementById('loire-legend');
+    // entrée bassin versant 1964 en tête de légende
+    leg.insertAdjacentHTML('beforeend',
+      `<span style="display:flex;align-items:center;gap:.4rem">
+        <svg width="28" height="10" style="flex-shrink:0">
+          <line x1="0" y1="5" x2="28" y2="5"
+            stroke="${BASIN_COLOR}" stroke-width="2.5"
+            stroke-dasharray="7 4"/>
+        </svg>
+        <span>Bassin versant Loire-Bretagne <b>(périmètre 1964)</b></span>
+      </span>`);
     loireRegs.forEach(reg => {
       const col = ADMIN_COLORS[reg.nom] || '#888';
       leg.insertAdjacentHTML('beforeend',
