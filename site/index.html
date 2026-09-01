@@ -1419,7 +1419,7 @@ buildMap(); buildControls(); paint(); bindMap(); rail();
     });
   }
 
-  /* SVG admin */
+  /* SVG admin — paths seulement, étiquettes après ouverture */
   const svgA = document.getElementById('cmpSvgAdm');
   svgA.setAttribute('viewBox', `0 0 ${vb[2]} ${vb[3]}`);
   G.regionsAdmin.forEach((r, i) => {
@@ -1427,15 +1427,17 @@ buildMap(); buildControls(); paint(); bindMap(); rail();
     p.setAttribute('d', r.path); p.setAttribute('fill', ADM_COL[i % ADM_COL.length]);
     p.dataset.name = r.name; svgA.appendChild(p);
   });
-  requestAnimationFrame(() => {
-    svgA.querySelectorAll('path').forEach((p, i) => {
+  let admLabelled = false;
+  window._labelAdmRegions = function() {
+    if (admLabelled) return; admLabelled = true;
+    svgA.querySelectorAll('path').forEach(p => {
       const bb = p.getBBox();
       const lines = (SHORT_ADM[p.dataset.name] || p.dataset.name).split('\n');
       const area = bb.width * bb.height;
       const fs = area > 80000 ? 26 : area > 30000 ? 20 : area > 8000 ? 15 : 11;
       cmpAddText(svgA, lines, bb.x + bb.width/2, bb.y + bb.height/2, fs);
     });
-  });
+  };
 
   /* SVG éco */
   const svgE = document.getElementById('cmpSvgEco');
@@ -1452,6 +1454,7 @@ buildMap(); buildControls(); paint(); bindMap(); rail();
 window.ouvrirComparaison = function() {
   document.getElementById('cmp-overlay').classList.add('open');
   document.body.style.overflow = 'hidden';
+  requestAnimationFrame(() => window._labelAdmRegions && window._labelAdmRegions());
 };
 window.fermerComparaison = function() {
   document.getElementById('cmp-overlay').classList.remove('open');
