@@ -1003,7 +1003,7 @@ function rail() {
           <b class="num">${fr(e.prel_Mm3[k],0)} Mm³</b></li>`).join('')}
        <li><span><b>Total hors turbinage</b></span><b class="num">${fr(prelTotal,0)} Mm³</b></li>
      </ul>
-     ${sais ? `<h4 style="margin-top:1.1rem">Le régime du fleuve, mois par mois</h4>
+     ${sais ? `<h4 style="margin-top:1.1rem">Régime hydrologique mensuel</h4>
        ${graphMois(sais)}
        <ul class="rlist">
          <li><span>Mois le plus haut</span><b class="num">${MOIS[sais.mois_haut-1]} · ${fr(sais.mois[sais.mois_haut-1],0)} m³/s</b></li>
