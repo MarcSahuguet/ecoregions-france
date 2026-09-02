@@ -252,8 +252,9 @@ button.chip.lay[aria-pressed="true"][data-c="riv"]{color:var(--water)}
 })();
 
 /* ---------- au-delà de la frontière ---------- */
-.tfmap{width:100%;aspect-ratio:1/1;display:block;background:var(--paper-2);
-  border:1px solid var(--rule);border-radius:3px}
+.tfwrap{position:relative;width:100%;padding-bottom:100%;background:var(--paper-2);
+  border:1px solid var(--rule);border-radius:3px;overflow:hidden}
+.tfmap{position:absolute;top:0;left:0;width:100%;height:100%;display:block}
 .tfmap .fr{fill:none;stroke:var(--ink);stroke-width:1.6;stroke-opacity:.85}
 .tfmap .rv{fill:none;stroke:#3a8ab5;stroke-width:1.4;stroke-opacity:.85;stroke-linecap:round;marker-end:url(#tfarr)}
 .tfmap .rvl{font-size:9px;fill:#1c6580;font-style:italic;font-family:var(--sans);pointer-events:none}
@@ -517,7 +518,7 @@ footer{padding:2.6rem 0 4rem;font-size:.85rem;color:var(--ink-3)}
         contrôlerait vraiment   et ce qu'elle ne contrôlerait pas.</p>
     </div>
     <div class="dual">
-      <div><svg class="tfmap" id="tfmap" role="img"
+      <div class="tfwrap"><svg class="tfmap" id="tfmap" role="img"
         aria-label="Bassins versants complets autour de la France"></svg></div>
       <div>
         <h4>Part française de chaque bassin</h4>
