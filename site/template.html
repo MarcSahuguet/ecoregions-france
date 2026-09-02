@@ -256,6 +256,7 @@ button.chip.lay[aria-pressed="true"][data-c="riv"]{color:var(--water)}
   border:1px solid var(--rule);border-radius:3px}
 .tfmap .fr{fill:none;stroke:var(--ink);stroke-width:1.6;stroke-opacity:.85}
 .tfmap .rv{fill:none;stroke:#3a8ab5;stroke-width:2.8;stroke-opacity:.9;stroke-linecap:round;stroke-linejoin:round;marker-end:url(#tfarr)}
+.tfmap .rvsrc{fill:#fff;stroke:#3a8ab5;stroke-width:2}
 .tfmap .rvl{font-size:14px;fill:#1c6580;font-style:italic;font-weight:600;font-family:var(--sans);pointer-events:none;
   paint-order:stroke;stroke:#fff;stroke-width:4px;stroke-linejoin:round}
 .tfmap .bs{fill-opacity:.42;stroke-width:.9;stroke-opacity:.9;cursor:pointer;
@@ -1334,7 +1335,9 @@ function rail() {
     const lab = RIVER_LABELS[r.nom] || {};
     const txt = lab.lx ? `<text class="rvl" x="${lab.lx}" y="${lab.ly}"
       transform="rotate(${lab.rot},${lab.lx},${lab.ly})">${r.nom}</text>` : '';
-    return `<path class="rv" d="${r.path}"/>` + txt;
+    const src = r.path.match(/^M([\d.]+),([\d.]+)/);
+    const dot = src ? `<circle class="rvsrc" cx="${src[1]}" cy="${src[2]}" r="5"/>` : '';
+    return `<path class="rv" d="${r.path}"/>` + dot + txt;
   }).join('');
 
   // cadrage carré centré sur les 4 bassins transfrontaliers
