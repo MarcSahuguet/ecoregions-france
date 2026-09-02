@@ -161,12 +161,36 @@ def main():
 
     rivers = [{"nom": n, "path": river_path(pts)} for n, pts in RIVER_PTS.items()]
 
+    def poly_path(pts):
+        coords = [pt(lon, lat) for lon, lat in pts]
+        return "M" + coords[0] + "L" + "L".join(coords[1:]) + "Z"
+
+    # Frontière suisse simplifiée (sens horaire)
+    SUISSE_PTS = [
+        (6.02,46.13),(5.96,46.35),(6.10,46.57),(6.15,46.67),(6.43,46.77),
+        (6.65,46.80),(6.90,47.07),(7.00,47.36),(7.20,47.49),(7.59,47.55),
+        (7.90,47.62),(8.15,47.72),(8.58,47.80),(8.85,47.68),(9.00,47.67),
+        (9.37,47.55),(9.47,47.53),(9.55,47.65),(9.67,47.52),(9.95,47.40),
+        (10.49,47.40),(10.43,47.03),(10.18,46.85),(10.08,46.57),(9.55,46.30),
+        (9.15,46.00),(9.02,45.83),(8.63,45.93),(8.10,45.90),(7.82,45.93),
+        (7.40,45.93),(7.03,45.93),(6.77,45.93),(6.63,46.14),(6.02,46.13),
+    ]
+
+    # Lac Léman (simplifié, rive nord française + rive sud suisse)
+    LEMAN_PTS = [
+        (6.15,46.20),(6.22,46.28),(6.35,46.35),(6.48,46.37),(6.59,46.40),
+        (6.75,46.42),(6.92,46.38),(6.88,46.43),(6.85,46.46),(6.80,46.50),
+        (6.63,46.52),(6.48,46.51),(6.35,46.46),(6.22,46.38),(6.15,46.20),
+    ]
+
     data = {"viewBox": [0, 0, round((xmax-xmin)*ech, 1), round((ymax-ymin)*ech, 1)],
             "france": svg(france),
             "bassins": [{"nom": d["sous_bassin"], "eco": d["eco"], "ecoNom": NOMS[d["eco"]],
                          "total_km2": d["total_km2"], "france_km2": d["france_km2"],
                          "part_fr": d["part_fr"], "path": svg(d["geom"])} for d in res],
-            "rivers": rivers}
+            "rivers": rivers,
+            "suisse": poly_path(SUISSE_PTS),
+            "leman": poly_path(LEMAN_PTS)}
     json.dump(data, open(f"{OUT}/transfrontalier.json", "w"), ensure_ascii=False,
               separators=(",", ":"))
     print(f"écrit {OUT}/transfrontalier.json "

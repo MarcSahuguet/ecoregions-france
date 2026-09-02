@@ -256,6 +256,8 @@ button.chip.lay[aria-pressed="true"][data-c="riv"]{color:var(--water)}
   border:1px solid var(--rule);border-radius:3px}
 .tfmap .fr{fill:none;stroke:var(--ink);stroke-width:1.6;stroke-opacity:.85}
 .tfmap .rv{fill:none;stroke:#3a8ab5;stroke-width:2.8;stroke-opacity:.9;stroke-linecap:round;stroke-linejoin:round;marker-end:url(#tfarr)}
+.tfmap .suisse{fill:none;stroke:#888;stroke-width:1.2;stroke-dasharray:4 3;stroke-opacity:.7}
+.tfmap .leman{fill:#c8dfe8;stroke:#6aacc5;stroke-width:1;fill-opacity:.85}
 .tfmap .rvsrc{fill:#fff;stroke:#3a8ab5;stroke-width:2}
 .tfmap .rvl{font-size:14px;fill:#1c6580;font-style:italic;font-weight:600;font-family:var(--sans);pointer-events:none;
   paint-order:stroke;stroke:#fff;stroke-width:4px;stroke-linejoin:round}
@@ -1361,6 +1363,8 @@ function rail() {
     </defs>` +
     bs +
     `<path class="fr" d="${TF.france}"/>` +
+    (TF.suisse ? `<path class="suisse" d="${TF.suisse}"/>` : '') +
+    (TF.leman  ? `<path class="leman"  d="${TF.leman}"/>` : '') +
     rvHtml;
 
   const liste = TF.bassins.filter(b => b.part_fr < PARTAGE).sort((a, b) => a.part_fr - b.part_fr);
