@@ -1339,7 +1339,7 @@ function rail() {
     });
   });
   const cx=(bx0+bx1)/2, cy=(by0+by1)/2;
-  const side = Math.max(bx1-bx0, by1-by0)*0.8 + 40; // 0.8 = zoom ~20 %
+  const side = Math.max(bx1-bx0, by1-by0) + 60;
   document.getElementById('tfmap').setAttribute('viewBox',
     `${(cx-side/2).toFixed(1)} ${(cy-side/2).toFixed(1)} ${side.toFixed(1)} ${side.toFixed(1)}`);
   document.getElementById('tfmap').innerHTML =
