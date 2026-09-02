@@ -252,7 +252,7 @@ button.chip.lay[aria-pressed="true"][data-c="riv"]{color:var(--water)}
 })();
 
 /* ---------- au-delà de la frontière ---------- */
-.tfmap{width:100%;height:auto;display:block;background:var(--paper-2);
+.tfmap{width:100%;aspect-ratio:1/1;display:block;background:var(--paper-2);
   border:1px solid var(--rule);border-radius:3px}
 .tfmap .fr{fill:none;stroke:var(--ink);stroke-width:1.6;stroke-opacity:.85}
 .tfmap .rv{fill:none;stroke:#3a8ab5;stroke-width:1.4;stroke-opacity:.85;stroke-linecap:round;marker-end:url(#tfarr)}
@@ -1329,10 +1329,19 @@ function rail() {
       (lab.lx ? `<text class="rvl" x="${lab.lx}" y="${lab.ly}">${r.nom}</text>` : '');
   }).join('');
 
-  // cadrage serré sur les 4 bassins transfrontaliers (padding 20 px)
-  const PAD = 20;
-  const focusedVB = `${395-PAD} ${0} ${vb[2]-(395-PAD)+PAD} ${705+PAD}`;
-  document.getElementById('tfmap').setAttribute('viewBox', focusedVB);
+  // cadrage carré centré sur les 4 bassins transfrontaliers
+  const tfBassins = TF.bassins.filter(b => b.part_fr < PARTAGE);
+  let bx0=Infinity,bx1=-Infinity,by0=Infinity,by1=-Infinity;
+  tfBassins.forEach(b => {
+    (b.path.match(/[-\d.]+,[-\d.]+/g)||[]).forEach(p => {
+      const [x,y] = p.split(',').map(Number);
+      bx0=Math.min(bx0,x);bx1=Math.max(bx1,x);by0=Math.min(by0,y);by1=Math.max(by1,y);
+    });
+  });
+  const cx=(bx0+bx1)/2, cy=(by0+by1)/2;
+  const side = Math.max(bx1-bx0, by1-by0)*0.8 + 40; // 0.8 = zoom ~20 %
+  document.getElementById('tfmap').setAttribute('viewBox',
+    `${(cx-side/2).toFixed(1)} ${(cy-side/2).toFixed(1)} ${side.toFixed(1)} ${side.toFixed(1)}`);
   document.getElementById('tfmap').innerHTML =
     `<defs>
       <marker id="tfarr" markerWidth="5" markerHeight="5" refX="4.5" refY="2.5" orient="auto">
