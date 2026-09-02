@@ -1321,16 +1321,33 @@ function rail() {
       stroke="${t ? coul(b) : 'var(--ink-3)'}" fill-opacity="${t ? .5 : .14}"
       ><title>${b.nom} : ${fr(b.total_km2)} km², dont ${fr(b.part_fr,1)} % en France</title></path>`;
   }).join('');
-  // tracés schématiques des fleuves principaux (coordonnées dans l'espace tfmap 0-900 × 0-878)
+  // tracés schématiques des fleuves (viewBox 0-900 × 0-878 ; y croît vers le sud)
+  // flèche marker-end = direction vers la mer / sortie du territoire
   const RIVERS_TF = [
-    {d:'M 450,578 Q 390,478 330,400 Q 240,408 175,410 L 150,420', label:'Loire',   lx:295, ly:392},
-    {d:'M 615,330 Q 565,430 556,530 Q 548,622 563,693',           label:'Rhône',   lx:538, ly:488},
-    {d:'M 522,388 Q 472,318 458,285 Q 388,246 300,235',           label:'Seine',   lx:415, ly:262},
-    {d:'M 368,752 Q 312,698 238,628 Q 206,588 193,556',           label:'Garonne', lx:268, ly:664},
-    {d:'M 688,458 Q 656,358 633,238 Q 608,128 563,28',            label:'Rhin',    lx:624, ly:276},
-    {d:'M 508,338 Q 532,218 548,28',                              label:'Meuse',   lx:548, ly:205},
-    {d:'M 398,166 Q 420,126 418,63',                              label:'Escaut',  lx:430, ly:122},
-    {d:'M 223,726 Q 173,696 128,673',                             label:'Adour',   lx:173, ly:684},
+    // Loire : Massif Central → Atlantique (ouest)
+    {d:'M 458,548 Q 395,508 325,482 Q 250,466 170,460 L 90,458',
+     label:'Loire',   lx:280, ly:452},
+    // Rhône : Genève/Suisse (entrée est) → Méditerranée (sud)
+    {d:'M 678,448 Q 625,452 565,455 Q 552,545 550,640 Q 552,718 555,795',
+     label:'Rhône',   lx:562, ly:548},
+    // Seine : Bourgogne (est) → Manche (nord-ouest)
+    {d:'M 492,358 Q 468,315 448,282 Q 395,254 315,228 Q 245,202 172,158',
+     label:'Seine',   lx:378, ly:248},
+    // Garonne : Pyrénées (sud) → Gironde/Atlantique (ouest)
+    {d:'M 338,748 Q 298,698 258,658 Q 215,608 168,578 Q 138,560 95,556',
+     label:'Garonne', lx:242, ly:648},
+    // Rhin : Bâle/Suisse → Alsace → Pays-Bas (nord)  [14 % en France]
+    {d:'M 728,678 Q 718,558 712,442 Q 709,322 714,202 Q 716,110 720,32',
+     label:'Rhin',    lx:660, ly:395},
+    // Meuse : Haute-Marne → Ardennes → Belgique (nord) [27 % en France]
+    {d:'M 538,392 Q 558,322 568,258 Q 573,196 572,132 Q 571,85 570,38',
+     label:'Meuse',   lx:582, ly:252},
+    // Escaut : Saint-Quentinois → Belgique (nord-est)  [35 % en France]
+    {d:'M 448,202 Q 464,152 474,108 Q 480,68 478,28',
+     label:'Escaut',  lx:492, ly:152},
+    // Adour : Pyrénées → Atlantique (sud-ouest)
+    {d:'M 270,762 Q 228,728 186,710 Q 150,696 95,692',
+     label:'Adour',   lx:188, ly:730},
   ];
   const rvHtml = RIVERS_TF.map(r =>
     `<path class="rv" d="${r.d}"/>
