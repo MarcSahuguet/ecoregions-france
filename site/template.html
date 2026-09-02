@@ -1315,12 +1315,11 @@ function rail() {
   const PARTAGE = 95;                        // en deçà, le bassin est réellement partagé
   const COUL = {"Rhin":"#3f8fb0","Meuse":"#7ba57e","Escaut":"#c0797f","Rhône":"#a882b5"};
   const coul = b => COUL[b.nom] || TINT[b.eco];
-  const bs = TF.bassins.slice().sort((a, b) => b.part_fr - a.part_fr).map(b => {
-    const t = b.part_fr < PARTAGE;
-    return `<path class="bs" d="${b.path}" fill="${t ? coul(b) : 'var(--ink-3)'}"
-      stroke="${t ? coul(b) : 'var(--ink-3)'}" fill-opacity="${t ? .5 : .14}"
-      ><title>${b.nom} : ${fr(b.total_km2)} km², dont ${fr(b.part_fr,1)} % en France</title></path>`;
-  }).join('');
+  const bs = TF.bassins.filter(b => b.part_fr < PARTAGE).map(b =>
+    `<path class="bs" d="${b.path}" fill="${coul(b)}"
+      stroke="${coul(b)}" fill-opacity=".5"
+      ><title>${b.nom} : ${fr(b.total_km2)} km², dont ${fr(b.part_fr,1)} % en France</title></path>`
+  ).join('');
   // tracés schématiques des fleuves principaux (coordonnées dans l'espace tfmap 0-900 × 0-878)
   const RIVERS_TF = [
     {d:'M 450,578 Q 390,478 330,400 Q 240,408 175,410 L 150,420', label:'Loire',   lx:295, ly:392},
