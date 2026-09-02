@@ -256,7 +256,8 @@ button.chip.lay[aria-pressed="true"][data-c="riv"]{color:var(--water)}
   border:1px solid var(--rule);border-radius:3px}
 .tfmap .fr{fill:none;stroke:var(--ink);stroke-width:1.6;stroke-opacity:.85}
 .tfmap .rv{fill:none;stroke:#3a8ab5;stroke-width:2.8;stroke-opacity:.9;stroke-linecap:round;stroke-linejoin:round;marker-end:url(#tfarr)}
-.tfmap .rvl{font-size:14px;fill:#1c6580;font-style:italic;font-weight:600;font-family:var(--sans);pointer-events:none}
+.tfmap .rvl{font-size:14px;fill:#1c6580;font-style:italic;font-weight:600;font-family:var(--sans);pointer-events:none;
+  paint-order:stroke;stroke:#fff;stroke-width:4px;stroke-linejoin:round}
 .tfmap .bs{fill-opacity:.42;stroke-width:.9;stroke-opacity:.9;cursor:pointer;
   transition:fill-opacity .15s ease}
 .tfmap .bs:hover{fill-opacity:.7}
@@ -1322,11 +1323,18 @@ function rail() {
   ).join('');
   // tracés schématiques des fleuves principaux (coordonnées dans l'espace tfmap 0-900 × 0-878)
   // Tracés réels des 4 fleuves transfrontaliers depuis TF.rivers (WGS84 → EPSG:3035 → SVG)
-  const RIVER_LABELS = {Rhin:{lx:670,ly:340}, Rhône:{lx:510,ly:560}, Meuse:{lx:586,ly:218}, Escaut:{lx:492,ly:148}};
+  // labels placed in open stretches, away from basin boundaries
+  const RIVER_LABELS = {
+    Rhin:   {lx:730, ly:470, rot:-60},
+    Rhône:  {lx:485, ly:610, rot:-75},
+    Meuse:  {lx:545, ly:310, rot:-75},
+    Escaut: {lx:445, ly:185, rot:-20},
+  };
   const rvHtml = (TF.rivers || []).map(r => {
     const lab = RIVER_LABELS[r.nom] || {};
-    return `<path class="rv" d="${r.path}"/>` +
-      (lab.lx ? `<text class="rvl" x="${lab.lx}" y="${lab.ly}">${r.nom}</text>` : '');
+    const txt = lab.lx ? `<text class="rvl" x="${lab.lx}" y="${lab.ly}"
+      transform="rotate(${lab.rot},${lab.lx},${lab.ly})">${r.nom}</text>` : '';
+    return `<path class="rv" d="${r.path}"/>` + txt;
   }).join('');
 
   // cadrage carré centré sur les 4 bassins transfrontaliers
