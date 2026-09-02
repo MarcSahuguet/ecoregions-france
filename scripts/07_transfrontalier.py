@@ -114,11 +114,36 @@ def main():
             if len(ded) > 3: out.append("M" + ded[0] + "L" + "L".join(ded[1:]) + "Z")
         return "".join(out)
 
+    # --- tracés réels des 4 fleuves transfrontaliers (WGS84 → 3035 → SVG) ------
+    def pt(lon, lat):
+        x3, y3 = to3035(lon, lat)
+        return f"{(x3-xmin)*ech:.1f},{(ymax-y3)*ech:.1f}"
+
+    RIVER_PTS = {
+        "Rhin": [   # source → Bâle → Alsace → Cologne → Rotterdam
+            (9.05,46.61),(8.22,47.00),(7.59,47.55),(7.78,48.58),
+            (8.38,49.01),(8.27,49.99),(6.96,50.94),(6.17,51.50),(4.48,51.92)],
+        "Rhône": [  # glacier du Rhône → Lac Léman → Genève → Lyon → Avignon → mer
+            (8.31,46.61),(6.55,46.45),(6.15,46.20),(5.02,45.73),
+            (4.84,45.76),(4.89,44.93),(4.81,43.95),(4.63,43.68),(4.73,43.43)],
+        "Meuse": [  # Pouilly-en-Bassigny → Verdun → Sedan → Namur → Liège → mer
+            (5.70,47.88),(5.38,49.16),(4.94,49.70),(4.87,50.46),
+            (5.57,50.64),(5.69,50.85),(4.48,51.92)],
+        "Escaut": [ # Saint-Quentin → Tournai → Gand → Anvers → mer du Nord
+            (3.32,49.85),(3.39,50.61),(3.72,51.05),(4.40,51.22),(3.59,51.45)],
+    }
+    def river_path(pts):
+        coords = [pt(lon, lat) for lon, lat in pts]
+        return "M" + coords[0] + "L" + "L".join(coords[1:])
+
+    rivers = [{"nom": n, "path": river_path(pts)} for n, pts in RIVER_PTS.items()]
+
     data = {"viewBox": [0, 0, round((xmax-xmin)*ech, 1), round((ymax-ymin)*ech, 1)],
             "france": svg(france),
             "bassins": [{"nom": d["sous_bassin"], "eco": d["eco"], "ecoNom": NOMS[d["eco"]],
                          "total_km2": d["total_km2"], "france_km2": d["france_km2"],
-                         "part_fr": d["part_fr"], "path": svg(d["geom"])} for d in res]}
+                         "part_fr": d["part_fr"], "path": svg(d["geom"])} for d in res],
+            "rivers": rivers}
     json.dump(data, open(f"{OUT}/transfrontalier.json", "w"), ensure_ascii=False,
               separators=(",", ":"))
     print(f"écrit {OUT}/transfrontalier.json "

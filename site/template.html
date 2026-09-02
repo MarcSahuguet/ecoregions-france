@@ -1321,30 +1321,13 @@ function rail() {
       ><title>${b.nom} : ${fr(b.total_km2)} km², dont ${fr(b.part_fr,1)} % en France</title></path>`
   ).join('');
   // tracés schématiques des fleuves principaux (coordonnées dans l'espace tfmap 0-900 × 0-878)
-  // Uniquement les 4 fleuves transfrontaliers, tracés dans l'intégralité de leur bassin
-  // viewBox 0-900 × 0-878 ; y croît vers le sud ; arrow = marker-end (direction vers la mer)
-  const RIVERS_TF = [
-    // Rhin : Alpes suisses (SE) → Bâle → Alsace → Pays-Bas (N)
-    // bassin x=[513,900] y=[0,476] → flux S→N, arrow au nord
-    {d:'M 848,468 Q 778,462 728,456 Q 712,388 710,298 Q 712,198 732,98 Q 758,35 812,8',
-     label:'Rhin',   lx:660, ly:345},
-    // Rhône : glacier du Rhône/Suisse (NE du bassin) → Genève → Lyon → Méditerranée (S)
-    // bassin x=[435,719] y=[324,705] → flux NE→S, arrow au sud
-    {d:'M 700,332 Q 668,355 642,388 Q 608,418 548,448 Q 542,535 548,625 Q 552,672 558,702',
-     label:'Rhône',  lx:558, ly:545},
-    // Meuse : Haute-Marne/France (S du bassin) → Ardennes → Belgique → Pays-Bas (N)
-    // bassin x=[471,634] y=[27,341] → flux S→N, arrow au nord
-    {d:'M 536,338 Q 558,275 568,215 Q 574,155 572,95 Q 568,55 562,28',
-     label:'Meuse',  lx:580, ly:215},
-    // Escaut : Picardie/France (S) → Belgique → Pays-Bas (N)
-    // bassin x=[395,581] y=[63,174] → flux S→N, arrow au nord
-    {d:'M 446,170 Q 468,130 482,100 Q 500,78 514,65',
-     label:'Escaut', lx:500, ly:148},
-  ];
-  const rvHtml = RIVERS_TF.map(r =>
-    `<path class="rv" d="${r.d}"/>
-     <text class="rvl" x="${r.lx}" y="${r.ly}">${r.label}</text>`
-  ).join('');
+  // Tracés réels des 4 fleuves transfrontaliers depuis TF.rivers (WGS84 → EPSG:3035 → SVG)
+  const RIVER_LABELS = {Rhin:{lx:670,ly:340}, Rhône:{lx:510,ly:560}, Meuse:{lx:586,ly:218}, Escaut:{lx:492,ly:148}};
+  const rvHtml = (TF.rivers || []).map(r => {
+    const lab = RIVER_LABELS[r.nom] || {};
+    return `<path class="rv" d="${r.path}"/>` +
+      (lab.lx ? `<text class="rvl" x="${lab.lx}" y="${lab.ly}">${r.nom}</text>` : '');
+  }).join('');
 
   document.getElementById('tfmap').setAttribute('viewBox', `0 0 ${vb[2]} ${vb[3]}`);
   document.getElementById('tfmap').innerHTML =
