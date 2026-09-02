@@ -1329,7 +1329,10 @@ function rail() {
       (lab.lx ? `<text class="rvl" x="${lab.lx}" y="${lab.ly}">${r.nom}</text>` : '');
   }).join('');
 
-  document.getElementById('tfmap').setAttribute('viewBox', `0 0 ${vb[2]} ${vb[3]}`);
+  // cadrage serré sur les 4 bassins transfrontaliers (padding 20 px)
+  const PAD = 20;
+  const focusedVB = `${395-PAD} ${0} ${vb[2]-(395-PAD)+PAD} ${705+PAD}`;
+  document.getElementById('tfmap').setAttribute('viewBox', focusedVB);
   document.getElementById('tfmap').innerHTML =
     `<defs>
       <marker id="tfarr" markerWidth="5" markerHeight="5" refX="4.5" refY="2.5" orient="auto">
