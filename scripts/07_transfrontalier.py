@@ -165,16 +165,19 @@ def main():
         coords = [pt(lon, lat) for lon, lat in pts]
         return "M" + coords[0] + "L" + "L".join(coords[1:]) + "Z"
 
-    # Frontière suisse simplifiée (sens horaire)
-    SUISSE_PTS = [
-        (6.02,46.13),(5.96,46.35),(6.10,46.57),(6.15,46.67),(6.43,46.77),
-        (6.65,46.80),(6.90,47.07),(7.00,47.36),(7.20,47.49),(7.59,47.55),
-        (7.90,47.62),(8.15,47.72),(8.58,47.80),(8.85,47.68),(9.00,47.67),
-        (9.37,47.55),(9.47,47.53),(9.55,47.65),(9.67,47.52),(9.95,47.40),
-        (10.49,47.40),(10.43,47.03),(10.18,46.85),(10.08,46.57),(9.55,46.30),
-        (9.15,46.00),(9.02,45.83),(8.63,45.93),(8.10,45.90),(7.82,45.93),
-        (7.40,45.93),(7.03,45.93),(6.77,45.93),(6.63,46.14),(6.02,46.13),
-    ]
+    def geom_svg(geom_3035, simpl=2000):
+        g = geom_3035.simplify(simpl, preserve_topology=True).buffer(0)
+        out = []
+        for poly in getattr(g, 'geoms', [g]):
+            if poly.geom_type != 'Polygon': continue
+            coords = [f"{(x-xmin)*ech:.1f},{(ymax-y)*ech:.1f}" for x, y in poly.exterior.coords]
+            out.append("M" + coords[0] + "L" + "L".join(coords[1:]) + "Z")
+        return "".join(out)
+
+    # Frontière suisse depuis Natural Earth (géométrie réelle)
+    ne = json.load(open(f"{RAW}/ne_50m_admin0_countries.geojson"))
+    ch_feat = next(f for f in ne['features'] if f['properties']['ISO_A2'] == 'CH')
+    ch_geom = transform(to3035, make_valid(shape(ch_feat['geometry'])))
 
     # Lac Léman (simplifié, rive nord française + rive sud suisse)
     LEMAN_PTS = [
@@ -189,7 +192,7 @@ def main():
                          "total_km2": d["total_km2"], "france_km2": d["france_km2"],
                          "part_fr": d["part_fr"], "path": svg(d["geom"])} for d in res],
             "rivers": rivers,
-            "suisse": poly_path(SUISSE_PTS),
+            "suisse": geom_svg(ch_geom),
             "leman": poly_path(LEMAN_PTS)}
     json.dump(data, open(f"{OUT}/transfrontalier.json", "w"), ensure_ascii=False,
               separators=(",", ":"))
