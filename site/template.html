@@ -130,7 +130,7 @@ svg.map path,.tfmap path{fill-rule:evenodd}   /* les trous ne dépendent pas de 
 .map.has-sel .eco:not(.sel){opacity:.42}
 .eco.sel{filter:brightness(1.06);stroke:var(--ink)!important;stroke-width:1.8!important}
 /* un calque superposé : les remplissages s'effacent, et la sélection devient la plus
-   transparente — c'est à l'intérieur d'elle qu'on veut lire le calque */
+   transparente   c'est à l'intérieur d'elle qu'on veut lire le calque */
 .map.has-lay .eco{opacity:.5}
 .map.has-lay.has-sel .eco:not(.sel){opacity:.5}
 .map.has-lay.has-sel .eco.sel{opacity:.14;filter:none}
@@ -376,7 +376,7 @@ footer{padding:2.6rem 0 4rem;font-size:.85rem;color:var(--ink-3)}
     <p class="lede">Et si les régions suivaient les lignes de partage des eaux plutôt que
       l'histoire administrative ? <span class="hl">Le débat est ouvert depuis juillet 2026</span>,
       mais aucune carte n'avait été publiée. En voici une, construite à partir des
-      référentiels officiels — et chiffrée écorégion par écorégion.</p>
+      référentiels officiels   et chiffrée écorégion par écorégion.</p>
     <div class="keyfigs" id="keyfigs"></div>
   </div>
 </header>
@@ -415,13 +415,13 @@ footer{padding:2.6rem 0 4rem;font-size:.85rem;color:var(--ink-3)}
   <div class="wrap">
     <div class="shead">
       <p class="eyebrow">Le raisonnement</p>
-      <h2>La France est déjà découpée par bassins — depuis 1964</h2>
+      <h2>La France est déjà découpée par bassins   depuis 1964</h2>
     </div>
     <div class="dual">
       <div class="prose">
         <p>L'idée paraît neuve. Elle a soixante ans. La <b>loi sur l'eau du 16 décembre 1964</b>
           a découpé le pays en six grands bassins hydrographiques, dotés chacun d'une agence de
-          l'eau, d'un comité de bassin — le « parlement de l'eau » — et d'un schéma directeur
+          l'eau, d'un comité de bassin   le « parlement de l'eau »   et d'un schéma directeur
           opposable, le SDAGE. Ces institutions lèvent des redevances, financent l'assainissement
           et arbitrent les usages. Elles ne coïncident avec aucune région.</p>
         <p>Le pays vit donc depuis longtemps avec <b>deux cartes superposées</b> : celle des
@@ -474,7 +474,7 @@ footer{padding:2.6rem 0 4rem;font-size:.85rem;color:var(--ink-3)}
     <div class="shead">
       <p class="eyebrow">Le risque</p>
       <h2>Inondation et submersion</h2>
-      <p>Le risque d'inondation est déjà planifié à l'échelle du bassin — c'est l'objet des
+      <p>Le risque d'inondation est déjà planifié à l'échelle du bassin   c'est l'objet des
         plans de gestion des risques d'inondation, un par grand bassin depuis la directive
         européenne de 2007. Mais il est exécuté à l'échelle intercommunale, par la compétence
         GEMAPI, obligatoire depuis 2018 et financée par une taxe plafonnée à 40 € par habitant.</p>
@@ -486,7 +486,7 @@ footer{padding:2.6rem 0 4rem;font-size:.85rem;color:var(--ink-3)}
         <p>Peu de choses sur la planification : elle est déjà à cette échelle. Beaucoup sur le
           financement. La taxe GEMAPI est levée par l'intercommunalité et plafonnée par habitant :
           l'aval urbain a une base fiscale large et beaucoup à protéger, l'amont rural a peu
-          d'habitants — et c'est pourtant à l'amont qu'on ralentit l'eau, par les haies, les zones
+          d'habitants   et c'est pourtant à l'amont qu'on ralentit l'eau, par les haies, les zones
           humides, les champs d'expansion de crue. Aujourd'hui, rien ne permet de faire financer
           par l'aval des travaux qui le protègent mais se situent en amont. Une écorégion le
           pourrait, à l'échelle exacte de l'écoulement.</p>
@@ -497,7 +497,7 @@ footer{padding:2.6rem 0 4rem;font-size:.85rem;color:var(--ink-3)}
           des tempêtes et du transit du sable, qui circule <b>le long</b> de la côte et traverse
           les embouchures. Un découpage par bassin tranche le rivage perpendiculairement à ce
           transit. Pour les 3,2 millions d'habitants couverts par un plan submersion, la maille
-          pertinente reste la cellule sédimentaire — et l'exécutant, l'intercommunalité.</p>
+          pertinente reste la cellule sédimentaire   et l'exécutant, l'intercommunalité.</p>
         <p class="note"><a target="_blank" rel="noopener noreferrer" href="https://www.georisques.gouv.fr/donnees/bases-de-donnees/base-gaspar">Base
           GASPAR</a>, Géorisques, millésime août 2026.</p>
       </div>
@@ -512,7 +512,7 @@ footer{padding:2.6rem 0 4rem;font-size:.85rem;color:var(--ink-3)}
       <h2>Les bassins ne s'arrêtent pas à la frontière</h2>
       <p>La carte des écorégions s'arrête au trait de côte et aux frontières. Les bassins
         versants, eux, continuent. Reconstitués en entier, ils montrent ce qu'une écorégion
-        contrôlerait vraiment — et ce qu'elle ne contrôlerait pas.</p>
+        contrôlerait vraiment   et ce qu'elle ne contrôlerait pas.</p>
     </div>
     <div class="dual">
       <div><svg class="tfmap" id="tfmap" role="img"
@@ -523,7 +523,7 @@ footer{padding:2.6rem 0 4rem;font-size:.85rem;color:var(--ink-3)}
         <p class="prose" style="margin-top:1rem">Trois écorégions gouverneraient une minorité
           de leur bassin. Vosges-Ardenne déciderait pour <b id="tf-rhin"></b> du bassin du Rhin,
           l'amont suisse et allemand lui échappant ; même asymétrie pour la Meuse et l'Escaut,
-          dont l'aval est néerlandais et belge — ce que la France y déverse, d'autres le boivent.
+          dont l'aval est néerlandais et belge   ce que la France y déverse, d'autres le boivent.
           Le Rhône est le cas inverse : français à <b id="tf-rhone"></b>, mais les glaciers et le
           lac qui règlent son étiage sont suisses.</p>
         <p class="prose">L'objection vaut déjà pour l'organisation actuelle : c'est pourquoi des
@@ -552,7 +552,7 @@ footer{padding:2.6rem 0 4rem;font-size:.85rem;color:var(--ink-3)}
         <h4>Un précédent qui s'est retourné</h4>
         <p>La réforme de 2015 avait été vendue sur une promesse chiffrée : <b>10 milliards d'euros
           d'économies annuelles</b>, jusqu'à 25 milliards selon certaines déclarations. La Cour des
-          comptes a tranché le 24 septembre 2019 : aucune économie, des surcoûts — sur les régimes
+          comptes a tranché le 24 septembre 2019 : aucune économie, des surcoûts   sur les régimes
           indemnitaires, les indemnités d'élus et les systèmes d'information. Cause identifiée :
           l'absence de réorganisation réelle, les effectifs restant dans les anciennes capitales
           régionales et les structures se juxtaposant au lieu de fusionner.</p>
@@ -580,7 +580,7 @@ footer{padding:2.6rem 0 4rem;font-size:.85rem;color:var(--ink-3)}
     </div>
     <div class="dual" style="margin-top:2.6rem;padding-top:2rem;border-top:1px solid var(--rule)">
       <div>
-        <h4>Ce que l'opinion dit — et ne dit pas</h4>
+        <h4>Ce que l'opinion dit   et ne dit pas</h4>
         <p class="note" style="margin-top:.2rem">Aucun sondage n'a testé cette proposition
           elle-même. Ce qui suit mesure l'appétit de réforme territoriale en général, et le
           critère que les Français réclament pour la conduire.</p>
@@ -591,8 +591,8 @@ footer{padding:2.6rem 0 4rem;font-size:.85rem;color:var(--ink-3)}
         <p>Un surcoût de cet ordre représente 0,25 à 0,3 % des budgets régionaux : économiquement
           marginal. Ce qui a tué la réforme précédente n'est pas sa facture, c'est l'écart entre
           sa facture et sa promesse.</p>
-        <p>L'appétit de réforme existe, massif et documenté. Mais il porte sur un critère —
-          l'histoire et la culture — que l'hydrographie ne satisfait pas, et il place la région
+        <p>L'appétit de réforme existe, massif et documenté. Mais il porte sur un critère  
+          l'histoire et la culture   que l'hydrographie ne satisfait pas, et il place la région
           en dernier parmi les échelons à renforcer. Un découpage écologique imposé contre le
           sentiment d'appartenance se heurterait au mur qui a arrêté celui de 2015, en sens
           inverse.</p>
@@ -632,14 +632,14 @@ footer{padding:2.6rem 0 4rem;font-size:.85rem;color:var(--ink-3)}
         <p>Le point de départ n'est pas un tracé inventé : ce sont les <b>34 sous-bassins
           DCE administratifs</b> du référentiel Sandre, produits par l'Office français de la
           biodiversité pour l'application de la directive-cadre sur l'eau. Ils portent des noms
-          que l'administration utilise déjà — Marne, Durance, Allier-Loire amont, Vilaine et
-          côtiers bretons — et, étant « administratifs », ils suivent les limites communales :
+          que l'administration utilise déjà   Marne, Durance, Allier-Loire amont, Vilaine et
+          côtiers bretons   et, étant « administratifs », ils suivent les limites communales :
           <b>aucune commune n'est coupée en deux</b> par cette carte.</p>
         <p>Ces 34 briques ont été regroupées en 13 écorégions sous trois contraintes : continuité
           hydrographique (amont et aval d'un même réseau restent ensemble), respect des
           circonscriptions de bassin de 1964, et recherche d'un équilibre démographique. Le
           nombre 13 est celui du débat public ; il n'est pas dicté par l'hydrographie. Sous les
-          mêmes contraintes, 14 écorégions seraient tout aussi défendables — la Corse serait
+          mêmes contraintes, 14 écorégions seraient tout aussi défendables   la Corse serait
           alors autonome plutôt que rattachée à la Méditerranée.</p>
         <p>Chaque indicateur est calculé, pas repris : les 34 745 communes métropolitaines sont
           rattachées à leur sous-bassin par la table officielle, puis leurs populations,
@@ -647,7 +647,7 @@ footer{padding:2.6rem 0 4rem;font-size:.85rem;color:var(--ink-3)}
           estimation subsiste, signalée comme telle : le PIB, réparti au prorata de la population
           à partir du PIB par habitant régional.</p>
         <p>Deux précautions de lecture. Les volumes prélevés pour <b>refroidir les centrales
-          nucléaires</b> sont, pour l'essentiel, restitués au cours d'eau — réchauffés, mais
+          nucléaires</b> sont, pour l'essentiel, restitués au cours d'eau   réchauffés, mais
           restitués : ils gonflent les totaux sans être une consommation. Et les
           <b>volumes turbinés</b> par les barrages hydroélectriques (757 milliards de m³ par an,
           soit vingt fois tous les autres usages) sont exclus de tous les calculs, la même eau
@@ -658,10 +658,10 @@ footer{padding:2.6rem 0 4rem;font-size:.85rem;color:var(--ink-3)}
         <dl class="srcs">
           <dt>Découpage</dt>
           <dd><a target="_blank" rel="noopener noreferrer" href="https://www.sandre.eaufrance.fr/notice-doc/r%C3%A9f%C3%A9rentiel-hydrographique">Sous-bassins
-            DCE administratifs et régions hydrographiques</a> — référentiel Sandre / OFB,
+            DCE administratifs et régions hydrographiques</a>   référentiel Sandre / OFB,
             service WFS, millésime 2026.</dd>
           <dd><a target="_blank" rel="noopener noreferrer" href="https://www.data.gouv.fr/datasets/bd-topage-r-metropole-2025">BD TOPAGE®
-            2025</a>, IGN &amp; OFB, éditeur Sandre — bassins hydrographiques.</dd>
+            2025</a>, IGN &amp; OFB, éditeur Sandre   bassins hydrographiques.</dd>
           <dt>Population, communes</dt>
           <dd>INSEE, populations légales, via l'<a target="_blank" rel="noopener noreferrer" href="https://geo.api.gouv.fr/decoupage-administratif">API
             Découpage administratif</a> (Etalab).</dd>
@@ -671,12 +671,12 @@ footer{padding:2.6rem 0 4rem;font-size:.85rem;color:var(--ink-3)}
             publiées par le SDES.</dd>
           <dt>Eau prélevée</dt>
           <dd><a target="_blank" rel="noopener noreferrer" href="https://hubeau.eaufrance.fr/page/api-prelevements-eau">Banque nationale des
-            prélèvements quantitatifs en eau (BNPE)</a>, via l'API Hub'Eau — moyenne des exercices
+            prélèvements quantitatifs en eau (BNPE)</a>, via l'API Hub'Eau   moyenne des exercices
             2020, 2021 et 2022.</dd>
           <dt>Débits et saisonnalité</dt>
           <dd><a target="_blank" rel="noopener noreferrer" href="https://hubeau.eaufrance.fr/page/api-hydrometrie">Hub'Eau hydrométrie</a>,
             débits moyens journaliers 2015-2024 ; pour chaque écorégion, la station jaugeant le
-            plus grand bassin versant, agrégée par mois calendaire — des mesures, non un modèle.</dd>
+            plus grand bassin versant, agrégée par mois calendaire   des mesures, non un modèle.</dd>
           <dt>Économie</dt>
           <dd><a target="_blank" rel="noopener noreferrer" href="https://www.insee.fr/fr/statistiques/8391986">INSEE, comptes régionaux</a>
             base 2020, PIB par habitant 2024.</dd>
@@ -781,16 +781,16 @@ const METRICS = [
    sfmt:e => fr(e.clc_pct.foret_naturel,1)+' %'},
   {id:'debit', lab:'Débit spécifique', ramp:RAMP_EAU, unit:'l/s/km²',
    get:e => e.hydro ? e.hydro.debit_specifique_ls_km2 : null,
-   fmt:e => e.hydro ? fr(e.hydro.debit_specifique_ls_km2,1)+' l/s/km² à '+e.hydro.station : '—',
-   sfmt:e => e.hydro ? fr(e.hydro.debit_specifique_ls_km2,1)+' l/s/km²' : '—'},
+   fmt:e => e.hydro ? fr(e.hydro.debit_specifique_ls_km2,1)+' l/s/km² à '+e.hydro.station : ' ',
+   sfmt:e => e.hydro ? fr(e.hydro.debit_specifique_ls_km2,1)+' l/s/km²' : ' '},
   {id:'canaux', lab:'Part des canaux', ramp:RAMP_PRES, unit:'% des prélèvements',
    get:e => 100 * e.prel_Mm3.CAN / e.prel_conso_Mm3,
    fmt:e => fr(100 * e.prel_Mm3.CAN / e.prel_conso_Mm3, 1)+' % des prélèvements',
    sfmt:e => fr(100 * e.prel_Mm3.CAN / e.prel_conso_Mm3, 1)+' %'},
   {id:'saison', lab:'Contraste saisonnier', ramp:RAMP_PRES, unit:'× entre le mois le plus haut et le plus bas',
    get:e => SAISON[e.key] ? SAISON[e.key].rapport : null,
-   fmt:e => SAISON[e.key] ? '×\u202f'+fr(SAISON[e.key].rapport,1)+' entre février et août' : '—',
-   sfmt:e => SAISON[e.key] ? '×\u202f'+fr(SAISON[e.key].rapport,1) : '—'},
+   fmt:e => SAISON[e.key] ? '×\u202f'+fr(SAISON[e.key].rapport,1)+' entre février et août' : ' ',
+   sfmt:e => SAISON[e.key] ? '×\u202f'+fr(SAISON[e.key].rapport,1) : ' '},
 ];
 const LAYERS = [
   {id:'riv', lab:"Cours d'eau", on:false, c:'riv'},
@@ -1155,7 +1155,7 @@ function rail() {
     bg.setAttribute('stroke', 'var(--rule)'); bg.setAttribute('stroke-width', '1');
     svg.appendChild(bg);
 
-    // régions admin — surface totale (fond pâle, non clippé)
+    // régions admin   surface totale (fond pâle, non clippé)
     const gFull = document.createElementNS(NS3, 'g');
     G.regionsAdmin.forEach(r => {
       const col = ADMIN_COLORS[r.name];
@@ -1202,7 +1202,7 @@ function rail() {
       svg.appendChild(p);
     });
 
-    // label "la Loire" — positionné entre Tours et Nantes, légèrement incliné
+    // label "la Loire"   positionné entre Tours et Nantes, légèrement incliné
     const lbl = document.createElementNS(NS3, 'text');
     lbl.setAttribute('x', '350'); lbl.setAttribute('y', '408');
     lbl.setAttribute('transform', 'rotate(-4, 350, 408)');
@@ -1263,7 +1263,7 @@ function rail() {
     // note
     document.getElementById('loire-note').innerHTML =
       `La Loire traverse <b>5 régions actuelles</b> et plus de
-       <b>${byKey.loireamont.departements} départements</b> — aucune n'a autorité sur
+       <b>${byKey.loireamont.departements} départements</b>   aucune n'a autorité sur
        l'ensemble du fleuve. Les cinq exécutifs gèrent chacun leur tronçon sans pouvoir
        agir sur ce que l'amont leur envoie.`;
   })();
@@ -1277,7 +1277,7 @@ function rail() {
      p:`L'écorégion Rhône-Alpes prélève ${fr(rhone.prel_conso_Mm3)} millions de m³ par an, dont
         ${fr(rhone.prel_Mm3.ENE)} pour refroidir quatre centrales nucléaires. Aujourd'hui, ce couloir
         est géré par une région parmi treize ; demain, il serait le sujet central d'une institution
-        entière. L'eau y est en grande partie restituée, mais réchauffée — et son régime dépend de
+        entière. L'eau y est en grande partie restituée, mais réchauffée   et son régime dépend de
         glaciers qui reculent.`},
     {c:'w', big:fr(gar.prel_part_irrigation,0)+' %', t:"de l'eau du Sud-Ouest part dans les champs",
      p:`Dans la Gascogne-Pyrénées, l'irrigation absorbe ${fr(gar.prel_Mm3.IRR)} millions de m³,
@@ -1343,7 +1343,7 @@ function rail() {
   const C = DATA.couts, P = IND.meta.perturbation;
   document.getElementById('reperes').innerHTML = [
     {v: fr(P.part_changeant_de_collectivite, 1) + ' %',
-     t: `de la population — ${fr(P.pop_changeant_de_collectivite/1e6, 1)} millions de personnes — `
+     t: `de la population   ${fr(P.pop_changeant_de_collectivite/1e6, 1)} millions de personnes   `
       + `changerait de collectivité de rattachement`},
     {v: P.departements_partages['5'] + ' / ' + P.departements_total,
      t: `départements seraient partagés entre deux écorégions ou plus `
@@ -1391,7 +1391,7 @@ function rail() {
      `De ${fr(Math.min(...E.map(e=>e.pop))/1e6,1)} millions d'habitants pour la Bourgogne-Comté à
       ${fr(Math.max(...E.map(e=>e.pop))/1e6,1)} millions pour l'Île-de-France : un rapport de
       ${fr(Math.max(...E.map(e=>e.pop))/Math.min(...E.map(e=>e.pop)),1)} à 1. C'est mieux que les
-      régions actuelles — où le rapport dépasse 35 à 1 entre l'Île-de-France et la Corse — mais
+      régions actuelles   où le rapport dépasse 35 à 1 entre l'Île-de-France et la Corse   mais
       cela reste une république à deux vitesses, où le vote d'un habitant de l'amont ne pèse pas
       comme celui de l'aval.`],
     ["Le tracé retenu n'est pas exactement la ligne de partage des eaux",
@@ -1405,7 +1405,7 @@ function rail() {
       comme moteurs. Le bassin versant, lui, ignore les bassins d'emploi, les réseaux ferroviaires
       et les aires urbaines. Le Périgord-Saintonge compte
       ${fr(byKey.dordogne.pop/1e6,1)} millions d'habitants et aucune ville de plus de
-      60 000 habitants — mais elle contient la centrale du Blayais et ses
+      60 000 habitants   mais elle contient la centrale du Blayais et ses
       ${fr(byKey.dordogne.prel_Mm3.ENE)} millions de m³ prélevés.`],
     ['Amont et aval ne veulent pas la même chose',
      `Réunir amont et aval dans une même assemblée ne supprime pas le conflit : il le déplace à
@@ -1415,7 +1415,7 @@ function rail() {
     ['Et les cinq bassins ultramarins',
      `La Guadeloupe, la Martinique, la Guyane, La Réunion et Mayotte constituent chacune une
       circonscription de bassin à part entière. Un découpage hydrographique cohérent en ferait
-      cinq écorégions supplémentaires — soit 18, et non 13. Cette carte, comme le débat qui l'a
+      cinq écorégions supplémentaires   soit 18, et non 13. Cette carte, comme le débat qui l'a
       motivée, s'arrête à la métropole.`],
   ];
   document.getElementById('objs').innerHTML = objs.map(([t,p]) =>
@@ -1430,7 +1430,7 @@ buildMap(); buildControls(); paint(); bindMap(); rail();
   <div id="cmp-overlay" role="dialog" aria-modal="true" aria-label="Comparaison avant après">
     <div id="cmp-box">
       <div id="cmp-head">
-        <h3>Avant / Après — ce que ce découpage change</h3>
+        <h3>Avant / Après   ce que ce découpage change</h3>
         <div class="cmp-actions">
           <button class="cmp-btn prim" onclick="exporterComparaison()">
             <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" style="vertical-align:middle;margin-right:4px"><path d="M8 2v8M4 7l4 4 4-4"/><path d="M2 12v1a1 1 0 001 1h10a1 1 0 001-1v-1"/></svg>
@@ -1456,7 +1456,7 @@ buildMap(); buildControls(); paint(); bindMap(); rail();
             <div class="cmp-svgwrap"><svg id="cmpSvgEco"></svg></div>
           </div>
         </div>
-        <p class="cmp-intro">Six critères qui motivent ce redécoupage — mesurés sur les données officielles de cette carte.</p>
+        <p class="cmp-intro">Six critères qui motivent ce redécoupage   mesurés sur les données officielles de cette carte.</p>
         <table class="cmp-table">
           <thead>
             <tr>
@@ -1509,7 +1509,7 @@ buildMap(); buildControls(); paint(); bindMap(); rail();
       et le SDAGE. Les comités de bassin deviennent des assemblées représentatives.`],
     ['Fragmentation des bassins versants',
      `La Loire traverse <b>5 régions et 12 départements</b>. En moyenne, chaque écorégion
-      recouvre ${fragMoyEco} régions actuelles — jusqu\'à ${fragMax} pour certaines.`,
+      recouvre ${fragMoyEco} régions actuelles   jusqu\'à ${fragMax} pour certaines.`,
      `Chaque écorégion correspond à <b>un seul grand ensemble hydrographique</b>.
       L\'amont et l\'aval partagent la même assemblée et le même budget.`],
     ['Gestion des risques amont/aval',
@@ -1565,7 +1565,7 @@ buildMap(); buildControls(); paint(); bindMap(); rail();
     });
   }
 
-  /* SVG admin — paths seulement, étiquettes après ouverture */
+  /* SVG admin   paths seulement, étiquettes après ouverture */
   const svgA = document.getElementById('cmpSvgAdm');
   svgA.setAttribute('viewBox', `0 0 ${vb[2]} ${vb[3]}`);
   G.regionsAdmin.forEach((r, i) => {
@@ -1640,7 +1640,7 @@ window.exporterComparaison = function() {
   // titre
   ctx.fillStyle = INK;
   ctx.font = `700 22px "Source Sans 3", -apple-system, sans-serif`;
-  ctx.fillText('Avant / Après — ce que ce découpage change', PAD, PAD + 28);
+  ctx.fillText('Avant / Après   ce que ce découpage change', PAD, PAD + 28);
   ctx.fillStyle = INK3;
   ctx.font = `400 13px "Source Sans 3", -apple-system, sans-serif`;
   ctx.fillText('6 critères mesurés sur les données officielles  •  ecoregions-france.vercel.app', PAD, PAD + 52);
@@ -1686,7 +1686,7 @@ window.exporterComparaison = function() {
   ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
   // pied
   ctx.fillStyle = INK3; ctx.font = `400 11px "Source Sans 3", -apple-system, sans-serif`;
-  ctx.fillText('Sources : Sandre/OFB, INSEE, BNPE Hub\'Eau, GASPAR — github.com/MarcSahuguet/ecoregions-france', PAD, y + 22);
+  ctx.fillText('Sources : Sandre/OFB, INSEE, BNPE Hub\'Eau, GASPAR   github.com/MarcSahuguet/ecoregions-france', PAD, y + 22);
 
   cvs.toBlob(blob => {
     const a = document.createElement('a');
