@@ -1321,15 +1321,25 @@ function rail() {
       ><title>${b.nom} : ${fr(b.total_km2)} km², dont ${fr(b.part_fr,1)} % en France</title></path>`
   ).join('');
   // tracés schématiques des fleuves principaux (coordonnées dans l'espace tfmap 0-900 × 0-878)
+  // Uniquement les 4 fleuves transfrontaliers, tracés dans l'intégralité de leur bassin
+  // viewBox 0-900 × 0-878 ; y croît vers le sud ; arrow = marker-end (direction vers la mer)
   const RIVERS_TF = [
-    {d:'M 450,578 Q 390,478 330,400 Q 240,408 175,410 L 150,420', label:'Loire',   lx:295, ly:392},
-    {d:'M 615,330 Q 565,430 556,530 Q 548,622 563,693',           label:'Rhône',   lx:538, ly:488},
-    {d:'M 522,388 Q 472,318 458,285 Q 388,246 300,235',           label:'Seine',   lx:415, ly:262},
-    {d:'M 368,752 Q 312,698 238,628 Q 206,588 193,556',           label:'Garonne', lx:268, ly:664},
-    {d:'M 688,458 Q 656,358 633,238 Q 608,128 563,28',            label:'Rhin',    lx:624, ly:276},
-    {d:'M 508,338 Q 532,218 548,28',                              label:'Meuse',   lx:548, ly:205},
-    {d:'M 398,166 Q 420,126 418,63',                              label:'Escaut',  lx:430, ly:122},
-    {d:'M 223,726 Q 173,696 128,673',                             label:'Adour',   lx:173, ly:684},
+    // Rhin : Alpes suisses (SE) → Bâle → Alsace → Pays-Bas (N)
+    // bassin x=[513,900] y=[0,476] → flux S→N, arrow au nord
+    {d:'M 848,468 Q 778,462 728,456 Q 712,388 710,298 Q 712,198 732,98 Q 758,35 812,8',
+     label:'Rhin',   lx:660, ly:345},
+    // Rhône : glacier du Rhône/Suisse (NE du bassin) → Genève → Lyon → Méditerranée (S)
+    // bassin x=[435,719] y=[324,705] → flux NE→S, arrow au sud
+    {d:'M 700,332 Q 668,355 642,388 Q 608,418 548,448 Q 542,535 548,625 Q 552,672 558,702',
+     label:'Rhône',  lx:558, ly:545},
+    // Meuse : Haute-Marne/France (S du bassin) → Ardennes → Belgique → Pays-Bas (N)
+    // bassin x=[471,634] y=[27,341] → flux S→N, arrow au nord
+    {d:'M 536,338 Q 558,275 568,215 Q 574,155 572,95 Q 568,55 562,28',
+     label:'Meuse',  lx:580, ly:215},
+    // Escaut : Picardie/France (S) → Belgique → Pays-Bas (N)
+    // bassin x=[395,581] y=[63,174] → flux S→N, arrow au nord
+    {d:'M 446,170 Q 468,130 482,100 Q 500,78 514,65',
+     label:'Escaut', lx:500, ly:148},
   ];
   const rvHtml = RIVERS_TF.map(r =>
     `<path class="rv" d="${r.d}"/>
