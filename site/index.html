@@ -1,4 +1,5 @@
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Écorégions de France</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -371,6 +372,24 @@ footer{padding:2.6rem 0 4rem;font-size:.85rem;color:var(--ink-3)}
   .atelier{grid-template-columns:1fr}
   .rail{position:static}
   body{font-size:16px}
+}
+@media (max-width:600px){
+  /* comparison modal: stack maps */
+  .cmp-maps{grid-template-columns:1fr}
+  /* controls: stack the two groups */
+  .controls{flex-direction:column;gap:8px}
+  /* touch targets */
+  button.chip{padding:.5rem .75rem;min-height:44px}
+  .tabs button{min-height:44px}
+  /* transboundary list: tighter first column */
+  .tflist li{grid-template-columns:6.5rem 1fr 3rem;font-size:.82rem}
+  /* opinion grid: single column */
+  .opinion li{grid-template-columns:3.2rem 1fr}
+  /* key figures: horizontal scroll rather than wrapping awkwardly */
+  .keyfigs{overflow-x:auto;flex-wrap:nowrap;-webkit-overflow-scrolling:touch}
+  .keyfig{flex-shrink:0}
+  /* before/after button: raise above legend which may wrap */
+  #btn-cmp{bottom:auto;top:10px;left:auto;right:10px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
