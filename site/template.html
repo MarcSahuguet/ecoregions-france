@@ -301,6 +301,7 @@ table.cost{width:100%;border-collapse:collapse;font-size:.88rem;color:var(--ink)
 table.cost td{padding:.55rem .1rem;border-bottom:1px solid var(--rule);vertical-align:top}
 table.cost td.m{font-family:var(--mono);font-variant-numeric:tabular-nums;text-align:right;
   white-space:nowrap;padding-left:1rem;color:var(--warm);font-weight:500}
+table.cost td.m.once{color:var(--ink-2)}
 table.cost td.h{color:var(--ink-3)}
 table.cost td.h .m,table.cost .m.h{color:var(--ink-3)}
 .total{display:flex;flex-wrap:wrap;gap:.2rem 1.6rem;align-items:baseline;
@@ -1434,7 +1435,7 @@ function rail() {
   document.getElementById('estim').innerHTML = E.map(r =>
     `<tr><td class="${r.hypothese ? 'h' : ''}">${r.poste}
         <span class="d">${r.methode}</span></td>
-      <td class="m ${r.hypothese ? 'h' : ''}">${r.montant}<span class="d">${r.nature}</span></td></tr>`
+      <td class="m ${r.hypothese ? 'h' : ''} ${r.nature === 'pérenne' ? '' : 'once'}">${r.montant}<span class="d">${r.nature}</span></td></tr>`
     ).join('');
   document.getElementById('estimtot').innerHTML =
     `<div class="total">
