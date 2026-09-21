@@ -626,6 +626,67 @@ footer{padding:2.6rem 0 4rem;font-size:.85rem;color:var(--ink-3)}
       </div>
     </div>
     <div class="conds" id="conditions"></div>
+
+    <div class="dual" style="margin-top:2.6rem;padding-top:2rem;border-top:1px solid var(--rule)">
+      <div class="prose">
+        <h4>Le coût invisible&nbsp;: l'inertie institutionnelle</h4>
+        <p>Au-delà des surcoûts directs, toute réorganisation régionale gèle temporairement les
+          investissements en cours. Les régions portent aujourd'hui environ <b>28 milliards d'euros
+          par an</b> d'investissements (CPER, FEDER/FSE, budgets propres). Une période de transition
+          de deux à trois ans avec 20&nbsp;% de ralentissement représente <b>10 à 17 milliards
+          d'euros de projets différés</b>, hors surcoûts directs.</p>
+        <p>Le retour d'expérience de 2015 le confirme&nbsp;: les projets les plus exposés sont
+          ceux qui dépendent de <b>délégations de service public pluriannuelles</b> et de
+          co-financements européens. Une réorganisation en cours de programmation FEDER (2021-2027)
+          ouvre une fenêtre de risque de décommittement qui peut dépasser le milliard.</p>
+      </div>
+      <div>
+        <h4>La décarbonation&nbsp;: le secteur le plus exposé</h4>
+        <p>Les projets les plus vulnérables à un gel institutionnel sont précisément ceux qui ne
+          peuvent pas attendre&nbsp;:</p>
+        <ul class="rlist" style="margin-top:.6rem">
+          <li><span>TER et mobilités régionales</span><b>~8 Md€</b></li>
+          <li><span>Hydrogène et ENR co-financés</span><b>~3 Md€</b></li>
+          <li><span>Rénovation bâtiments publics</span><b>~2 Md€</b></li>
+          <li><span>Forêts et puits de carbone (FEADER)</span><b>~1,5 Md€</b></li>
+          <li><span>Ports et infrastructures bas-carbone</span><b>~0,8 Md€</b></li>
+        </ul>
+        <p class="note">Engagements régionaux dans les CPER 2021-2027. Un gel de 2 ans
+          retarderait 30 à 40&nbsp;% de ces projets.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="alternatives">
+  <div class="wrap">
+    <div class="shead">
+      <p class="eyebrow">Les alternatives</p>
+      <h2>Faut-il vraiment redessiner la carte&nbsp;?</h2>
+      <p>Le redécoupage administratif est une réponse parmi d'autres à la question de la
+        gouvernance de l'eau. La France dispose déjà d'une architecture de gestion par bassin
+        versant, parallèle aux régions. Elle est sous-exploitée, pas absente.</p>
+    </div>
+
+    <div class="dual">
+      <div class="prose">
+        <h4>Ce qui existe déjà</h4>
+        <p>Depuis 1964, six agences de l'eau couvrent les grands bassins hydrographiques avec
+          un budget annuel de <b>deux milliards d'euros</b> et des outils de planification
+          (SDAGE) qui s'imposent aux documents d'urbanisme. Les comités de bassin, les contrats
+          de plan interrégionaux (CPIER) et les conférences territoriales (CTAP) complètent
+          cette architecture.</p>
+        <p>Le problème n'est pas l'absence d'outils&nbsp;: c'est leur manque de dents. Les
+          agences financent, mais ne décident pas. Le SDAGE planifie, mais n'a pas de maîtrise
+          d'ouvrage. Les CPIER existent, mais sont rarement activés sur les enjeux eau.</p>
+        <h4>La vraie question politique</h4>
+        <p>Veut-on réformer la gouvernance de l'eau&nbsp;? Ou veut-on réformer la carte
+          régionale pour d'autres raisons&nbsp; économiques, identitaires, efficacité générale
+           et utiliser l'eau comme justification&nbsp;? Ce n'est pas la même réforme, et ce
+          n'est pas le même coût.</p>
+      </div>
+      <div id="alts-list"></div>
+    </div>
   </div>
 </section>
 
@@ -1440,6 +1501,35 @@ function rail() {
   document.getElementById('conditions').innerHTML = C.conditions.map((c, i) =>
     `<div class="cond"><span class="rank">Condition ${i + 1}</span>
       <h4>${c.titre}</h4><p>${c.texte}</p></div>`).join('');
+})();
+
+/* ---------- alternatives de gouvernance ---------- */
+(() => {
+  const ALTS = [
+    { titre: 'Renforcer les Agences de l\'eau',
+      portee: 'Faible coût · impact direct',
+      couleur: 'leaf',
+      texte: 'Leur donner un droit de veto sur les projets d\'aménagement contradictoires avec le SDAGE, relever les plafonds de redevances, et leur confier la maîtrise d\'ouvrage directe sur la restauration des grands cours d\'eau. Aucune réforme institutionnelle n\'est requise.' },
+    { titre: 'Autorités de bassin à compétence exécutive',
+      portee: 'Réforme ciblée · sans redécoupage',
+      couleur: 'water',
+      texte: 'Établissements publics sui generis, à cheval sur plusieurs régions, dotés d\'une compétence exclusive sur la planification eau, les zones humides et la continuité écologique. Modèle inspiré des River Basin Authorities britanniques et des Watersheds Districts québécois.' },
+    { titre: 'Contractualisation interrégionale obligatoire',
+      portee: 'Incitation forte · sans réforme lourde',
+      couleur: 'ochre',
+      texte: 'Tout projet touchant un bassin partagé entre régions exige un CPIER eau, dont la signature conditionne l\'accès aux fonds FEDER et CPER sur le volet eau. Crée une obligation de coopération sans supprimer les régions existantes.' },
+    { titre: 'Délégation fonctionnelle, pas territoriale',
+      portee: 'Solution intermédiaire',
+      couleur: 'ink-2',
+      texte: 'Les régions conservent leurs périmètres mais délèguent la compétence eau à une structure de bassin pour les enjeux trans-régionaux. Proche du modèle des syndicats de communes, étendu à l\'échelle macro. Évite le millefeuille si la gouvernance est bien définie.' },
+  ];
+  const el = document.getElementById('alts-list');
+  if (!el) return;
+  el.innerHTML = '<ul class="ratio" style="gap:18px">' + ALTS.map(a =>
+    `<li style="border-left-color:var(--${a.couleur})">
+      <h5>${a.titre}<em style="color:var(--${a.couleur})">${a.portee}</em></h5>
+      <p>${a.texte}</p>
+    </li>`).join('') + '</ul>';
 })();
 
 /* ---------- objections ---------- */
